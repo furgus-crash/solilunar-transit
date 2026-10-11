@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Transits">
+    <meta name="theme-color" content="#07090E">
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAADu0lEQVR42u3dMXITQRCG0fWUq2wnPgAhnIWcc3AgzuGcs0DIGQiJKJDRWpItdv/ueV9MAZ566pndlaybu4fHRTrWsASCQ3AIDsEhOASH4BAcgkNwSHAIDsEhOASH4BAcgkNwCA4JDsEhOASH4BAcgkNwCA7BIcEhOHR5t9P+5D+/fT7/D99/+DLhEt3M82ufLtLASn8cVwQxIZSeOM4y8f3pgr/x/acJlXTD8RKLizS81konIk1wrJq4IogLoTRQUh7HcRYbmDhPSWkitXEckbELixeJ1PVRFUcii3ZE6uFIZ9GISDEcz2XEslgnUshHJRwHMkqwWCFSxUcNHCUHRv0RMsjYrsP/+Qa39ptPjtpbSfEtZpCx7whJnh+DDD6K4Wguo4iPQQYfZXBMJCPexyCDjwI4JpUR7GOEr9ScPuBYGRtzyjj82UOGx8iSoaQ1GVmrMPPYyDt8jMx14cO24qgRffjwQWpF4jA2wofH2F+GUtdq5LxElLYyY6qXguFRanIYG8Hr42pFSThcpFS5bLmdednvP/44S/PXdyaHsWF4OHMIDlXCYU+ptbOYHIJDcKgkDgeOcscOk0NwCA7BoUY4nEYrnkkLP5U985lqwj9U9LmubUV5k2Oz132PIbfL7DE5BIfgEByCQ3AIDsGhLu12E+ztd3UK3UZz+1wmR6OXo49DRkyOP99HtP4t8Drd79Xb5vudbCuCQ3AIDvXC4Uxa6zRqcggOwaHCOBw7Ch04TA7BoRI47CxV9pRl8l9SO+3j1txtxfAoMTacOZSMw/AIXp99cGw/Iau3y4qNyV8cxkYiDsMjf61GxM9seCRdpLhaUTwOwyN2bIRNDj7C1mF/HAcvDj7+WoHdz+wRk8OVS+aajLi1mHl4ZBw1sq9W5vSR91MH4Zj68JF01AidHJP6iJSRuK1M5yNVRuiZYyIfwTKW2NvnU/jIlrEkP1tp7iNexhL+4K2tjwoylmW5uXt4DF/J599KVPq7ng6Jh98aLvDI/vkK1h0hpWTUmBzHR0i5+VFkK6mKo+oWU21gVMWxHP1ixFgi/+yAtZ4/18NRg0hxFrVx5BJpwaIDjmXt63d3IXLsMqr0+5jK43iJyDZKVi6tG7y9rQmO00quC2X9Xkuntzx2w3GayOusnHHnrd87YXviuEzJ22r87ujmOP4TlEneLj8RjrdYmfPDE/Pi0Ml8kFpwCA7BITgEh+AQHIJDcAgOCQ7BITgEh+AQHIJDcAgOwSHBITgEh+AQHIJDcAgOwSE4JDi03i/KXmJ/GmoDYwAAAABJRU5ErkJggg==">
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Sun and Moon Transits","short_name":"Transits","display":"standalone","background_color":"%2307090E","theme_color":"%2307090E"}'>
+    <title>Sun &amp; Moon Satellite Transits</title>
+    <style>
+/* Self-contained styles (no outside downloads) */
+*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}
+html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
+body{margin:0;line-height:inherit}
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}
+a{color:inherit;text-decoration:inherit}
+b,strong{font-weight:bolder}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:1em}
+table{text-indent:0;border-color:inherit;border-collapse:collapse}
+button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0}
+button,select{text-transform:none}
+button,[type=button],[type=reset],[type=submit]{-webkit-appearance:button;background-color:transparent;background-image:none}
+blockquote,dl,dd,h1,h2,h3,h4,h5,h6,hr,figure,p,pre{margin:0}
+ol,ul,menu{list-style:none;margin:0;padding:0}
+input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}
+button,[role=button]{cursor:pointer}
+:disabled{cursor:default}
+img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:middle}
+[hidden]{display:none}
+.ico{display:inline-block;height:1em;width:auto;fill:currentColor;vertical-align:-.125em}
+.absolute{position:absolute}
+.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.aspect-\[16\/10\]{aspect-ratio:16/10}
+.backdrop-blur-md{-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.backdrop-blur-sm{-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.bg-\[\#0B0E14\]{background-color:#0B0E14}
+.bg-astroBg{background-color:#07090E}
+.bg-astroBg\/70{background-color:rgb(7 9 14 / 0.7)}
+.bg-astroBg\/80{background-color:rgb(7 9 14 / 0.8)}
+.bg-astroBorder{background-color:#1E2638}
+.bg-astroCard{background-color:#0B0E14}
+.bg-astroCard\/80{background-color:rgb(11 14 20 / 0.8)}
+.bg-astroCyan{background-color:#00E5FF}
+.bg-astroCyan\/80{background-color:rgb(0 229 255 / 0.8)}
+.bg-astroOrange{background-color:#FF6D00}
+.bg-astroOrange\/20{background-color:rgb(255 109 0 / 0.2)}
+.bg-astroPurple{background-color:#BF5AF2}
+.bg-astroPurple\/20{background-color:rgb(191 90 242 / 0.2)}
+.bg-astroRed{background-color:#FF1744}
+.bg-astroRed\/20{background-color:rgb(255 23 68 / 0.2)}
+.bg-black\/70{background-color:rgb(0 0 0 / 0.7)}
+.bg-black\/80{background-color:rgb(0 0 0 / 0.8)}
+.bg-cyan-500\/25{background-color:rgb(6 182 212 / 0.25)}
+.bg-cyan-900\/50{background-color:rgb(22 78 99 / 0.5)}
+.bg-cyan-950{background-color:#083344}
+.bg-cyan-950\/60{background-color:rgb(8 51 68 / 0.6)}
+.bg-cyan-950\/70{background-color:rgb(8 51 68 / 0.7)}
+.bg-emerald-950\/40{background-color:rgb(2 44 34 / 0.4)}
+.bg-orange-950\/40{background-color:rgb(67 20 7 / 0.4)}
+.bg-purple-950\/40{background-color:rgb(59 7 100 / 0.4)}
+.bg-red-950\/40{background-color:rgb(69 10 10 / 0.4)}
+.bg-slate-900{background-color:#0f172a}
+.bg-slate-900\/90{background-color:rgb(15 23 42 / 0.9)}
+.block{display:block}
+.border{border-width:1px}
+.border-2{border-width:2px}
+.border-astroBorder{border-color:#1E2638}
+.border-astroBorder\/60{border-color:rgb(30 38 56 / 0.6)}
+.border-astroCyan{border-color:#00E5FF}
+.border-astroOrange\/60{border-color:rgb(255 109 0 / 0.6)}
+.border-astroPurple\/60{border-color:rgb(191 90 242 / 0.6)}
+.border-astroRed\/60{border-color:rgb(255 23 68 / 0.6)}
+.border-b{border-bottom-width:1px}
+.border-cyan-700\/60{border-color:rgb(14 116 144 / 0.6)}
+.border-cyan-800{border-color:#155e75}
+.border-cyan-800\/50{border-color:rgb(21 94 117 / 0.5)}
+.border-cyan-800\/60{border-color:rgb(21 94 117 / 0.6)}
+.border-emerald-800\/50{border-color:rgb(6 95 70 / 0.5)}
+.border-orange-800\/50{border-color:rgb(154 52 18 / 0.5)}
+.border-purple-800\/50{border-color:rgb(107 33 168 / 0.5)}
+.border-red-800\/50{border-color:rgb(153 27 27 / 0.5)}
+.border-white\/10{border-color:rgb(255 255 255 / 0.1)}
+.bottom-0{bottom:0}
+.bottom-1{bottom:.25rem}
+.cursor-crosshair{cursor:crosshair}
+.cursor-ew-resize{cursor:ew-resize}
+.cursor-grab{cursor:grab}
+.cursor-pointer{cursor:pointer}
+.divide-astroBorder\/50>:not([hidden])~:not([hidden]){border-color:rgb(30 38 56 / 0.5)}
+.divide-y>:not([hidden])~:not([hidden]){border-top-width:1px}
+.drop-shadow{filter:drop-shadow(0 1px 2px rgb(0 0 0 / .1)) drop-shadow(0 1px 1px rgb(0 0 0 / .06))}
+.duration-300{transition-duration:300ms}
+.fixed{position:fixed}
+.flex{display:flex}
+.flex-1{flex:1 1 0%}
+.flex-col{flex-direction:column}
+.flex-wrap{flex-wrap:wrap}
+.font-bold{font-weight:700}
+.font-medium{font-weight:500}
+.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+.font-normal{font-weight:400}
+.font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
+.font-semibold{font-weight:600}
+.gap-0\.5{gap:.125rem}
+.gap-1{gap:.25rem}
+.gap-1\.5{gap:.375rem}
+.gap-2{gap:.5rem}
+.gap-3{gap:.75rem}
+.gap-4{gap:1rem}
+.gap-5{gap:1.25rem}
+.grid{display:grid}
+.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}
+.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.h-12{height:3rem}
+.h-2\.5{height:.625rem}
+.h-full{height:100%}
+.inset-0{top:0;right:0;bottom:0;left:0}
+.italic{font-style:italic}
+.items-center{align-items:center}
+.items-end{align-items:flex-end}
+.justify-between{justify-content:space-between}
+.justify-center{justify-content:center}
+.leading-relaxed{line-height:1.625}
+.left-3{left:.75rem}
+.list-disc{list-style-type:disc}
+.list-inside{list-style-position:inside}
+.max-h-\[320px\]{max-height:320px}
+.max-h-\[90vh\]{max-height:90vh}
+.max-w-7xl{max-width:80rem}
+.max-w-md{max-width:28rem}
+.max-w-xl{max-width:36rem}
+.mb-0\.5{margin-bottom:.125rem}
+.mb-1{margin-bottom:.25rem}
+.min-h-\[220px\]{min-height:220px}
+.min-h-screen{min-height:100vh}
+.mt-1{margin-top:.25rem}
+.mx-auto{margin-left:auto;margin-right:auto}
+.opacity-40{opacity:.4}
+.opacity-80{opacity:.8}
+.outline-none{outline:2px solid transparent;outline-offset:2px}
+.overflow-hidden{overflow:hidden}
+.overflow-x-hidden{overflow-x:hidden}
+.overflow-y-auto{overflow-y:auto}
+.p-2{padding:.5rem}
+.p-2\.5{padding:.625rem}
+.p-3{padding:.75rem}
+.p-4{padding:1rem}
+.p-5{padding:1.25rem}
+.p-6{padding:1.5rem}
+.pb-2{padding-bottom:.5rem}
+.pb-3{padding-bottom:.75rem}
+.pointer-events-auto{pointer-events:auto}
+.pointer-events-none{pointer-events:none}
+.px-1{padding-left:.25rem;padding-right:.25rem}
+.px-1\.5{padding-left:.375rem;padding-right:.375rem}
+.px-2{padding-left:.5rem;padding-right:.5rem}
+.px-2\.5{padding-left:.625rem;padding-right:.625rem}
+.px-3{padding-left:.75rem;padding-right:.75rem}
+.px-4{padding-left:1rem;padding-right:1rem}
+.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}
+.py-1{padding-top:.25rem;padding-bottom:.25rem}
+.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}
+.py-2{padding-top:.5rem;padding-bottom:.5rem}
+.py-3{padding-top:.75rem;padding-bottom:.75rem}
+.relative{position:relative}
+.right-3{right:.75rem}
+.right-4{right:1rem}
+.rounded{border-radius:.25rem}
+.rounded-2xl{border-radius:1rem}
+.rounded-full{border-radius:9999px}
+.rounded-l-md{border-top-left-radius:.375rem;border-bottom-left-radius:.375rem}
+.rounded-lg{border-radius:.5rem}
+.rounded-r-md{border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}
+.rounded-xl{border-radius:.75rem}
+.shadow-2xl{box-shadow:0 25px 50px -12px rgb(0 0 0 / .25)}
+.shadow-inner{box-shadow:inset 0 2px 4px 0 rgb(0 0 0 / .05)}
+.shadow-lg{box-shadow:0 10px 15px -3px rgb(0 0 0 / .1),0 4px 6px -4px rgb(0 0 0 / .1)}
+.shadow-xl{box-shadow:0 20px 25px -5px rgb(0 0 0 / .1),0 8px 10px -6px rgb(0 0 0 / .1)}
+.space-y-0\.5>:not([hidden])~:not([hidden]){margin-top:.125rem}
+.space-y-3>:not([hidden])~:not([hidden]){margin-top:.75rem}
+.sticky{position:sticky}
+.text-2xl{font-size:1.5rem;line-height:2rem}
+.text-\[10px\]{font-size:10px}
+.text-\[11px\]{font-size:11px}
+.text-\[9px\]{font-size:9px}
+.text-astroCyan{color:#00E5FF}
+.text-astroGreen{color:#00E676}
+.text-astroOrange{color:#FF6D00}
+.text-astroPurple{color:#BF5AF2}
+.text-astroRed{color:#FF1744}
+.text-base{font-size:1rem;line-height:1.5rem}
+.text-black{color:#000000}
+.text-center{text-align:center}
+.text-gray-200{color:#e5e7eb}
+.text-gray-300{color:#d1d5db}
+.text-gray-400{color:#9ca3af}
+.text-gray-500{color:#6b7280}
+.text-left{text-align:left}
+.text-lg{font-size:1.125rem;line-height:1.75rem}
+.text-sm{font-size:.875rem;line-height:1.25rem}
+.text-white{color:#ffffff}
+.text-xl{font-size:1.25rem;line-height:1.75rem}
+.text-xs{font-size:.75rem;line-height:1rem}
+.top-0{top:0}
+.top-1{top:.25rem}
+.top-3{top:.75rem}
+.top-4{top:1rem}
+.tracking-wide{letter-spacing:.025em}
+.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:150ms}
+.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:150ms}
+.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:150ms}
+.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.uppercase{text-transform:uppercase}
+.w-0\.5{width:.125rem}
+.w-1{width:.25rem}
+.w-2\.5{width:.625rem}
+.w-3\.5{width:.875rem}
+.w-full{width:100%}
+.whitespace-nowrap{white-space:nowrap}
+.z-10{z-index:10}
+.z-20{z-index:20}
+.z-30{z-index:30}
+.z-50{z-index:50}
+.hidden{display:none}
+.hover\:bg-astroCyan:hover{background-color:#00E5FF}
+.hover\:bg-astroOrange\/30:hover{background-color:rgb(255 109 0 / 0.3)}
+.hover\:bg-astroPurple\/30:hover{background-color:rgb(191 90 242 / 0.3)}
+.hover\:bg-astroRed\/30:hover{background-color:rgb(255 23 68 / 0.3)}
+.hover\:bg-cyan-400:hover{background-color:#22d3ee}
+.hover\:bg-cyan-500\/35:hover{background-color:rgb(6 182 212 / 0.35)}
+.hover\:bg-cyan-900:hover{background-color:#164e63}
+.hover\:bg-slate-700:hover{background-color:#334155}
+.hover\:bg-slate-800\/60:hover{background-color:rgb(30 41 59 / 0.6)}
+.hover\:text-white:hover{color:#ffffff}
+.focus\:border-astroCyan:focus{border-color:#00E5FF}
+.active\:cursor-grabbing:active{cursor:grabbing}
+@media (min-width:640px){.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1024px){.lg\:col-span-2{grid-column:span 2/span 2}.lg\:col-span-5{grid-column:span 5/span 5}.lg\:col-span-7{grid-column:span 7/span 7}.lg\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}.lg\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}
+    </style>
+    <style>
+        body {
+            background-color: #07090E;
+            color: #E2E8F0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            user-select: none;
+        }
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0E14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E2638;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00E5FF;
+        }
+        /* Glassmorphism style helper */
+        .glass-panel {
+            background: rgba(11, 14, 20, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid #1E2638;
+        }
+        .pointer-none {
+            pointer-events: none !important;
+        }
+        #sessionBox, #leftHandle, #rightHandle {
+            touch-action: none;
+        }
+        [id^="guide-"] { scroll-margin-top: 3rem; }
+        #dateInput {
+            -webkit-appearance: none;
+            appearance: none;
+            display: block;
+            width: 100%;
+            min-width: 0;
+            max-width: 100%;
+            min-height: 1.75rem;
+            text-align: left;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-astroBg text-gray-200 flex flex-col font-sans antialiased overflow-x-hidden">
+
+    <header class="w-full bg-astroCard border-b border-astroBorder px-4 py-3 sticky top-0 z-30 flex flex-wrap items-center justify-between gap-3 shadow-xl">
+        <div class="flex items-center gap-3">
+            <div class="p-2 bg-cyan-950/60 text-astroCyan rounded-xl border border-cyan-800/50 flex items-center justify-center"><svg class="ico text-xl" viewBox="0 0 512 512" aria-hidden="true"><path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/></svg></div>
+            <div>
+                <h1 class="text-lg font-bold tracking-wide text-white flex items-center gap-2">
+                    Sun &amp; Moon Transits
+                    <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-cyan-950 text-astroCyan border border-cyan-800/60">v1.0</span>
+                </h1>
+                <p class="text-xs text-gray-400">Satellites crossing the Sun and Moon during your viewing window</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button id="guideBtn" class="px-3 py-1.5 bg-astroBorder hover:bg-slate-700 text-xs font-medium rounded-lg text-gray-200 transition flex items-center gap-1.5"><svg class="ico text-astroCyan" viewBox="0 0 512 512" aria-hidden="true"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM169.8 165.3c7.9-22.3 29.1-37.3 52.8-37.3l58.3 0c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24l0-13.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1l-58.3 0c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg> User Guide</button>
+            <button id="resetSessionBtn" class="px-3 py-1.5 bg-astroBorder hover:bg-slate-700 text-xs font-medium rounded-lg text-gray-200 transition flex items-center gap-1.5"><svg class="ico text-gray-400" viewBox="0 0 512 512" aria-hidden="true"><path d="M142.9 142.9c-17.5 17.5-30.1 38-37.8 59.8c-5.9 16.7-24.2 25.4-40.8 19.5s-25.4-24.2-19.5-40.8C55.6 150.7 73.2 122 97.6 97.6c87.2-87.2 228.3-87.5 315.8-1L455 55c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2l0 128c0 13.3-10.7 24-24 24l-8.4 0c0 0 0 0 0 0L344 224c-9.7 0-18.5-5.8-22.2-14.8s-1.7-19.3 5.2-26.2l41.1-41.1c-62.6-61.5-163.1-61.2-225.3 1zM16 312c0-13.3 10.7-24 24-24l7.6 0 .7 0L168 288c9.7 0 18.5 5.8 22.2 14.8s1.7 19.3-5.2 26.2l-41.1 41.1c62.6 61.5 163.1 61.2 225.3-1c17.5-17.5 30.1-38 37.8-59.8c5.9-16.7 24.2-25.4 40.8-19.5s25.4 24.2 19.5 40.8c-10.8 30.6-28.4 59.3-52.9 83.8c-87.2 87.2-228.3 87.5-315.8 1L57 457c-6.9 6.9-17.2 8.9-26.2 5.2S16 449.7 16 440l0-119.6 0-.7 0-7.6z"/></svg> Reset</button>
+        </div>
+    </header>
+
+    <section class="w-full bg-astroCard/80 border-b border-astroBorder px-4 py-3">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 text-xs">
+
+            <div class="lg:col-span-2 bg-astroBg/70 p-2.5 rounded-xl border border-astroBorder flex flex-col gap-1.5">
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-400 font-medium flex items-center gap-1"><svg class="ico text-astroCyan" viewBox="0 0 384 512" aria-hidden="true"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg> Observing location</span>
+                    <button id="gpsBtn" class="px-2 py-1 bg-cyan-950 hover:bg-cyan-900 text-astroCyan border border-cyan-700/60 rounded text-[11px] font-semibold transition flex items-center gap-1"><svg class="ico" viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0c17.7 0 32 14.3 32 32l0 10.4c93.7 13.9 167.7 88 181.6 181.6l10.4 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-10.4 0c-13.9 93.7-88 167.7-181.6 181.6l0 10.4c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-10.4C130.3 455.7 56.3 381.7 42.4 288L32 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l10.4 0C56.3 130.3 130.3 56.3 224 42.4L224 32c0-17.7 14.3-32 32-32zM107.4 288c12.5 58.3 58.4 104.1 116.6 116.6l0-20.6c0-17.7 14.3-32 32-32s32 14.3 32 32l0 20.6c58.3-12.5 104.1-58.4 116.6-116.6L384 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l20.6 0C392.1 165.7 346.3 119.9 288 107.4l0 20.6c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-20.6C165.7 119.9 119.9 165.7 107.4 224l20.6 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-20.6 0zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg> Use GPS</button>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="text-[10px] text-gray-500 block mb-0.5">Latitude (°N)</label>
+                        <input type="number" id="latInput" step="0.0001" class="w-full bg-astroCard border border-astroBorder rounded px-2 py-1 text-white focus:border-astroCyan outline-none">
+                    </div>
+                    <div>
+                        <label class="text-[10px] text-gray-500 block mb-0.5">Longitude (°, − = West)</label>
+                        <input type="number" id="lngInput" step="0.0001" class="w-full bg-astroCard border border-astroBorder rounded px-2 py-1 text-white focus:border-astroCyan outline-none">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-astroBg/70 p-2.5 rounded-xl border border-astroBorder flex flex-col gap-1.5">
+                <span class="text-gray-400 font-medium flex items-center gap-1"><svg class="ico text-astroCyan" viewBox="0 0 448 512" aria-hidden="true"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L64 64C28.7 64 0 92.7 0 128l0 16 0 48L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-48 0-16c0-35.3-28.7-64-64-64l-40 0 0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L152 64l0-40zM48 192l80 0 0 56-80 0 0-56zm0 104l80 0 0 64-80 0 0-64zm128 0l96 0 0 64-96 0 0-64zm144 0l80 0 0 64-80 0 0-64zm80-48l-80 0 0-56 80 0 0 56zm0 160l0 40c0 8.8-7.2 16-16 16l-64 0 0-56 80 0zm-128 0l0 56-96 0 0-56 96 0zm-144 0l0 56-64 0c-8.8 0-16-7.2-16-16l0-40 80 0zM272 248l-96 0 0-56 96 0 0 56z"/></svg> Viewing date</span>
+                <div class="grid grid-cols-1 gap-1.5">
+                    <input type="date" id="dateInput" class="w-full bg-astroCard border border-astroBorder rounded px-2 py-1 text-white focus:border-astroCyan outline-none">
+                    <div class="flex items-center justify-between text-[10px] text-gray-400">
+                        <span><span id="riseName">Sunrise</span>: <strong id="riseLabel" class="text-gray-200">—</strong></span>
+                        <span><span id="setName">Sunset</span>: <strong id="setLabel" class="text-gray-200">—</strong></span>
+                    </div>
+                    <div id="upPeriodWrap" class="hidden">
+                        <select id="upPeriodSelect" class="w-full bg-astroCard border border-astroBorder rounded px-2 py-1 text-white focus:border-astroCyan outline-none"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-astroBg/70 p-2.5 rounded-xl border border-astroBorder flex flex-col gap-1.5">
+                <span class="text-gray-400 font-medium flex items-center gap-1"><svg class="ico text-astroCyan" viewBox="0 0 512 512" aria-hidden="true"><path d="M149.1 64.8L138.7 96 64 96C28.7 96 0 124.7 0 160L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-256c0-35.3-28.7-64-64-64l-74.7 0L362.9 64.8C356.4 45.2 338.1 32 317.4 32L194.6 32c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg> Telescope frame</span>
+                <select id="telescopeSelect" class="w-full bg-astroCard border border-astroBorder rounded px-2 py-1 text-white focus:border-astroCyan outline-none">
+                    <option value="disc" selected>Disc close-up (no frame)</option>
+                    <optgroup label="DWARFLAB">
+                        <option value="dwarf3">DWARFLAB Dwarf 3 (2.95° x 1.66°)</option>
+                        <option value="dwarf2">DWARFLAB Dwarf II (3.2° x 1.8°)</option>
+                    </optgroup>
+                    <optgroup label="ZWO Seestar">
+                        <option value="seestar_s50">ZWO Seestar S50 (1.29° x 0.73°)</option>
+                        <option value="seestar_s30">ZWO Seestar S30 (2.15° x 1.21°)</option>
+                    </optgroup>
+                    <optgroup label="Vaonis">
+                        <option value="vespera2">Vaonis Vespera II (2.50° x 1.40°)</option>
+                        <option value="vespera_pro">Vaonis Vespera Pro (1.60° x 1.60°)</option>
+                        <option value="vespera_classic">Vaonis Vespera Classic (1.60° x 0.90°)</option>
+                        <option value="stellina">Vaonis Stellina (1.00° x 0.70°)</option>
+                        <option value="hestia">Vaonis Hestia (1.80° x 1.80°)</option>
+                    </optgroup>
+                    <optgroup label="Unistellar">
+                        <option value="evscope2">Unistellar eVscope 2 (0.57° x 0.78°)</option>
+                        <option value="equinox2">Unistellar eQuinox 2 (0.57° x 0.78°)</option>
+                        <option value="odyssey">Unistellar Odyssey (0.57° x 0.76°)</option>
+                        <option value="odyssey_pro">Unistellar Odyssey Pro (0.57° x 0.76°)</option>
+                    </optgroup>
+                    <option value="custom">-- Custom FOV Dimensions --</option>
+                </select>
+                <div id="customFovContainer" class="hidden grid grid-cols-2 gap-1">
+                    <input type="number" id="fovWInput" placeholder="Width (°)" step="0.1" value="2.0" class="bg-astroCard border border-astroBorder rounded px-1.5 py-0.5 text-xs text-white">
+                    <input type="number" id="fovHInput" placeholder="Height (°)" step="0.1" value="1.5" class="bg-astroCard border border-astroBorder rounded px-1.5 py-0.5 text-xs text-white">
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 bg-astroBg/70 p-2.5 rounded-xl border border-astroBorder flex flex-col gap-1.5">
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-400 font-medium flex items-center gap-1"><svg class="ico text-astroCyan" viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0c17.7 0 32 14.3 32 32l0 10.4c93.7 13.9 167.7 88 181.6 181.6l10.4 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-10.4 0c-13.9 93.7-88 167.7-181.6 181.6l0 10.4c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-10.4C130.3 455.7 56.3 381.7 42.4 288L32 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l10.4 0C56.3 130.3 130.3 56.3 224 42.4L224 32c0-17.7 14.3-32 32-32zM107.4 288c12.5 58.3 58.4 104.1 116.6 116.6l0-20.6c0-17.7 14.3-32 32-32s32 14.3 32 32l0 20.6c58.3-12.5 104.1-58.4 116.6-116.6L384 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l20.6 0C392.1 165.7 346.3 119.9 288 107.4l0 20.6c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-20.6C165.7 119.9 119.9 165.7 107.4 224l20.6 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-20.6 0zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg> Target</span>
+                    <span id="illumLabel" class="text-[10px] text-astroCyan bg-cyan-950/70 px-2 py-0.5 rounded border border-cyan-800">—</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <select id="targetSelect" class="w-full bg-astroCard border border-astroBorder rounded px-2 py-1 text-white focus:border-astroCyan outline-none">
+                        <option value="sun" selected>Sun</option>
+                        <option value="moon">Moon</option>
+                    </select>
+                    <div class="flex items-center gap-2 text-xs text-gray-300">
+                        <div class="flex-1 bg-astroCard border border-astroBorder rounded px-2 py-1 overflow-hidden whitespace-nowrap">
+                            Alt: <span id="targetAltLabel" class="text-astroGreen font-mono">—</span> | Az: <span id="targetAzLabel" class="text-astroCyan font-mono">—</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="sunWarn" class="text-[11px] text-astroOrange flex items-center gap-1.5"><svg class="ico" viewBox="0 0 512 512" aria-hidden="true"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg> Never look at the Sun without a certified solar filter.</div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl w-full mx-auto p-4 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+        <div class="lg:col-span-7 flex flex-col gap-4">
+            <div class="bg-astroCard border border-astroBorder rounded-2xl p-4 flex flex-col gap-3 shadow-2xl relative">
+                <div class="flex items-center justify-between border-b border-astroBorder/60 pb-3">
+                    <div class="flex items-center gap-2"><svg class="ico text-astroCyan" viewBox="0 0 512 512" aria-hidden="true"><path d="M149.1 64.8L138.7 96 64 96C28.7 96 0 124.7 0 160L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-256c0-35.3-28.7-64-64-64l-74.7 0L362.9 64.8C356.4 45.2 338.1 32 317.4 32L194.6 32c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg><h2 class="text-sm font-bold text-white tracking-wide">Field of View Simulator</h2></div>
+                    <div class="text-xs text-gray-400"><strong id="fovSpecLabel" class="text-white">Disc close-up</strong></div>
+                </div>
+
+                <div class="relative w-full aspect-[16/10] bg-[#0B0E14] rounded-xl border border-astroBorder overflow-hidden shadow-inner flex items-center justify-center">
+                    <canvas id="fovCanvas" class="w-full h-full block cursor-crosshair"></canvas>
+                    <div class="absolute top-3 left-3 bg-black/70 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-white/10 text-[11px] font-mono text-gray-300 flex flex-col gap-0.5 pointer-events-none">
+                        <div class="text-astroCyan font-semibold flex items-center gap-1"><svg class="ico" viewBox="0 0 512 512" aria-hidden="true"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg> Disc center</div>
+                        <div>Alt: <span id="canvasAltCenter" class="text-white">—</span></div>
+                        <div>Az: <span id="canvasAzCenter" class="text-white">—</span></div>
+                    </div>
+                    <div class="absolute top-3 right-3 bg-black/70 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-white/10 text-[11px] flex flex-col items-end gap-0.5 pointer-events-none">
+                        <div class="text-gray-400 text-[10px]">Passes in window</div>
+                        <div class="flex items-center gap-2 font-bold font-mono">
+                            <span class="text-astroRed" id="badgeRedCount">0 Ctr</span>
+                            <span class="text-astroOrange" id="badgeOrangeCount">0 Edge</span>
+                            <span class="text-astroPurple" id="badgePurpleCount">0 Near</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-2 bg-astroBg/80 p-2.5 rounded-xl border border-astroBorder text-xs">
+                    <span class="text-gray-400 font-medium">Show:</span>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <button id="toggleRed" class="px-2.5 py-1 rounded-lg border border-astroRed/60 bg-astroRed/20 text-astroRed font-semibold flex items-center gap-1.5 transition hover:bg-astroRed/30"><span class="w-2.5 h-2.5 rounded-full bg-astroRed"></span>Central Transit (<span id="countRed">0</span>)</button>
+                        <button id="toggleOrange" class="px-2.5 py-1 rounded-lg border border-astroOrange/60 bg-astroOrange/20 text-astroOrange font-semibold flex items-center gap-1.5 transition hover:bg-astroOrange/30"><span class="w-2.5 h-2.5 rounded-full bg-astroOrange"></span>Edge Transit (<span id="countOrange">0</span>)</button>
+                        <button id="togglePurple" class="px-2.5 py-1 rounded-lg border border-astroPurple/60 bg-astroPurple/20 text-astroPurple font-semibold flex items-center gap-1.5 transition hover:bg-astroPurple/30"><span class="w-2.5 h-2.5 rounded-full bg-astroPurple"></span>Near Miss (&lt;0.5° off edge)(<span id="countPurple">0</span>)</button>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-400">
+                    <span id="satStatus">Loading satellite data…</span>
+                    <div class="flex items-center gap-2">
+                        <button id="updateSatBtn" class="px-2.5 py-1 bg-astroBorder hover:bg-slate-700 rounded text-gray-200 transition">Update data</button>
+                        <button id="loadSatFileBtn" class="px-2.5 py-1 bg-astroBorder hover:bg-slate-700 rounded text-gray-200 transition">Load file</button>
+                        <input id="satFileInput" type="file" accept=".txt,.tle,text/plain" class="hidden">
+                    </div>
+                </div>
+                <div class="w-full h-2.5 bg-slate-900 rounded-full overflow-hidden border border-astroBorder">
+                    <div id="satProgressFill" class="h-full bg-astroCyan transition-all duration-300" style="width: 0%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-5 flex flex-col gap-4">
+
+            <div class="bg-astroCard border border-astroBorder rounded-2xl p-4 flex flex-col gap-2 shadow-2xl">
+                <div class="flex items-center gap-2 text-xs text-gray-400"><svg class="ico text-astroGreen" viewBox="0 0 448 512" aria-hidden="true"><path d="M224 0c-17.7 0-32 14.3-32 32l0 19.2C119 66 64 130.6 64 208l0 18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416l384 0c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8l0-18.8c0-77.4-55-142-128-156.8L256 32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg> Next transit</div>
+                <div id="nextBanner" class="text-sm font-bold text-white font-mono">Waiting for the calculation…</div>
+            </div>
+
+            <div class="bg-astroCard border border-astroBorder rounded-2xl p-4 flex flex-col gap-3 shadow-2xl">
+                <div class="flex items-center justify-between border-b border-astroBorder/60 pb-2">
+                    <div class="flex items-center gap-2"><svg class="ico text-astroCyan" viewBox="0 0 640 512" aria-hidden="true"><path d="M128 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm32 97.3c28.3-12.3 48-40.5 48-73.3c0-44.2-35.8-80-80-80S48 51.8 48 96c0 32.8 19.7 61 48 73.3L96 224l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l256 0 0 54.7c-28.3 12.3-48 40.5-48 73.3c0 44.2 35.8 80 80 80s80-35.8 80-80c0-32.8-19.7-61-48-73.3l0-54.7 256 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-54.7c28.3-12.3 48-40.5 48-73.3c0-44.2-35.8-80-80-80s-80 35.8-80 80c0 32.8 19.7 61 48 73.3l0 54.7-320 0 0-54.7zM488 96a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zM320 392a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg><h2 class="text-sm font-bold text-white">Timeline: target in the sky</h2></div>
+                    <span id="sessionTimeRange" class="text-xs font-mono text-astroCyan font-semibold">—</span>
+                </div>
+                <div class="relative w-full py-2">
+                    <div id="timelineTrack" class="w-full h-12 bg-slate-900/90 rounded-xl border border-astroBorder relative cursor-pointer overflow-hidden">
+                        <div id="timelineTicksOverlay" class="absolute inset-0 pointer-none z-10"></div>
+                        <div id="sessionBox" class="absolute top-1 bottom-1 bg-cyan-500/25 border-2 border-astroCyan rounded-lg shadow-lg cursor-grab active:cursor-grabbing z-20 flex items-center justify-between transition-colors hover:bg-cyan-500/35">
+                            <div id="leftHandle" class="w-3.5 h-full bg-astroCyan/80 hover:bg-astroCyan rounded-l-md cursor-ew-resize flex items-center justify-center text-[9px] text-black font-bold z-30">║</div>
+                            <div class="text-[10px] font-bold font-mono text-white px-1 truncate pointer-none drop-shadow">Viewing Window</div>
+                            <div id="rightHandle" class="w-3.5 h-full bg-astroCyan/80 hover:bg-astroCyan rounded-r-md cursor-ew-resize flex items-center justify-center text-[9px] text-black font-bold z-30">║</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-astroCard border border-astroBorder rounded-2xl p-4 flex flex-col gap-3 shadow-2xl flex-1 min-h-[220px]">
+                <div class="flex items-center justify-between border-b border-astroBorder/60 pb-2">
+                    <div class="flex items-center gap-2"><svg class="ico text-astroCyan" viewBox="0 0 512 512" aria-hidden="true"><path d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32l224 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-224 0c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32l224 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-224 0c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32l288 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-288 0c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg><h2 class="text-sm font-bold text-white">Predicted Transits in Window</h2></div>
+                    <span class="text-[10px] text-gray-400">(Tap a row for details)</span>
+                </div>
+                <div id="trainBox" class="flex flex-col gap-2 text-[11px]"></div>
+                <div class="overflow-y-auto max-h-[320px] rounded-lg border border-astroBorder">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-900/90 text-gray-400 uppercase text-[10px] sticky top-0 border-b border-astroBorder">
+                            <tr><th class="p-2">Satellite</th><th class="p-2">Start</th><th class="p-2">End</th></tr>
+                        </thead>
+                        <tbody id="passesTableBody" class="divide-y divide-astroBorder/50 font-mono text-[11px]"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="telemetryModal" class="fixed inset-0 z-50 hidden flex items-end justify-center p-4 pointer-events-none">
+        <div class="bg-astroCard border border-astroBorder rounded-2xl max-w-md w-full p-5 shadow-2xl flex flex-col gap-4 relative pointer-events-auto">
+            <button id="closeTelemetryModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg"><svg class="ico" viewBox="0 0 384 512" aria-hidden="true"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></button>
+            <div class="flex items-center gap-3">
+                <div class="p-3 bg-cyan-950 text-astroCyan rounded-xl border border-cyan-800"><svg class="ico text-2xl" viewBox="0 0 512 512" aria-hidden="true"><path d="M192 32c0-17.7 14.3-32 32-32C383.1 0 512 128.9 512 288c0 17.7-14.3 32-32 32s-32-14.3-32-32C448 164.3 347.7 64 224 64c-17.7 0-32-14.3-32-32zM60.6 220.6L164.7 324.7l28.4-28.4c-.7-2.6-1.1-5.4-1.1-8.3c0-17.7 14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32c-2.9 0-5.6-.4-8.3-1.1l-28.4 28.4L291.4 451.4c14.5 14.5 11.8 38.8-7.3 46.3C260.5 506.9 234.9 512 208 512C93.1 512 0 418.9 0 304c0-26.9 5.1-52.5 14.4-76.1c7.5-19 31.8-21.8 46.3-7.3zM224 96c106 0 192 86 192 192c0 17.7-14.3 32-32 32s-32-14.3-32-32c0-70.7-57.3-128-128-128c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg></div>
+                <div>
+                    <h3 id="modalSatName" class="text-base font-bold text-white">—</h3>
+                    <p id="modalSatNorad" class="text-xs text-gray-400 font-mono">—</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-xs font-mono">
+                <div class="bg-astroBg p-2.5 rounded-xl border border-astroBorder"><div id="pb1l" class="text-[10px] text-gray-500">—</div><div id="pb1v" class="text-sm font-bold text-astroCyan">—</div></div>
+                <div class="bg-astroBg p-2.5 rounded-xl border border-astroBorder"><div id="pb2l" class="text-[10px] text-gray-500">—</div><div id="pb2v" class="text-sm font-bold text-white">—</div></div>
+                <div class="bg-astroBg p-2.5 rounded-xl border border-astroBorder"><div id="pb3l" class="text-[10px] text-gray-500">—</div><div id="pb3v" class="text-sm font-bold text-white">—</div></div>
+                <div class="bg-astroBg p-2.5 rounded-xl border border-astroBorder"><div id="pb4l" class="text-[10px] text-gray-500">—</div><div id="pb4v" class="text-sm font-bold text-astroGreen">—</div></div>
+            </div>
+            <div class="bg-astroBg p-3 rounded-xl border border-astroBorder flex flex-col gap-1 text-xs">
+                <p id="modalSatTrack" class="text-gray-300 font-mono text-[11px]">—</p>
+            </div>
+            <button id="closeTelemetryBtn2" class="w-full py-2 bg-astroBorder hover:bg-slate-700 text-white rounded-xl text-xs font-bold transition">Close</button>
+        </div>
+    </div>
+
+    <div id="guideModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-astroCard border border-astroBorder rounded-2xl max-w-xl w-full p-6 shadow-2xl flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-astroBorder pb-3">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2"><svg class="ico text-astroCyan" viewBox="0 0 576 512" aria-hidden="true"><path d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5l0-377.4c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8L0 454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5l0-370.3c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11L304 456c0 11.4 11.7 19.3 22.4 15.5z"/></svg> Sun &amp; Moon Transits Guide</h3>
+                <button id="closeGuideModal" class="text-gray-400 hover:text-white text-lg"><svg class="ico" viewBox="0 0 384 512" aria-hidden="true"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></button>
+            </div>
+            <div class="space-y-3 text-xs text-gray-300 leading-relaxed">
+                <div class="sticky top-0 bg-astroCard py-1 z-10">
+                    <select id="guideJump" class="w-full bg-astroBg border border-astroBorder rounded px-2 py-1 text-white focus:border-astroCyan outline-none">
+                        <option value="">Jump to a section…</option>
+<option value="guide-1">1. Quick start</option>
+<option value="guide-2">2. Setting up</option>
+<option value="guide-3">3. Satellite data</option>
+<option value="guide-4">4. Field of View Simulator</option>
+<option value="guide-5">5. Timeline and viewing window</option>
+<option value="guide-6">6. Predicted transits list</option>
+<option value="guide-7">7. ISS, China's station, Hubble and Starlink trains</option>
+<option value="guide-8">8. Next transit countdown</option>
+<option value="guide-9">9. Safety</option>
+<option value="guide-10">10. How accurate is it?</option>
+<option value="guide-11">11. Using it at a session</option>
+<option value="guide-12">12. Troubleshooting</option>
+                    </select>
+                </div>
+<div id="guide-1" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">1. Quick start</h4>
+<div class="space-y-3">
+<p>This app predicts when satellites will pass in front of the <strong>Sun</strong> or the <strong>Moon</strong> for the location and date you choose. It is built for public viewing sessions: you can see in advance which satellite will cross, exactly when, and where on the disc.</p>
+<ul class="list-disc list-inside space-y-0.5">
+<li>Set the <strong>observing location</strong> as precisely as you can (see section 2) and the <strong>viewing date</strong>.</li>
+<li>Choose <strong>Sun</strong> or <strong>Moon</strong> as the target. The timeline shows only the hours it is above the horizon.</li>
+<li>Wait for the status line under the display to say how many transits were found. The first time, the app downloads satellite data.</li>
+<li>Drag the cyan <strong>Viewing Window</strong> on the timeline to match your session. The list shows every crossing in that window with start and end times.</li>
+<li>Check the <strong>Next transit</strong> countdown at the top right during your session.</li>
+<li>Tap a row, or a Starlink train, to highlight it on the display.</li>
+</ul></div>
+</div>
+<div id="guide-2" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">2. Setting up</h4>
+<div class="space-y-3">
+<p><strong>Location matters a lot.</strong> A satellite only crosses the Sun or Moon for people standing in a narrow strip of ground, typically a few kilometers to about 10 km wide. Moving a few kilometers can turn a transit into a near miss. The app starts at the Bell Museum (44.9914, −93.1881). Enter the exact spot where your telescopes will be, or tap <strong>Use GPS</strong> on site. Longitude is negative for west. If location access is blocked, a message appears and your coordinates stay as they were. Invalid numbers are rejected.</p>
+<p><strong>Viewing date.</strong> The date of your session. The app starts on today's date. <strong>Sunrise/Sunset</strong> (or <strong>Moonrise/Moonset</strong>) show when the target is up. All times use your phone's time zone.</p>
+<p><strong>Target.</strong> Sun or Moon. The Alt/Az box shows where it is at the start of your window. For the Moon it also shows how much of the disc is lit. If the Moon rises and sets twice within your date, a menu appears so you can choose which period to use.</p>
+<p><strong>Telescope frame.</strong> Optional. <strong>Disc close-up</strong> (the default) zooms in on the disc. Choose a telescope or Custom to draw its frame around the disc. Changing it only redraws the display.</p></div>
+</div>
+<div id="guide-3" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">3. Satellite data</h4>
+<div class="space-y-3">
+<p>Orbits come from CelesTrak's list of active satellites, about 15,000 including all Starlink, the ISS, China's space station and Hubble. The list is saved on your phone, and every calculation runs on your phone. It is shared with the deep-sky app, so a download in one is used by the other.</p>
+<ul class="list-disc list-inside space-y-0.5">
+<li><strong>Update data</strong> downloads a fresh list. The app also refreshes automatically when the saved copy is over 12 hours old. <strong>For the best transit accuracy, tap Update data on the day of your session</strong> (an ISS reboost or a Starlink maneuver makes older data wrong).</li>
+<li>CelesTrak allows about one download per internet connection every 2 hours. If you see "CelesTrak refused", wait, use mobile data, or use <strong>Load file</strong> with a satellite list saved from CelesTrak.</li>
+<li>The status line warns you if your date is more than 2 days from the orbit data.</li>
+</ul></div>
+</div>
+<div id="guide-4" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">4. Field of View Simulator</h4>
+<div class="space-y-3">
+<p>The display shows the Sun or Moon as a disc, with the sky around it. The <strong>dotted ring</strong> marks the central half of the disc. Up on the screen means toward the zenith and right means increasing azimuth. If you chose a telescope, its frame is the light grey rectangle. The scales along the edges give altitude and azimuth.</p>
+<p>Each line is a satellite's path across the area, with an arrowhead showing the direction and a label with its name and the time it enters the disc. Satellites do <strong>not</strong> need to be sunlit to transit: you see their silhouette against the disc.</p>
+<ul class="list-disc list-inside space-y-0.5">
+<li><strong class="text-astroRed">Central Transit:</strong> crosses the inner half of the disc (within half the radius of the center). Best views.</li>
+<li><strong class="text-astroOrange">Edge Transit:</strong> crosses the disc but nearer the edge.</li>
+<li><strong class="text-astroPurple">Near Miss:</strong> passes within 0.5° of the edge without touching the disc. Because orbit predictions have some uncertainty, these could still turn into transits, so they are worth watching for.</li>
+</ul>
+<p>The three <strong>Show</strong> buttons hide or show each kind on both the display and the list. Tracks are followed within about 1.2° of the disc center, so a very large telescope frame is cut off at that distance.</p></div>
+</div>
+<div id="guide-5" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">5. Timeline and viewing window</h4>
+<div class="space-y-3">
+<p>The timeline covers only the time the Sun or Moon is above the horizon on your date. The colored lines are <strong>every transit and near miss all through that period</strong>, so you can see busy and quiet times at a glance.</p>
+<ul class="list-disc list-inside space-y-0.5">
+<li><strong>Move</strong> the cyan window by dragging its middle. <strong>Resize</strong> it with the ║ handles (minimum 10 minutes). Tap an empty spot on the bar to center the window there.</li>
+<li>The display, the list, and the counts update instantly for the window you choose.</li>
+<li><strong>Reset</strong> puts the window back to one hour: starting now if you are looking at today and the target is up, otherwise in the middle of the period.</li>
+</ul></div>
+</div>
+<div id="guide-6" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">6. Predicted transits list</h4>
+<div class="space-y-3">
+<p>The list shows every pass in your window, earliest first. <strong>Start</strong> and <strong>End</strong> are the moments the satellite enters and leaves the disc, in local time to a tenth of a second. Most transits last only 0.5 to 2 seconds. A <strong>Near Miss</strong> shows its closest-approach time with "≈" and no end time.</p>
+<p><strong>Tap a row</strong> to select it. Its trail on the display turns <strong>dotted</strong> and an info panel opens at the bottom with: start and end times, duration, distance, how close it comes to the center of the disc, how fast it moves across the sky, its altitude above your horizon, and its orbit (height, speed, inclination, NORAD ID). Tap the row again, or Close, to clear it. The selection also clears if you move the window so it leaves.</p></div>
+</div>
+<div id="guide-7" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">7. ISS, China's station, Hubble and Starlink trains</h4>
+<div class="space-y-3">
+<p><strong class="text-astroGreen">★ Special satellites:</strong> the <strong>ISS</strong>, the <strong>Chinese Space Station (CSS)</strong> and the <strong>Hubble Space Telescope</strong> are marked with a green ★, drawn with a thicker line, and labeled on the display. Modules and visiting spacecraft docked to a station share its position, so they are merged into a single entry, with the other names listed in the info panel.</p>
+<p><strong>Starlink trains:</strong> when three or more Starlink satellites from the same launch cross within 30 seconds of each other, they are grouped as a <strong>train</strong>. A cyan banner above the list gives the number of satellites, the time span and how many actually cross the disc. <strong>Tap it</strong> to highlight every member on the display and open a summary. Members also carry a green TRAIN tag in the list. New launches appear as tight trains in the first days after launch, so refresh the data on the day.</p></div>
+</div>
+<div id="guide-8" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">8. Next transit countdown</h4>
+<div class="space-y-3">
+<p>At the top right, a live countdown shows the next crossing after the current time (not just the ones in your window): what it is, how central it is, the exact time and how long to wait. It turns green in the last 2 minutes so you can point it out to the public. Below it, a green <strong>Next highlight</strong> line shows the next ISS, Chinese station, Hubble or Starlink train, which are the transits most worth announcing. If you pick another date, it counts down to the first crossing after the current time on that date.</p></div>
+</div>
+<div id="guide-9" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">9. Safety</h4>
+<div class="space-y-3">
+<p><strong class="text-astroOrange">Never look at the Sun, directly or through a telescope, binoculars or camera, without a certified solar filter correctly fitted.</strong> A transit lasts only a second or two, so don't take a filter off or remove your eye protection to try to see it. Moon viewing needs no filter.</p></div>
+</div>
+<div id="guide-10" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">10. How accurate is it?</h4>
+<div class="space-y-3">
+<p><strong>Calculated from real data:</strong> satellite positions (the standard SGP4 model with CelesTrak's orbit data), the Sun's and Moon's real positions (the Moon includes the shift from where you stand, up to about 1°), and the exact moments the satellite crosses the disc. In tests, the calculation timed a crossing placed at the center of the Sun and of the Moon to within a few thousandths of a second.</p>
+<p><strong>What limits it in practice:</strong> orbit data. With fresh data (a day old or less), a satellite's position is typically good to a kilometer or two. That shifts its path by roughly a tenth of a degree (about a fifth of the Sun's or Moon's width) and its timing by a second or less. So treat Central transits as likely, Edge transits and Near Misses as uncertain, and expect timing within about a second or two. Older data, satellite maneuvers, and your exact position make this worse. The predictions have not been compared with live observed transits yet, so compare them with another tracker if you can.</p>
+<p><strong>Not included:</strong> satellites missing from the public list (some military or brand-new ones), aircraft, birds, and atmospheric refraction (small except near the horizon). High-orbit satellites (orbits over about 225 minutes) are skipped because they barely move across the sky.</p></div>
+</div>
+<div id="guide-11" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">11. Using it at a session</h4>
+<div class="space-y-3">
+<ul class="list-disc list-inside space-y-0.5">
+<li>Open the page once with a connection before the event so the app and the data are saved. Then it opens and calculates without signal. (Phone GPS usually works without signal too.)</li>
+<li>On the day, tap <strong>Update data</strong>, confirm the location, then set the window for your session.</li>
+<li>Add it to your Home Screen: in Safari tap Share, then Add to Home Screen.</li>
+<li>After the app is updated on GitHub, open it twice to see the new version.</li>
+</ul></div>
+</div>
+<div id="guide-12" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">12. Troubleshooting</h4>
+<div class="space-y-3">
+<ul class="list-disc list-inside space-y-0.5">
+<li><strong>"CelesTrak refused the download":</strong> the 2-hour limit. Wait, use mobile data, or Load file.</li>
+<li><strong>"Could not download satellite data":</strong> no connection and no saved copy yet. Connect once.</li>
+<li><strong>"The Sun/Moon is not above the horizon on this date":</strong> pick another date.</li>
+<li><strong>No transits:</strong> normal! Most windows have none. Look at the timeline for busier times, or widen the window.</li>
+<li><strong>"(could not refresh, using saved copy)":</strong> the refresh failed, so older saved data is being used.</li>
+<li><strong>Predictions differ from another site:</strong> check the data date, your exact location, and the time zone.</li>
+</ul></div>
+</div>
+            </div>
+            <button id="closeGuideBtn2" class="w-full py-2 bg-astroCyan text-black font-bold rounded-xl text-xs hover:bg-cyan-400 transition">Got It</button>
+        </div>
+    </div>
+
+    <script>
+        // ===== SATELLITE PREDICTION CORE (SGP4 orbit model) =====
+        const DEG = Math.PI / 180, TWOPI = 2 * Math.PI;
+        const RE_KM = 6378.135;                       // WGS-72 Earth radius used by SGP4
+        const XKE = 0.0743669161331734132, J2 = 0.001082616, J3 = -0.00000253881, J4 = -0.00000165597, J3OJ2 = J3 / J2;
+        const SGP4_S = 78 / RE_KM + 1, QZMS2T = Math.pow((120 - 78) / RE_KM, 4);
+
+        // Parse one TLE (name + two lines) into orbital elements. Returns null if unusable.
+        function parseTLE(name, l1, l2) {
+            if (!l1 || !l2 || l1[0] !== '1' || l2[0] !== '2') return null;
+            const yr = +l1.substr(18, 2);
+            const year = yr < 57 ? 2000 + yr : 1900 + yr;
+            const epochMs = Date.UTC(year, 0, 1) + (+l1.substr(20, 12) - 1) * 86400000;
+            const bm = l1.substr(53, 8).trim().match(/^([+-]?)(\d+)([+-]\d+)$/);
+            const bstar = bm ? (bm[1] === '-' ? -1 : 1) * (+('0.' + bm[2])) * Math.pow(10, +bm[3]) : 0;
+            const t = {
+                name: (name || '').trim(), norad: +l1.substr(2, 5), launch: l1.substr(9, 5).trim(), epochMs, bstar,
+                incl: +l2.substr(8, 8) * DEG, node: +l2.substr(17, 8) * DEG,
+                ecc: +('0.' + l2.substr(26, 7).trim()), argp: +l2.substr(34, 8) * DEG,
+                m: +l2.substr(43, 8) * DEG, n: +l2.substr(52, 11) * TWOPI / 1440, inclDeg: +l2.substr(8, 8)
+            };
+            for (const k of ['epochMs', 'incl', 'node', 'ecc', 'argp', 'm', 'n']) if (!isFinite(t[k])) return null;
+            return t.n > 0 ? t : null;
+        }
+
+        // SGP4 initialisation (near-Earth objects, orbital period under 225 min). Returns null otherwise.
+        function sgp4Init(t) {
+            let no = t.n; const ecco = t.ecc, inclo = t.incl, nodeo = t.node, argpo = t.argp, mo = t.m, bstar = t.bstar;
+            if (ecco < 0 || ecco >= 1) return null;
+            const eccsq = ecco * ecco, omeosq = 1 - eccsq, rteosq = Math.sqrt(omeosq);
+            const cosio = Math.cos(inclo), cosio2 = cosio * cosio;
+            const ak = Math.pow(XKE / no, 2 / 3);
+            const d1 = 0.75 * J2 * (3 * cosio2 - 1) / (rteosq * omeosq);
+            let del = d1 / (ak * ak);
+            const adel = ak * (1 - del * del - del * (1 / 3 + 134 * del * del / 81));
+            del = d1 / (adel * adel);
+            no = no / (1 + del);
+            if (TWOPI / no >= 225) return null;
+            const ao = Math.pow(XKE / no, 2 / 3), ao0 = Math.pow(XKE / no, 2 / 3), sinio = Math.sin(inclo), po = ao * omeosq;
+            const con42 = 1 - 5 * cosio2, con41 = -con42 - cosio2 - cosio2, posq = po * po, rp = ao * (1 - ecco);
+            const isimp = rp < (220 / RE_KM + 1);
+            let sfour = SGP4_S, qzms24 = QZMS2T;
+            const perige = (rp - 1) * RE_KM;
+            if (perige < 156) {
+                sfour = perige < 98 ? 20 : perige - 78;
+                qzms24 = Math.pow((120 - sfour) / RE_KM, 4);
+                sfour = sfour / RE_KM + 1;
+            }
+            const pinvsq = 1 / posq, tsi = 1 / (ao - sfour), eta = ao * ecco * tsi, etasq = eta * eta, eeta = ecco * eta;
+            const psisq = Math.abs(1 - etasq), coef = qzms24 * Math.pow(tsi, 4), coef1 = coef / Math.pow(psisq, 3.5);
+            const cc2 = coef1 * no * (ao * (1 + 1.5 * etasq + eeta * (4 + etasq)) + 0.375 * J2 * tsi / psisq * con41 * (8 + 3 * etasq * (8 + etasq)));
+            const cc1 = bstar * cc2;
+            const cc3 = ecco > 1e-4 ? -2 * coef * tsi * J3OJ2 * no * sinio / ecco : 0;
+            const x1mth2 = 1 - cosio2;
+            const cc4 = 2 * no * coef1 * ao * omeosq * (eta * (2 + 0.5 * etasq) + ecco * (0.5 + 2 * etasq) - J2 * tsi / (ao * psisq) * (-3 * con41 * (1 - 2 * eeta + etasq * (1.5 - 0.5 * eeta)) + 0.75 * x1mth2 * (2 * etasq - eeta * (1 + etasq)) * Math.cos(2 * argpo)));
+            const cc5 = 2 * coef1 * ao * omeosq * (1 + 2.75 * (etasq + eeta) + eeta * etasq);
+            const cosio4 = cosio2 * cosio2, temp1 = 1.5 * J2 * pinvsq * no, temp2 = 0.5 * temp1 * J2 * pinvsq, temp3 = -0.46875 * J4 * pinvsq * pinvsq * no;
+            const mdot = no + 0.5 * temp1 * rteosq * con41 + 0.0625 * temp2 * rteosq * (13 - 78 * cosio2 + 137 * cosio4);
+            const argpdot = -0.5 * temp1 * con42 + 0.0625 * temp2 * (7 - 114 * cosio2 + 395 * cosio4) + temp3 * (3 - 36 * cosio2 + 49 * cosio4);
+            const xhdot1 = -temp1 * cosio;
+            const nodedot = xhdot1 + (0.5 * temp2 * (4 - 19 * cosio2) + 2 * temp3 * (3 - 7 * cosio2)) * cosio;
+            const s = {
+                no, ecco, inclo, nodeo, argpo, mo, bstar, isimp, eta, cc1, cc4, cc5, mdot, argpdot, nodedot,
+                omgcof: bstar * cc3 * Math.cos(argpo), xmcof: ecco > 1e-4 ? -(2 / 3) * coef * bstar / eeta : 0,
+                nodecf: 3.5 * omeosq * xhdot1 * cc1, t2cof: 1.5 * cc1,
+                xlcof: -0.25 * J3OJ2 * sinio * (3 + 5 * cosio) / (Math.abs(cosio + 1) > 1.5e-12 ? 1 + cosio : 1.5e-12),
+                aycof: -0.5 * J3OJ2 * sinio, delmo: Math.pow(1 + eta * Math.cos(mo), 3), sinmao: Math.sin(mo),
+                x1mth2, x7thm1: 7 * cosio2 - 1, con41, sinip: sinio, cosip: cosio, amBase: ao0, epochMs: t.epochMs, name: t.name, norad: t.norad, launch: t.launch, inclDeg: t.inclDeg
+            };
+            if (!isimp) {
+                const cc1sq = cc1 * cc1;
+                s.d2 = 4 * ao * tsi * cc1sq;
+                const temp = s.d2 * tsi * cc1 / 3;
+                s.d3 = (17 * ao + sfour) * temp;
+                s.d4 = 0.5 * temp * ao * tsi * (221 * ao + 31 * sfour) * cc1;
+                s.t3cof = s.d2 + 2 * cc1sq;
+                s.t4cof = 0.25 * (3 * s.d3 + cc1 * (12 * s.d2 + 10 * cc1sq));
+                s.t5cof = 0.2 * (3 * s.d4 + 12 * cc1 * s.d3 + 6 * s.d2 * s.d2 + 15 * cc1sq * (2 * s.d2 + cc1sq));
+            }
+            return s;
+        }
+
+        // Propagate to tsince (minutes from the TLE epoch). Writes position (km) to out[0..2] and velocity (km/s) to out[3..5].
+        function sgp4(s, tsince, out) {
+            const t = tsince, t2 = t * t;
+            const xmdf = s.mo + s.mdot * t, argpdf = s.argpo + s.argpdot * t, nodedf = s.nodeo + s.nodedot * t;
+            let argpm = argpdf, mm = xmdf;
+            const nodem = nodedf + s.nodecf * t2;
+            let tempa = 1 - s.cc1 * t, tempe = s.bstar * s.cc4 * t, templ = s.t2cof * t2;
+            if (!s.isimp) {
+                const delomg = s.omgcof * t, c = 1 + s.eta * Math.cos(xmdf);
+                const delm = s.xmcof * (c * c * c - s.delmo), temp = delomg + delm;
+                mm = xmdf + temp; argpm = argpdf - temp;
+                const t3 = t2 * t, t4 = t3 * t;
+                tempa = tempa - s.d2 * t2 - s.d3 * t3 - s.d4 * t4;
+                tempe = tempe + s.bstar * s.cc5 * (Math.sin(mm) - s.sinmao);
+                templ = templ + s.t3cof * t3 + t4 * (s.t4cof + t * s.t5cof);
+            }
+            let em = s.ecco;
+            const am = s.amBase * tempa * tempa;
+            const nm = XKE / (am * Math.sqrt(am));
+            em = em - tempe;
+            if (em >= 1 || em < -0.001 || am < 0.95) return false;
+            if (em < 1e-6) em = 1e-6;
+            mm = mm + s.no * templ;
+            let xlm = mm + argpm + nodem;
+            let nodemm = nodem % TWOPI, argpmm = argpm % TWOPI;
+            xlm = xlm % TWOPI;
+            mm = (xlm - argpmm - nodemm) % TWOPI;
+            const sinip = s.sinip, cosip = s.cosip;
+            const axnl = em * Math.cos(argpmm);
+            let temp = 1 / (am * (1 - em * em));
+            const aynl = em * Math.sin(argpmm) + temp * s.aycof;
+            const xl = mm + argpmm + nodemm + temp * s.xlcof * axnl;
+            const u = (xl - nodemm) % TWOPI;
+            let eo1 = u, tem5 = 9999.9, ktr = 1, sineo1 = 0, coseo1 = 0;
+            while (Math.abs(tem5) >= 1e-12 && ktr <= 10) {
+                sineo1 = Math.sin(eo1); coseo1 = Math.cos(eo1);
+                tem5 = 1 - coseo1 * axnl - sineo1 * aynl;
+                tem5 = (u - aynl * coseo1 + axnl * sineo1 - eo1) / tem5;
+                if (Math.abs(tem5) >= 0.95) tem5 = tem5 > 0 ? 0.95 : -0.95;
+                eo1 += tem5; ktr++;
+            }
+            const ecose = axnl * coseo1 + aynl * sineo1, esine = axnl * sineo1 - aynl * coseo1;
+            const el2 = axnl * axnl + aynl * aynl, pl = am * (1 - el2);
+            if (pl < 0) return false;
+            const rl = am * (1 - ecose), rdotl = Math.sqrt(am) * esine / rl, rvdotl = Math.sqrt(pl) / rl;
+            const betal = Math.sqrt(1 - el2);
+            temp = esine / (1 + betal);
+            const sinu = am / rl * (sineo1 - aynl - axnl * temp), cosu = am / rl * (coseo1 - axnl + aynl * temp);
+            let su = Math.atan2(sinu, cosu);
+            const sin2u = (cosu + cosu) * sinu, cos2u = 1 - 2 * sinu * sinu;
+            temp = 1 / pl;
+            const temp1 = 0.5 * J2 * temp, temp2 = temp1 * temp;
+            const mrt = rl * (1 - 1.5 * temp2 * betal * s.con41) + 0.5 * temp1 * s.x1mth2 * cos2u;
+            if (mrt < 1) return false;                       // decayed
+            su = su - 0.25 * temp2 * s.x7thm1 * sin2u;
+            const xnode = nodemm + 1.5 * temp2 * cosip * sin2u;
+            const xinc = s.inclo + 1.5 * temp2 * cosip * sinip * cos2u;
+            const mvt = rdotl - nm * temp1 * s.x1mth2 * sin2u / XKE;
+            const rvdot = rvdotl + nm * temp1 * (s.x1mth2 * cos2u + 1.5 * s.con41) / XKE;
+            const sinsu = Math.sin(su), cossu = Math.cos(su), snod = Math.sin(xnode), cnod = Math.cos(xnode);
+            const sini = Math.sin(xinc), cosi = Math.cos(xinc);
+            const xmx = -snod * cosi, xmy = cnod * cosi;
+            const ux = xmx * sinsu + cnod * cossu, uy = xmy * sinsu + snod * cossu, uz = sini * sinsu;
+            const vx = xmx * cossu - cnod * sinsu, vy = xmy * cossu - snod * sinsu, vz = sini * cossu;
+            const vk = RE_KM * XKE / 60, rk = mrt * RE_KM;
+            out[0] = rk * ux; out[1] = rk * uy; out[2] = rk * uz;
+            out[3] = (mvt * ux + rvdot * vx) * vk; out[4] = (mvt * uy + rvdot * vy) * vk; out[5] = (mvt * uz + rvdot * vz) * vk;
+            return true;
+        }
+
+        // ---- Earth / sky geometry ----
+        function gmstRad(jd) {
+            const t = (jd - 2451545.0) / 36525;
+            let g = -6.2e-6 * t * t * t + 0.093104 * t * t + (876600 * 3600 + 8640184.812866) * t + 67310.54841;
+            g = (g * DEG / 240) % TWOPI;
+            return g < 0 ? g + TWOPI : g;
+        }
+        function sunUnit(jd) {
+            const n = jd - 2451545.0, L = (280.460 + 0.9856474 * n) % 360, g = ((357.528 + 0.9856003 * n) % 360) * DEG;
+            const lam = (L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * DEG, eps = (23.439 - 0.0000004 * n) * DEG;
+            return [Math.cos(lam), Math.cos(eps) * Math.sin(lam), Math.sin(eps) * Math.sin(lam)];
+        }
+        // Observer position (km) and local east/north/up unit vectors in the same frame, at a given time
+        function observerFrame(latDeg, lngDeg, ms) {
+            const jd = ms / 86400000 + 2440587.5, th = gmstRad(jd) + lngDeg * DEG, la = latDeg * DEG;
+            const sl = Math.sin(la), cl = Math.cos(la), st = Math.sin(th), ct = Math.cos(th);
+            const e2 = 0.00669437999014, N = 6378.137 / Math.sqrt(1 - e2 * sl * sl);
+            return {
+                pos: [N * cl * ct, N * cl * st, N * (1 - e2) * sl],
+                east: [-st, ct, 0], north: [-sl * ct, -sl * st, cl], up: [cl * ct, cl * st, sl]
+            };
+        }
+        // Smallest angle (radians) between direction T and the great-circle arc from unit vector a to unit vector b
+        function arcDist(ax, ay, az, bx, by, bz, Tx, Ty, Tz) {
+            const ta = ax * Tx + ay * Ty + az * Tz, tb = bx * Tx + by * Ty + bz * Tz;
+            const ends = Math.acos(Math.min(1, Math.max(ta, tb)));
+            let nx = ay * bz - az * by, ny = az * bx - ax * bz, nz = ax * by - ay * bx;
+            const nl = Math.sqrt(nx * nx + ny * ny + nz * nz);
+            if (nl < 1e-9) return ends;
+            nx /= nl; ny /= nl; nz /= nl;
+            const dpl = nx * Tx + ny * Ty + nz * Tz;
+            const px = Tx - dpl * nx, py = Ty - dpl * ny, pz = Tz - dpl * nz;
+            const c1 = (ay * pz - az * py) * nx + (az * px - ax * pz) * ny + (ax * py - ay * px) * nz;
+            const c2 = (py * bz - pz * by) * nx + (pz * bx - px * bz) * ny + (px * by - py * bx) * nz;
+            return (c1 >= 0 && c2 >= 0) ? Math.asin(Math.min(1, Math.abs(dpl))) : ends;
+        }
+
+
+        // ---- Sun and Moon positions ----
+        // Moon: Meeus, "Astronomical Algorithms" ch. 47 (60 longitude/distance terms, 60 latitude terms, accuracy about 10 arcsec)
+        const MOON_LR = [  // D, M, M', F, longitude (1e-6 deg), distance (1e-3 km)
+            [0,0,1,0,6288774,-20905355],[2,0,-1,0,1274027,-3699111],[2,0,0,0,658314,-2955968],[0,0,2,0,213618,-569925],
+            [0,1,0,0,-185116,48888],[0,0,0,2,-114332,-3149],[2,0,-2,0,58793,246158],[2,-1,-1,0,57066,-152138],
+            [2,0,1,0,53322,-170733],[2,-1,0,0,45758,-204586],[0,1,-1,0,-40923,-129620],[1,0,0,0,-34720,108743],
+            [0,1,1,0,-30383,104755],[2,0,0,-2,15327,10321],[0,0,1,2,-12528,0],[0,0,1,-2,10980,79661],
+            [4,0,-1,0,10675,-34782],[0,0,3,0,10034,-23210],[4,0,-2,0,8548,-21636],[2,1,-1,0,-7888,24208],
+            [2,1,0,0,-6766,30824],[1,0,-1,0,-5163,-8379],[1,1,0,0,4987,-16675],[2,-1,1,0,4036,-12831],
+            [2,0,2,0,3994,-10445],[4,0,0,0,3861,-11650],[2,0,-3,0,3665,14403],[0,1,-2,0,-2689,-7003],
+            [2,0,-1,2,-2602,0],[2,-1,-2,0,2390,10056],[1,0,1,0,-2348,6322],[2,-2,0,0,2236,-9884],
+            [0,1,2,0,-2120,5751],[0,2,0,0,-2069,0],[2,-2,-1,0,2048,-4950],[2,0,1,-2,-1773,4130],
+            [2,0,0,2,-1595,0],[4,-1,-1,0,1215,-3958],[0,0,2,2,-1110,0],[3,0,-1,0,-892,3258],
+            [2,1,1,0,-810,2616],[4,-1,-2,0,759,-1897],[0,2,-1,0,-713,-2117],[2,2,-1,0,-700,2354],
+            [2,1,-2,0,691,0],[2,-1,0,-2,596,0],[4,0,1,0,549,-1423],[0,0,4,0,537,-1117],
+            [4,-1,0,0,520,-1571],[1,0,-2,0,-487,-1739],[2,1,0,-2,-399,0],[0,0,2,-2,-381,-4421],
+            [1,1,1,0,351,0],[3,0,-2,0,-340,0],[4,0,-3,0,330,0],[2,-1,2,0,327,0],
+            [0,2,1,0,-323,1165],[1,1,-1,0,299,0],[2,0,3,0,294,0],[2,0,-1,-2,0,8752]
+        ];
+        const MOON_B = [   // D, M, M', F, latitude (1e-6 deg)
+            [0,0,0,1,5128122],[0,0,1,1,280602],[0,0,1,-1,277693],[2,0,0,-1,173237],[2,0,-1,1,55413],[2,0,-1,-1,46271],
+            [2,0,0,1,32573],[0,0,2,1,17198],[2,0,1,-1,9266],[0,0,2,-1,8822],[2,-1,0,-1,8216],[2,0,-2,-1,4324],
+            [2,0,1,1,4200],[2,1,0,-1,-3359],[2,-1,-1,1,2463],[2,-1,0,1,2211],[2,-1,-1,-1,2065],[0,1,-1,-1,-1870],
+            [4,0,-1,-1,1828],[0,1,0,1,-1794],[0,0,0,3,-1749],[0,1,-1,1,-1565],[1,0,0,1,-1491],[0,1,1,1,-1475],
+            [0,1,1,-1,-1410],[0,1,0,-1,-1344],[1,0,0,-1,-1335],[0,0,3,1,1107],[4,0,0,-1,1021],[4,0,-1,1,833],
+            [0,0,1,-3,777],[4,0,-2,1,671],[2,0,0,-3,607],[2,0,2,-1,596],[2,-1,1,-1,491],[2,0,-2,1,-451],
+            [0,0,3,-1,439],[2,0,2,1,422],[2,0,-3,-1,421],[2,1,-1,1,-366],[2,1,0,1,-351],[4,0,0,1,331],
+            [2,-1,1,1,315],[2,-2,0,-1,302],[0,0,1,3,-283],[2,1,1,-1,-229],[1,1,0,-1,223],[1,1,0,1,223],
+            [0,1,-2,-1,-220],[2,1,-1,-1,-220],[1,0,1,1,-185],[2,-1,-2,-1,181],[0,1,2,1,-177],[4,0,-2,-1,176],
+            [4,-1,-1,-1,166],[1,0,1,-1,-164],[4,0,1,-1,132],[1,0,-1,-1,-119],[4,-1,0,-1,115],[2,-2,0,1,107]
+        ];
+        // Geocentric Moon: unit vector in the equator-of-date frame, distance (km). jd = Julian date (UT).
+        function moonGeocentric(jd) {
+            const T = (jd + 69.2 / 86400 - 2451545.0) / 36525;          // TT is about UT + 69 s in 2026
+            const T2 = T * T, T3 = T2 * T, T4 = T3 * T;
+            const rad = Math.PI / 180, mod = (x) => ((x % 360) + 360) % 360;
+            const Lp = mod(218.3164477 + 481267.88123421 * T - 0.0015786 * T2 + T3 / 538841 - T4 / 65194000);
+            const D = mod(297.8501921 + 445267.1114034 * T - 0.0018819 * T2 + T3 / 545868 - T4 / 113065000) * rad;
+            const M = mod(357.5291092 + 35999.0502909 * T - 0.0001536 * T2 + T3 / 24490000) * rad;
+            const Mp = mod(134.9633964 + 477198.8675055 * T + 0.0087414 * T2 + T3 / 69699 - T4 / 14712000) * rad;
+            const F = mod(93.2720950 + 483202.0175233 * T - 0.0036539 * T2 - T3 / 3526000 + T4 / 863310000) * rad;
+            const A1 = mod(119.75 + 131.849 * T) * rad, A2 = mod(53.09 + 479264.290 * T) * rad, A3 = mod(313.45 + 481266.484 * T) * rad;
+            const E = 1 - 0.002516 * T - 0.0000074 * T2, Lr = Lp * rad;
+            const ef = (m) => { const a = Math.abs(m); return a === 1 ? E : (a === 2 ? E * E : 1); };
+            let sl = 0, sr = 0, sb = 0;
+            for (const t of MOON_LR) { const arg = t[0] * D + t[1] * M + t[2] * Mp + t[3] * F, e = ef(t[1]); sl += t[4] * e * Math.sin(arg); sr += t[5] * e * Math.cos(arg); }
+            for (const t of MOON_B) { const arg = t[0] * D + t[1] * M + t[2] * Mp + t[3] * F; sb += t[4] * ef(t[1]) * Math.sin(arg); }
+            sl += 3958 * Math.sin(A1) + 1962 * Math.sin(Lr - F) + 318 * Math.sin(A2);
+            sb += -2235 * Math.sin(Lr) + 382 * Math.sin(A3) + 175 * Math.sin(A1 - F) + 175 * Math.sin(A1 + F) + 127 * Math.sin(Lr - Mp) - 115 * Math.sin(Lr + Mp);
+            const lam = (Lp + sl / 1e6) * rad, bet = (sb / 1e6) * rad, dist = 385000.56 + sr / 1000;
+            const eps = (23.4392911 - 0.0130042 * T) * rad;
+            const x = Math.cos(bet) * Math.cos(lam), y = Math.cos(bet) * Math.sin(lam), z = Math.sin(bet);
+            return { unit: [x, y * Math.cos(eps) - z * Math.sin(eps), y * Math.sin(eps) + z * Math.cos(eps)], distKm: dist, lamDeg: lam / rad, betDeg: bet / rad };
+        }
+        // Sun: unit vector (equator of date), distance (AU) and angular radius (deg)
+        function sunInfo(jd) {
+            const n = jd - 2451545.0, g = ((357.528 + 0.9856003 * n) % 360) * DEG;
+            const u = sunUnit(jd), R = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g);
+            return { unit: u, distAU: R, radiusDeg: 0.26660 / R };
+        }
+        // Direction (unit vector, equator-of-date frame) and angular radius (deg) of the Sun or Moon as seen from an observer
+        function targetTopo(kind, ms, obsPos) {
+            const jd = ms / 86400000 + 2440587.5;
+            if (kind === 'sun') { const s = sunInfo(jd); return { vec: s.unit, radiusDeg: s.radiusDeg }; }
+            const m = moonGeocentric(jd);
+            const dx = m.unit[0] * m.distKm - obsPos[0], dy = m.unit[1] * m.distKm - obsPos[1], dz = m.unit[2] * m.distKm - obsPos[2];
+            const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
+            return { vec: [dx / d, dy / d, dz / d], radiusDeg: Math.asin(1737.4 / d) / DEG };
+        }
+        // Altitude / azimuth (degrees) of the Sun or Moon, and the Moon's illuminated fraction
+        function bodyAltAz(kind, latDeg, lngDeg, ms) {
+            const f = observerFrame(latDeg, lngDeg, ms), t = targetTopo(kind, ms, f.pos), v = t.vec;
+            const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+            let az = Math.atan2(dot(v, f.east), dot(v, f.north)) / DEG; if (az < 0) az += 360;
+            return { alt: Math.asin(dot(v, f.up)) / DEG, az, radiusDeg: t.radiusDeg };
+        }
+        function moonIllumination(ms) {
+            const jd = ms / 86400000 + 2440587.5, m = moonGeocentric(jd).unit, s = sunUnit(jd);
+            return (1 - (m[0] * s[0] + m[1] * s[1] + m[2] * s[2])) / 2;
+        }
+
+        // ---- Transit finder ----
+        const TRACK_RADIUS_DEG = 1.2;                 // satellites are followed while within this angle of the Sun / Moon center
+        const SPECIAL_NORAD = { 25544: 'ISS', 48274: 'CSS', 20580: 'HST' };
+
+        // Find every satellite path that comes within TRACK_RADIUS_DEG of the Sun or Moon during a time window.
+        // opts: {kind:'sun'|'moon', lat, lng, startMs, endMs, sats}. Returns {tracks, radiusDeg} or null if stopped.
+        // Each track: {name, norad, inclDeg, launch, altKm, speedKmS, pts:[[tMs, xDeg, yDeg, elDeg, rangeKm], ...]}
+        // x = increasing azimuth, y = toward the zenith, measured from the center of the disc.
+        async function computeTransitTracks(opts, onProgress, shouldStop) {
+            const STEP = 120000, N = Math.floor((opts.endMs - opts.startMs) / STEP) + 2;
+            const R = TRACK_RADIUS_DEG * DEG, FLAG = (TRACK_RADIUS_DEG + 3) * DEG, cosR = Math.cos(R);
+            const obs = new Float64Array(3 * N), upv = new Float64Array(3 * N), tv = new Float64Array(3 * N), tms = new Float64Array(N);
+            let radSum = 0;
+            for (let i = 0; i < N; i++) {
+                tms[i] = opts.startMs + i * STEP;
+                const f = observerFrame(opts.lat, opts.lng, tms[i]), tg = targetTopo(opts.kind, tms[i], f.pos);
+                obs[3 * i] = f.pos[0]; obs[3 * i + 1] = f.pos[1]; obs[3 * i + 2] = f.pos[2];
+                upv[3 * i] = f.up[0]; upv[3 * i + 1] = f.up[1]; upv[3 * i + 2] = f.up[2];
+                tv[3 * i] = tg.vec[0]; tv[3 * i + 1] = tg.vec[1]; tv[3 * i + 2] = tg.vec[2];
+                radSum += tg.radiusDeg;
+            }
+            const rv = new Float64Array(6), tracks = [];
+            const la = opts.lat * DEG, e2 = 0.00669437999014, Nrad = 6378.137 / Math.sqrt(1 - e2 * Math.sin(la) * Math.sin(la));
+            const obsRho = Nrad * Math.cos(la), obsZ = Nrad * (1 - e2) * Math.sin(la), lonR = opts.lng * DEG, cl = Math.cos(la), sl = Math.sin(la);
+
+            function refine(s, tStart, tEnd) {
+                let cur = null, prx = 0, pry = 0, prz = 0, pt = 0, havePrev = false, v = 0.5 * DEG, dt = 250;
+                const flush = () => { if (cur && cur.pts.length >= 2) tracks.push(cur); cur = null; };
+                for (let t = tStart; t <= tEnd + 1; t += dt) {
+                    if (!sgp4(s, (t - s.epochMs) / 60000, rv)) { flush(); havePrev = false; dt = 250; continue; }
+                    const jd = t / 86400000 + 2440587.5, th = gmstRad(jd) + lonR, ct = Math.cos(th), st = Math.sin(th);
+                    let rx = rv[0] - obsRho * ct, ry = rv[1] - obsRho * st, rz = rv[2] - obsZ;
+                    const rng = Math.sqrt(rx * rx + ry * ry + rz * rz);
+                    rx /= rng; ry /= rng; rz /= rng;
+                    // target direction at this instant (linear blend of the 2-minute values)
+                    let k = Math.floor((t - opts.startMs) / STEP); if (k < 0) k = 0; if (k > N - 2) k = N - 2;
+                    const fr = (t - tms[k]) / STEP;
+                    let Tx = tv[3 * k] + fr * (tv[3 * k + 3] - tv[3 * k]), Ty = tv[3 * k + 1] + fr * (tv[3 * k + 4] - tv[3 * k + 1]), Tz = tv[3 * k + 2] + fr * (tv[3 * k + 5] - tv[3 * k + 2]);
+                    const tl = Math.sqrt(Tx * Tx + Ty * Ty + Tz * Tz); Tx /= tl; Ty /= tl; Tz /= tl;
+                    const cosAng = Math.min(1, rx * Tx + ry * Ty + rz * Tz), ang = Math.acos(cosAng);
+                    if (havePrev) {
+                        const c = Math.min(1, rx * prx + ry * pry + rz * prz);
+                        v = Math.max(1e-5, Math.acos(c) / ((t - pt) / 1000));
+                    }
+                    prx = rx; pry = ry; prz = rz; pt = t; havePrev = true;
+                    const ux = cl * ct, uy = cl * st, uz = sl, sinEl = rx * ux + ry * uy + rz * uz;
+                    if (cosAng >= cosR && sinEl > 0) {
+                        const uT = ux * Tx + uy * Ty + uz * Tz;
+                        let yx = ux - uT * Tx, yy = uy - uT * Ty, yz = uz - uT * Tz;
+                        const yl = Math.sqrt(yx * yx + yy * yy + yz * yz); yx /= yl; yy /= yl; yz /= yl;
+                        const xx = Ty * yz - Tz * yy, xy = Tz * yx - Tx * yz, xz = Tx * yy - Ty * yx;
+                        const dx = Math.atan((rx * xx + ry * xy + rz * xz) / cosAng) / DEG, dy = Math.atan((rx * yx + ry * yy + rz * yz) / cosAng) / DEG;
+                        if (!cur) cur = { name: s.name, norad: s.norad, inclDeg: s.inclDeg, launch: s.launch,
+                                          altKm: Math.sqrt(rv[0] * rv[0] + rv[1] * rv[1] + rv[2] * rv[2]) - 6371,
+                                          speedKmS: Math.sqrt(rv[3] * rv[3] + rv[4] * rv[4] + rv[5] * rv[5]), pts: [] };
+                        cur.pts.push([t, dx, dy, Math.asin(sinEl) / DEG, rng]);
+                    } else flush();
+                    // next step: coarse when far away, fine (about 0.02 degrees of motion) when close
+                    const stepS = ang > R + 0.5 * DEG ? Math.max(0.05, Math.min(2.0, (ang - R - 0.2 * DEG) / (1.5 * v)))
+                                                      : Math.max(0.01, Math.min(0.25, 0.02 * DEG / v));
+                    dt = stepS * 1000;
+                }
+                flush();
+            }
+
+            const CHUNK = 150;
+            for (let q = 0; q < opts.sats.length; q++) {
+                const s = opts.sats[q];
+                let px = 0, py = 0, pz = 0, pBelow = false, pOk = false, gStart = -1, gEnd = -1;
+                for (let i = 0; i < N; i++) {
+                    if (!sgp4(s, (tms[i] - s.epochMs) / 60000, rv)) { pOk = false; continue; }
+                    let rx = rv[0] - obs[3 * i], ry = rv[1] - obs[3 * i + 1], rz = rv[2] - obs[3 * i + 2];
+                    const rng = Math.sqrt(rx * rx + ry * ry + rz * rz);
+                    rx /= rng; ry /= rng; rz /= rng;
+                    const below = rx * upv[3 * i] + ry * upv[3 * i + 1] + rz * upv[3 * i + 2] < 0;
+                    if (pOk && !(below && pBelow) && arcDist(px, py, pz, rx, ry, rz, tv[3 * i], tv[3 * i + 1], tv[3 * i + 2]) < FLAG) {
+                        if (gStart >= 0 && i - 1 <= gEnd + 1) gEnd = i;
+                        else { if (gStart >= 0) refine(s, tms[gStart - 1], tms[gEnd]); gStart = i; gEnd = i; }
+                    }
+                    px = rx; py = ry; pz = rz; pBelow = below; pOk = true;
+                }
+                if (gStart >= 0) refine(s, tms[gStart - 1], tms[gEnd]);
+                if ((q + 1) % CHUNK === 0) {
+                    if (onProgress) onProgress((q + 1) / opts.sats.length);
+                    await new Promise(r => setTimeout(r, 0));
+                    if (shouldStop && shouldStop()) return null;
+                }
+            }
+            if (onProgress) onProgress(1);
+            return { tracks, radiusDeg: radSum / N };
+        }
+
+        // Turn raw tracks into transit passes: classify against the disc, merge docked modules, find Starlink trains.
+        // Categories: red = central transit (inside the middle half of the disc), orange = edge transit, purple = near miss (within 0.5 deg of the edge)
+        function buildTransitPasses(result, midnightMs) {
+            const rad = result.radiusDeg, passes = [];
+            result.tracks.forEach(tr => {
+                const P = tr.pts;
+                let minD = Infinity, tMin = P[0][0], elMin = P[0][3], rngMin = P[0][4], entry = null, exit = null, pathLen = 0;
+                for (let i = 0; i < P.length - 1; i++) {
+                    const t1 = P[i][0], x1 = P[i][1], y1 = P[i][2], t2 = P[i + 1][0], dx = P[i + 1][1] - x1, dy = P[i + 1][2] - y1;
+                    pathLen += Math.hypot(dx, dy);
+                    const a = dx * dx + dy * dy;
+                    const u = a > 0 ? Math.max(0, Math.min(1, -(x1 * dx + y1 * dy) / a)) : 0;
+                    const d = Math.hypot(x1 + u * dx, y1 + u * dy);
+                    if (d < minD) { minD = d; tMin = t1 + u * (t2 - t1); elMin = P[i][3] + u * (P[i + 1][3] - P[i][3]); rngMin = P[i][4] + u * (P[i + 1][4] - P[i][4]); }
+                    if (a > 0) {
+                        const b = 2 * (x1 * dx + y1 * dy), c = x1 * x1 + y1 * y1 - rad * rad, disc = b * b - 4 * a * c;
+                        if (disc >= 0) {
+                            const sq = Math.sqrt(disc), lo = Math.max((-b - sq) / (2 * a), 0), hi = Math.min((-b + sq) / (2 * a), 1);
+                            if (lo <= hi) {
+                                const tin = t1 + lo * (t2 - t1), tout = t1 + hi * (t2 - t1);
+                                if (entry === null || tin < entry) entry = tin;
+                                if (exit === null || tout > exit) exit = tout;
+                            }
+                        }
+                    }
+                }
+                if (minD > rad + 0.5) return;                       // too far from the disc to matter
+                const crosses = entry !== null;
+                const category = minD <= 0.5 * rad ? 'red' : (crosses ? 'orange' : 'purple');
+                const trackSecs = (P[P.length - 1][0] - P[0][0]) / 1000;
+                const tPass = crosses ? entry : tMin;
+                passes.push({
+                    name: tr.name || ('NORAD ' + tr.norad), norad: tr.norad, launch: tr.launch, special: SPECIAL_NORAD[tr.norad] || null,
+                    category, crosses, startMs: crosses ? entry : null, endMs: crosses ? exit : null, closestMs: tMin,
+                    timeMins: (tPass - midnightMs) / 60000, durationS: crosses ? (exit - entry) / 1000 : 0,
+                    x1: P[0][1], y1: P[0][2], x2: P[P.length - 1][1], y2: P[P.length - 1][2],
+                    minD, rangeKm: rngMin, elDeg: elMin, altKm: tr.altKm, speedKmS: tr.speedKmS, inclDeg: tr.inclDeg,
+                    angSpeed: trackSecs > 0 ? pathLen / trackSecs : 0, also: [], trainId: null
+                });
+            });
+            // merge modules docked to the same station (same place in the sky, same range, same instant)
+            passes.sort((a, b) => a.closestMs - b.closestMs);
+            const merged = [];
+            passes.forEach(p => {
+                const m = merged.find(q => Math.abs(q.closestMs - p.closestMs) < 100 && Math.abs(q.rangeKm - p.rangeKm) < 0.3 && Math.abs(q.minD - p.minD) < 0.02);
+                if (!m) { merged.push(p); return; }
+                if (p.special && !m.special) { p.also = m.also.concat([m.name]); merged[merged.indexOf(m)] = p; }
+                else m.also.push(p.name);
+            });
+            merged.sort((a, b) => a.timeMins - b.timeMins);
+            merged.forEach((p, i) => { p.id = i; });
+            // Starlink trains: three or more satellites from one launch whose passes come within 30 s of each other
+            const trains = [], byLaunch = {};
+            merged.filter(p => /^STARLINK/i.test(p.name) && p.launch).forEach(p => { (byLaunch[p.launch] = byLaunch[p.launch] || []).push(p); });
+            Object.keys(byLaunch).forEach(l => {
+                const list = byLaunch[l].sort((a, b) => a.closestMs - b.closestMs);
+                let grp = [];
+                const close = () => {
+                    if (grp.length >= 3) {
+                        const id = trains.length;
+                        grp.forEach(p => { p.trainId = id; });
+                        trains.push({ id, launch: l, members: grp.map(p => p.id), count: grp.length,
+                                      fromMs: grp[0].closestMs, toMs: grp[grp.length - 1].closestMs,
+                                      crossing: grp.filter(p => p.crosses).length, altKm: grp[0].altKm });
+                    }
+                    grp = [];
+                };
+                list.forEach(p => { if (grp.length && p.closestMs - grp[grp.length - 1].closestMs > 30000) close(); grp.push(p); });
+                close();
+            });
+            trains.sort((a, b) => a.fromMs - b.fromMs);
+            trains.forEach((t, i) => { t.id = i; t.members.forEach(id => { merged[id].trainId = i; }); });
+            return { passes: merged, trains };
+        }
+
+        // Smart Telescope Optics FOV Presets (Width x Height in Degrees)
+        const TELESCOPE_PRESETS = {
+            disc: { widthDeg: 0, heightDeg: 0, name: "Disc close-up" },
+            dwarf3: { widthDeg: 2.95, heightDeg: 1.66, name: "DWARFLAB Dwarf 3" },
+            dwarf2: { widthDeg: 3.20, heightDeg: 1.80, name: "DWARFLAB Dwarf II" },
+            seestar_s50: { widthDeg: 1.29, heightDeg: 0.73, name: "ZWO Seestar S50" },
+            seestar_s30: { widthDeg: 2.15, heightDeg: 1.21, name: "ZWO Seestar S30" },
+            vespera2: { widthDeg: 2.50, heightDeg: 1.40, name: "Vaonis Vespera II" },
+            vespera_pro: { widthDeg: 1.60, heightDeg: 1.60, name: "Vaonis Vespera Pro" },
+            vespera_classic: { widthDeg: 1.60, heightDeg: 0.90, name: "Vaonis Vespera Classic" },
+            stellina: { widthDeg: 1.00, heightDeg: 0.70, name: "Vaonis Stellina" },
+            hestia: { widthDeg: 1.80, heightDeg: 1.80, name: "Vaonis Hestia" },
+            evscope2: { widthDeg: 0.57, heightDeg: 0.78, name: "Unistellar eVscope 2" },
+            equinox2: { widthDeg: 0.57, heightDeg: 0.78, name: "Unistellar eQuinox 2" },
+            odyssey: { widthDeg: 0.57, heightDeg: 0.76, name: "Unistellar Odyssey" },
+            odyssey_pro: { widthDeg: 0.57, heightDeg: 0.76, name: "Unistellar Odyssey Pro" }
+        };
+
+        // ===== APP STATE AND CALCULATION FLOW =====
+        const MIN_RISE_ALT = -0.833;                   // Sun / Moon count as "up" above this altitude (rise and set, with refraction)
+        const KIND_NAME = { sun: 'Sun', moon: 'Moon' };
+        const WIDE_MARGIN_DEG = 0.5;                   // extra sky shown around the disc / telescope frame
+
+        let appState = {
+            lat: 44.9914, lng: -93.1881,               // Bell Museum, Falcon Heights / St. Paul
+            dateStr: (() => { const n = new Date(); return n.getFullYear() + '-' + String(n.getMonth() + 1).padStart(2, '0') + '-' + String(n.getDate()).padStart(2, '0'); })(),
+            kind: 'sun', telescopeKey: 'disc', fovW: 0, fovH: 0,
+            upIntervals: [], upIndex: 0, upStartMins: 0, upEndMins: 0,
+            sessionStartMins: 0, sessionDurationMins: 60,
+            filterRed: true, filterOrange: true, filterPurple: true,
+            satellitePasses: [], trains: [], selectedIds: [],
+            tracksResult: null, tracksKey: '', runId: 0, sats: null, satStamp: 0, satInfo: null, dataNote: '', loadPromise: null, statusBase: '',
+            midnightMs: 0, targetAlt: 0, targetAz: 0, radiusDeg: 0.266, illum: null
+        };
+
+        function pad2(n) { return String(n).padStart(2, '0'); }
+        function formatMinsToHHMM(mins) {
+            let normalized = Math.floor(mins) % 1440;
+            if (normalized < 0) normalized += 1440;
+            return `${pad2(Math.floor(normalized / 60))}:${pad2(normalized % 60)}`;
+        }
+        // Local clock time of an instant, with optional tenths of a second
+        function fmtClock(ms, tenths) {
+            const d = new Date(ms);
+            return `${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}` + (tenths ? '.' + Math.floor(d.getMilliseconds() / 100) : '');
+        }
+        function dayMidnightMs() {
+            const p = appState.dateStr.split('-').map(Number);
+            return new Date(p[0], p[1] - 1, p[2]).getTime();
+        }
+        function fmtHM(ms, mid) {
+            const d = new Date(ms);
+            return `${pad2(d.getHours())}:${pad2(d.getMinutes())}` + (ms - mid >= 86400000 ? ' (+1)' : '');
+        }
+
+        // Times when the Sun / Moon is above the horizon, starting from local midnight of the chosen date
+        function computeUpIntervals() {
+            const mid = dayMidnightMs(), STEP = 300000, end = mid + 36 * 3600e3, list = [];
+            const alt = ms => bodyAltAz(appState.kind, appState.lat, appState.lng, ms).alt;
+            const edge = (a, b, rising) => {
+                let lo = a, hi = b;
+                for (let i = 0; i < 22; i++) { const m = (lo + hi) / 2; if ((alt(m) > MIN_RISE_ALT) === rising) hi = m; else lo = m; }
+                return (lo + hi) / 2;
+            };
+            let prevUp = alt(mid) > MIN_RISE_ALT, start = prevUp ? mid : null;
+            for (let t = mid + STEP; t <= end; t += STEP) {
+                const up = alt(t) > MIN_RISE_ALT;
+                if (up && !prevUp) start = edge(t - STEP, t, true);
+                if (!up && prevUp) { list.push({ startMs: start, endMs: edge(t - STEP, t, false) }); start = null; }
+                prevUp = up;
+            }
+            if (prevUp && start !== null) list.push({ startMs: start, endMs: end });
+            return list.filter(iv => iv.startMs < mid + 24 * 3600e3 && iv.endMs - iv.startMs > 60000);
+        }
+
+        function defaultSession() {
+            const ns = appState.upStartMins, ne = appState.upEndMins, len = ne - ns, dur = Math.min(60, len);
+            let start = ns + (len - dur) / 2;
+            const now = (Date.now() - appState.midnightMs) / 60000;
+            if (now >= ns && now <= ne - 10) start = Math.min(Math.floor(now / 5) * 5, ne - dur);   // today: start at the current time
+            appState.sessionDurationMins = dur;
+            appState.sessionStartMins = Math.max(ns, start);
+        }
+
+        // Work out when the chosen target is in the sky on the chosen date, and set up the timeline range
+        function updateDayInfo(resetChoice) {
+            const mid = dayMidnightMs(), ivs = computeUpIntervals(), prevStart = appState.upStartMins, prevEnd = appState.upEndMins;
+            appState.midnightMs = mid; appState.upIntervals = ivs;
+            if (resetChoice || appState.upIndex >= ivs.length) {
+                const now = Date.now();
+                let idx = ivs.findIndex(iv => now >= iv.startMs && now <= iv.endMs);
+                if (idx < 0) { let best = -1; ivs.forEach((iv, i) => { if (iv.endMs - iv.startMs > best) { best = iv.endMs - iv.startMs; idx = i; } }); }
+                appState.upIndex = Math.max(0, idx);
+            }
+            const sel = document.getElementById('upPeriodSelect'), wrap = document.getElementById('upPeriodWrap');
+            sel.innerHTML = '';
+            ivs.forEach((iv, i) => { const o = document.createElement('option'); o.value = i; o.textContent = `${KIND_NAME[appState.kind]} up ${fmtHM(iv.startMs, mid)} to ${fmtHM(iv.endMs, mid)}`; sel.appendChild(o); });
+            sel.value = appState.upIndex;
+            wrap.classList.toggle('hidden', ivs.length < 2);
+            document.getElementById('riseName').innerText = appState.kind === 'sun' ? 'Sunrise' : 'Moonrise';
+            document.getElementById('setName').innerText = appState.kind === 'sun' ? 'Sunset' : 'Moonset';
+            const iv = ivs[appState.upIndex];
+            if (iv) {
+                appState.upStartMins = (iv.startMs - mid) / 60000; appState.upEndMins = (iv.endMs - mid) / 60000;
+                document.getElementById('riseLabel').innerText = iv.startMs === mid ? 'before 00:00' : fmtHM(iv.startMs, mid);
+                document.getElementById('setLabel').innerText = fmtHM(iv.endMs, mid);
+            } else {
+                appState.upStartMins = 0; appState.upEndMins = 0;
+                document.getElementById('riseLabel').innerText = '—'; document.getElementById('setLabel').innerText = '—';
+            }
+            if (iv) {
+                const changed = Math.abs(appState.upStartMins - prevStart) > 0.01 || Math.abs(appState.upEndMins - prevEnd) > 0.01;
+                const outside = appState.sessionStartMins < appState.upStartMins - 0.01 || appState.sessionStartMins + appState.sessionDurationMins > appState.upEndMins + 0.01;
+                if (changed || outside || resetChoice) defaultSession();
+            }
+        }
+
+        function trackKey() {
+            const iv = appState.upIntervals[appState.upIndex];
+            return [appState.kind, appState.lat, appState.lng, appState.dateStr, iv ? iv.startMs + '-' + iv.endMs : 'none', appState.satStamp].join('|');
+        }
+
+        // Called whenever the location, date, target or time-up period changes (not for telescope or window changes)
+        function generateSatellitePasses(resetChoice) {
+            appState.selectedIds = [];
+            const panel = document.getElementById('telemetryModal');
+            if (panel) panel.classList.add('hidden');
+            updateDayInfo(!!resetChoice);
+            if (!appState.upIntervals.length) {
+                appState.runId++; appState.satellitePasses = []; appState.trains = []; appState.tracksResult = null; appState.tracksKey = '';
+                setSatStatus(`The ${KIND_NAME[appState.kind]} is not above the horizon on this date at this location.`, 0);
+                return;
+            }
+            if (appState.tracksResult && appState.tracksKey === trackKey()) {
+                appState.runId++;
+                statusReady();
+            } else {
+                appState.satellitePasses = []; appState.trains = [];
+                startTrackComputation();
+            }
+        }
+
+        async function startTrackComputation() {
+            const run = ++appState.runId;
+            if (!appState.sats) { await loadSatData(false); if (run !== appState.runId) return; }
+            if (!appState.sats || !appState.sats.length) return;
+            const iv = appState.upIntervals[appState.upIndex], mid = appState.midnightMs, key = trackKey();
+            if (!iv) return;
+            setSatStatus('Computing transits… 0%', 0);
+            const res = await computeTransitTracks(
+                { kind: appState.kind, lat: appState.lat, lng: appState.lng, startMs: iv.startMs, endMs: iv.endMs, sats: appState.sats },
+                p => setSatStatus(`Computing transits… ${Math.round(p * 100)}%`, p),
+                () => run !== appState.runId);
+            if (res === null || run !== appState.runId) return;
+            const out = buildTransitPasses(res, mid);
+            appState.tracksResult = res; appState.tracksKey = key; appState.radiusDeg = res.radiusDeg;
+            appState.satellitePasses = out.passes; appState.trains = out.trains;
+            statusReady();
+            updateAllViews();
+        }
+
+        function statusReady() {
+            const P = appState.satellitePasses, cross = P.filter(p => p.crosses).length, near = P.length - cross;
+            const days = Math.abs(appState.midnightMs + 12 * 3600e3 - appState.satStamp) / 86400000;
+            const old = days > 2 ? `  Note: this date is ${Math.round(days)} days from the orbit data, so timing is less accurate. Tap Update data on the day.` : '';
+            const tr = appState.trains.length ? ` ${appState.trains.length} Starlink train${appState.trains.length > 1 ? 's' : ''}.` : '';
+            setSatStatus(`Satellite data from ${fmtStamp(appState.satStamp)}: ${appState.satInfo.used.toLocaleString()} satellites${appState.dataNote}. ${cross} transit${cross === 1 ? '' : 's'} and ${near} near miss${near === 1 ? '' : 'es'} of the ${KIND_NAME[appState.kind]}.${tr}${old}`, 0);
+        }
+
+        // Altitude / azimuth of the target at the start of the imaging window
+        function updateTargetReadout() {
+            const ms = appState.midnightMs + appState.sessionStartMins * 60000;
+            const aa = bodyAltAz(appState.kind, appState.lat, appState.lng, ms);
+            appState.targetAlt = aa.alt; appState.targetAz = aa.az;
+            if (!appState.tracksResult) appState.radiusDeg = aa.radiusDeg;
+            document.getElementById('targetAltLabel').innerText = `${aa.alt.toFixed(1)}°`;
+            document.getElementById('targetAzLabel').innerText = `${aa.az.toFixed(1)}°`;
+            document.getElementById('canvasAltCenter').innerText = `${aa.alt.toFixed(2)}°`;
+            document.getElementById('canvasAzCenter').innerText = `${aa.az.toFixed(2)}°`;
+            document.getElementById('illumLabel').innerText = appState.kind === 'moon' ? `Moon ${Math.round(moonIllumination(ms) * 100)}% lit` : `Disc radius ${aa.radiusDeg.toFixed(2)}°`;
+            refreshSatStatus();
+        }
+
+        function passesInWindow() {
+            const s = appState.sessionStartMins, e = s + appState.sessionDurationMins;
+            return appState.satellitePasses.filter(p => p.timeMins >= s && p.timeMins <= e);
+        }
+        function visiblePasses() {
+            return passesInWindow().filter(p => (p.category === 'red' && appState.filterRed) || (p.category === 'orange' && appState.filterOrange) || (p.category === 'purple' && appState.filterPurple));
+        }
+
+        // ---- selection (one pass, or a whole Starlink train) ----
+        function clearSelection() {
+            appState.selectedIds = [];
+            document.getElementById('telemetryModal').classList.add('hidden');
+            updateAllViews();
+        }
+        function togglePassSelection(pass) {
+            if (appState.selectedIds.length === 1 && appState.selectedIds[0] === pass.id) { clearSelection(); return; }
+            appState.selectedIds = [pass.id];
+            openPassPanel(pass);
+            updateAllViews();
+        }
+        function toggleTrainSelection(train) {
+            const same = appState.selectedIds.length === train.members.length && train.members.every(id => appState.selectedIds.includes(id));
+            if (same) { clearSelection(); return; }
+            appState.selectedIds = train.members.slice();
+            openTrainPanel(train);
+            updateAllViews();
+        }
+
+        // Master update pipeline triggering re-renders
+        function updateAllViews() {
+            const inWin = new Set(passesInWindow().map(p => p.id));
+            if (appState.selectedIds.length && !appState.selectedIds.every(id => inWin.has(id))) {
+                appState.selectedIds = [];
+                document.getElementById('telemetryModal').classList.add('hidden');
+            }
+            updateTargetReadout();
+            renderFOVCanvas();
+            renderTimeline();
+            renderPassesTable();
+            updateNextBanner();
+        }
+
+        // ---- Satellite data (CelesTrak "active" list), saved on the device and refreshed once a day ----
+        const TLE_URL = 'https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle';
+        function idbOpen() {
+            return new Promise((res, rej) => {
+                const r = indexedDB.open('astrosat', 1);
+                r.onupgradeneeded = () => r.result.createObjectStore('kv');
+                r.onsuccess = () => res(r.result);
+                r.onerror = () => rej(r.error);
+            });
+        }
+        async function idbGet(k) {
+            try {
+                const db = await idbOpen();
+                return await new Promise((res, rej) => { const q = db.transaction('kv').objectStore('kv').get(k); q.onsuccess = () => res(q.result); q.onerror = () => rej(q.error); });
+            } catch (e) { return undefined; }
+        }
+        async function idbSet(k, v) {
+            try {
+                const db = await idbOpen();
+                await new Promise((res, rej) => { const tx = db.transaction('kv', 'readwrite'); tx.objectStore('kv').put(v, k); tx.oncomplete = res; tx.onerror = () => rej(tx.error); });
+                return true;
+            } catch (e) { return false; }
+        }
+        function parseTLEText(text) {
+            const lines = text.split(/\r?\n/), out = [];
+            for (let i = 0; i < lines.length - 1; i++) {
+                if (lines[i].startsWith('1 ') && lines[i + 1].startsWith('2 ')) {
+                    const prev = i > 0 ? lines[i - 1] : '';
+                    out.push([(prev.startsWith('1 ') || prev.startsWith('2 ')) ? '' : prev, lines[i], lines[i + 1]]);
+                    i++;
+                }
+            }
+            return out;
+        }
+        function setSatStatus(text, pct) {
+            appState.statusBase = text;
+            refreshSatStatus();
+            if (pct !== undefined && pct !== null) document.getElementById('satProgressFill').style.width = `${Math.round(pct * 100)}%`;
+        }
+        function refreshSatStatus() {
+            const warn = (appState.upEndMins > appState.upStartMins && appState.targetAlt < MIN_RISE_ALT) ? '  ⚠ The ' + KIND_NAME[appState.kind] + ' is below the horizon at the start of your window.' : '';
+            document.getElementById('satStatus').innerText = appState.statusBase + warn;
+        }
+        function fmtStamp(ts) {
+            return new Date(ts).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+        }
+        function loadSatData(force) {
+            if (appState.loadPromise) return appState.loadPromise;
+            appState.loadPromise = (async () => {
+                try {
+                    setSatStatus('Loading satellite data…', 0);
+                    const rec = await idbGet('tle');
+                    const age = rec ? Date.now() - rec.ts : Infinity;
+                    let use = rec, note = '';
+                    if (!rec || age > 12 * 3600 * 1000 || (force && age > 2 * 3600 * 1000)) {
+                        try {
+                            const ctl = new AbortController(), killer = setTimeout(() => ctl.abort(), 20000);
+                            let text;
+                            try {
+                                const resp = await fetch(TLE_URL, { cache: 'no-store', signal: ctl.signal });
+                                if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                                text = await resp.text();
+                            } catch (e) {
+                                throw (e && e.name === 'AbortError') ? new Error('timed out') : e;
+                            } finally { clearTimeout(killer); }
+                            if (text.length < 100000) throw new Error('unexpected reply');
+                            use = { ts: Date.now(), text };
+                            if (!(await idbSet('tle', use))) note = ' (could not save a copy on this device)';
+                        } catch (err) {
+                            note = rec ? ' (could not refresh, using saved copy)' : '';
+                            if (!rec) {
+                                const refused = /HTTP (403|429)/.test(err.message);
+                                setSatStatus(refused
+                                    ? 'CelesTrak refused the download (' + err.message + '). It allows only one download of this list per internet connection about every 2 hours, so another device on your Wi-Fi probably fetched it recently. Try Update data again later, switch to mobile data, or use Load file.'
+                                    : 'Could not download satellite data (' + err.message + '). Connect and tap Update data, or use Load file.', 0);
+                                return;
+                            }
+                        }
+                    } else if (force) {
+                        note = ' (already up to date)';
+                    }
+                    const triples = parseTLEText(use.text), recs = [];
+                    for (const tr of triples) { const t = parseTLE(tr[0], tr[1], tr[2]); if (t) { const s = sgp4Init(t); if (s) recs.push(s); } }
+                    appState.sats = recs; appState.satStamp = use.ts; appState.satInfo = { total: triples.length, used: recs.length }; appState.dataNote = note;
+                    setSatStatus(`Satellite data from ${fmtStamp(use.ts)}: ${recs.length.toLocaleString()} satellites${note}`, 0);
+                } finally { appState.loadPromise = null; }
+            })();
+            return appState.loadPromise;
+        }
+
+
+        // ===== DRAWING: FOV SIMULATOR, TIMELINE, TABLE, INFO PANEL, COUNTDOWN =====
+        const CAT_LABEL = { red: 'Central transit', orange: 'Edge transit', purple: 'Near miss' };
+        const CAT_COLOR = { red: '#FF1744', orange: '#FF6D00', purple: '#BF5AF2' };
+        function passTimeMs(p) { return p.crosses ? p.startMs : p.closestMs; }
+        function passLabel(p) { return (p.special ? '★ ' : '') + p.name; }
+
+        function renderFOVCanvas() {
+            const canvas = document.getElementById('fovCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const rect = canvas.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr; canvas.height = rect.height * dpr; ctx.scale(dpr, dpr);
+            const width = rect.width, height = rect.height;
+            ctx.fillStyle = '#0B0E14'; ctx.fillRect(0, 0, width, height);
+            const cx = width / 2, cy = height / 2, rad = appState.radiusDeg, sun = appState.kind === 'sun';
+
+            // Sky area shown: the disc (or the telescope frame, if larger) plus a margin
+            const halfW = Math.max(appState.fovW / 2, rad) + WIDE_MARGIN_DEG, halfH = Math.max(appState.fovH / 2, rad) + WIDE_MARGIN_DEG;
+            const margin = 40, scale = Math.min((width - margin * 2) / (2 * halfW), (height - margin * 2) / (2 * halfH));
+            const viewW = 2 * halfW * scale, viewH = 2 * halfH * scale, viewLeft = cx - viewW / 2, viewTop = cy - viewH / 2;
+            ctx.strokeStyle = '#1E2638'; ctx.lineWidth = 1; ctx.strokeRect(viewLeft, viewTop, viewW, viewH);
+
+            // Telescope frame (only if a telescope is chosen)
+            if (appState.fovW > 0) {
+                const fw = appState.fovW * scale, fh = appState.fovH * scale;
+                ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 1.5; ctx.strokeRect(cx - fw / 2, cy - fh / 2, fw, fh);
+            }
+
+            // The Sun / Moon disc, with a dashed ring marking the central zone
+            ctx.beginPath(); ctx.arc(cx, cy, rad * scale, 0, Math.PI * 2);
+            ctx.fillStyle = sun ? 'rgba(255, 196, 40, 0.22)' : 'rgba(203, 213, 225, 0.20)'; ctx.fill();
+            ctx.strokeStyle = sun ? '#FFC428' : '#CBD5E1'; ctx.lineWidth = 1.5; ctx.stroke();
+            ctx.setLineDash([3, 3]); ctx.strokeStyle = 'rgba(0, 229, 255, 0.6)'; ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.arc(cx, cy, 0.5 * rad * scale, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+            ctx.strokeStyle = 'rgba(0, 229, 255, 0.9)'; ctx.lineWidth = 1.5; ctx.beginPath();
+            ctx.moveTo(cx - 10, cy); ctx.lineTo(cx - 3, cy); ctx.moveTo(cx + 3, cy); ctx.lineTo(cx + 10, cy);
+            ctx.moveTo(cx, cy - 10); ctx.lineTo(cx, cy - 3); ctx.moveTo(cx, cy + 3); ctx.lineTo(cx, cy + 10); ctx.stroke();
+
+            // Altitude / azimuth scales, centered on the target at the start of the window
+            ctx.fillStyle = '#64748B'; ctx.font = '10px monospace';
+            const cosAlt = Math.max(0.05, Math.cos(appState.targetAlt * Math.PI / 180));
+            const numTicksX = Math.max(2, Math.min(5, Math.floor(viewW / 56))), numTicksY = Math.max(2, Math.min(5, Math.floor(viewH / 28)));
+            ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+            for (let i = 0; i <= numTicksX; i++) {
+                const fr = i / numTicksX, degVal = -halfW + fr * 2 * halfW, x = viewLeft + fr * viewW;
+                ctx.beginPath(); ctx.strokeStyle = '#334155'; ctx.moveTo(x, viewTop + viewH); ctx.lineTo(x, viewTop + viewH + 5); ctx.stroke();
+                const azVal = (((appState.targetAz + degVal / cosAlt) % 360) + 360) % 360;
+                ctx.fillText(`${azVal.toFixed(2)}°`, x, viewTop + viewH + 8);
+            }
+            ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+            for (let i = 0; i <= numTicksY; i++) {
+                const fr = i / numTicksY, degVal = halfH - fr * 2 * halfH, y = viewTop + fr * viewH;
+                ctx.beginPath(); ctx.strokeStyle = '#334155'; ctx.moveTo(viewLeft - 5, y); ctx.lineTo(viewLeft, y); ctx.stroke();
+                ctx.fillText(`${(appState.targetAlt + degVal).toFixed(2)}°`, viewLeft - 8, y);
+            }
+
+            // Trails
+            const all = passesInWindow(), vis = visiblePasses();
+            const firstOfTrain = {};
+            vis.forEach(p => { if (p.trainId !== null && (firstOfTrain[p.trainId] === undefined || p.closestMs < firstOfTrain[p.trainId].closestMs)) firstOfTrain[p.trainId] = p; });
+            vis.forEach(pass => {
+                const x1 = cx + pass.x1 * scale, y1 = cy - pass.y1 * scale, x2 = cx + pass.x2 * scale, y2 = cy - pass.y2 * scale;
+                const c = clipLineLiangBarsky(x1, y1, x2, y2, viewLeft, viewTop, viewLeft + viewW, viewTop + viewH);
+                if (!c) return;
+                const color = CAT_COLOR[pass.category], selected = appState.selectedIds.includes(pass.id);
+                ctx.strokeStyle = color; ctx.lineWidth = (pass.category === 'red' ? 2.5 : 1.8) * (pass.special ? 1.5 : 1);
+                if (selected) ctx.setLineDash([5, 5]);
+                ctx.beginPath(); ctx.moveTo(c.cx1, c.cy1); ctx.lineTo(c.cx2, c.cy2); ctx.stroke(); ctx.setLineDash([]);
+                const ang = Math.atan2(c.cy2 - c.cy1, c.cx2 - c.cx1), hl = 8;
+                ctx.fillStyle = color; ctx.beginPath(); ctx.moveTo(c.cx2, c.cy2);
+                ctx.lineTo(c.cx2 - hl * Math.cos(ang - Math.PI / 6), c.cy2 - hl * Math.sin(ang - Math.PI / 6));
+                ctx.lineTo(c.cx2 - hl * Math.cos(ang + Math.PI / 6), c.cy2 - hl * Math.sin(ang + Math.PI / 6)); ctx.fill();
+                if (pass.trainId !== null && firstOfTrain[pass.trainId] !== pass) return;       // one label per train
+                const label = pass.trainId !== null ? `Starlink train x${appState.trains[pass.trainId].count} (${fmtClock(passTimeMs(pass), false)})` : `${passLabel(pass)} (${fmtClock(passTimeMs(pass), false)})`;
+                ctx.fillStyle = color; ctx.font = '10px monospace'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+                ctx.fillText(label, Math.min(c.cx1 + 4, width - 150), c.cy1 - 8);
+            });
+
+            const cnt = { red: 0, orange: 0, purple: 0 };
+            all.forEach(p => { cnt[p.category]++; });
+            document.getElementById('badgeRedCount').innerText = `${cnt.red} Ctr`;
+            document.getElementById('badgeOrangeCount').innerText = `${cnt.orange} Edge`;
+            document.getElementById('badgePurpleCount').innerText = `${cnt.purple} Near`;
+            document.getElementById('countRed').innerText = cnt.red;
+            document.getElementById('countOrange').innerText = cnt.orange;
+            document.getElementById('countPurple').innerText = cnt.purple;
+        }
+
+        // Liang-Barsky line clipping against a rectangle
+        function clipLineLiangBarsky(x1, y1, x2, y2, xmin, ymin, xmax, ymax) {
+            let u1 = 0.0, u2 = 1.0;
+            const dx = x2 - x1, dy = y2 - y1, p = [-dx, dx, -dy, dy], q = [x1 - xmin, xmax - x1, y1 - ymin, ymax - y1];
+            for (let i = 0; i < 4; i++) {
+                if (p[i] === 0) { if (q[i] < 0) return null; }
+                else {
+                    const r = q[i] / p[i];
+                    if (p[i] < 0) { if (r > u2) return null; if (r > u1) u1 = r; }
+                    else { if (r < u1) return null; if (r < u2) u2 = r; }
+                }
+            }
+            return { cx1: x1 + u1 * dx, cy1: y1 + u1 * dy, cx2: x1 + u2 * dx, cy2: y1 + u2 * dy };
+        }
+
+        function renderTimeline() {
+            const overlay = document.getElementById('timelineTicksOverlay'), box = document.getElementById('sessionBox');
+            if (!overlay || !box) return;
+            const ns = appState.upStartMins, ne = appState.upEndMins, total = ne - ns;
+            overlay.innerHTML = '';
+            if (total <= 0) { box.style.display = 'none'; document.getElementById('sessionTimeRange').innerText = 'Not up on this date'; return; }
+            box.style.display = '';
+            appState.satellitePasses.forEach(pass => {
+                if (pass.timeMins < ns || pass.timeMins > ne) return;
+                let tickColor = 'bg-astroPurple';
+                if (pass.category === 'red') tickColor = 'bg-astroRed z-10 w-1';
+                if (pass.category === 'orange') tickColor = 'bg-astroOrange z-10 w-0.5';
+                const tick = document.createElement('div');
+                tick.className = `absolute top-0 bottom-0 ${tickColor} pointer-none opacity-80`;
+                tick.style.left = `${((pass.timeMins - ns) / total) * 100}%`;
+                if (pass.category === 'purple') tick.style.width = '1px';
+                overlay.appendChild(tick);
+            });
+            const s = Math.max(ns, Math.min(ne - 1, appState.sessionStartMins)), e = Math.min(ne, s + appState.sessionDurationMins);
+            box.style.left = `${((s - ns) / total) * 100}%`;
+            box.style.width = `${((e - s) / total) * 100}%`;
+            document.getElementById('sessionTimeRange').innerText =
+                `${formatMinsToHHMM(appState.sessionStartMins)} - ${formatMinsToHHMM(appState.sessionStartMins + appState.sessionDurationMins)} (${Math.round(appState.sessionDurationMins)} min)`;
+        }
+
+        // Timeline drag: move the window, resize it with the handles, or tap the bar to center it
+        function initTimelineDrag() {
+            const track = document.getElementById('timelineTrack'), box = document.getElementById('sessionBox');
+            const lh = document.getElementById('leftHandle'), rh = document.getElementById('rightHandle');
+            let mode = null, dragX = 0, s0 = 0, d0 = 0;
+            const MINLEN = 10;
+            const total = () => appState.upEndMins - appState.upStartMins;
+            const down = (m) => (e) => { mode = m; dragX = e.clientX; s0 = appState.sessionStartMins; d0 = appState.sessionDurationMins; e.currentTarget.setPointerCapture(e.pointerId); e.stopPropagation(); };
+            box.addEventListener('pointerdown', (e) => { if (e.target === lh || e.target === rh) return; down('move')(e); });
+            lh.addEventListener('pointerdown', down('left'));
+            rh.addEventListener('pointerdown', down('right'));
+            window.addEventListener('pointermove', (e) => {
+                if (!mode || total() <= 0) return;
+                const ns = appState.upStartMins, ne = appState.upEndMins;
+                const delta = Math.round(((e.clientX - dragX) / track.getBoundingClientRect().width) * total());
+                if (mode === 'move') appState.sessionStartMins = Math.max(ns, Math.min(ne - appState.sessionDurationMins, s0 + delta));
+                else if (mode === 'left') { const st = Math.max(ns, Math.min(s0 + d0 - MINLEN, s0 + delta)); appState.sessionDurationMins = s0 + d0 - st; appState.sessionStartMins = st; }
+                else appState.sessionDurationMins = Math.max(MINLEN, Math.min(ne - appState.sessionStartMins, d0 + delta));
+                updateAllViews();
+            });
+            const up = () => { mode = null; };
+            window.addEventListener('pointerup', up); window.addEventListener('pointercancel', up);
+            track.addEventListener('click', (e) => {
+                if (e.target.closest('#sessionBox') || total() <= 0) return;
+                const r = track.getBoundingClientRect(), ns = appState.upStartMins, ne = appState.upEndMins;
+                const m = ns + ((e.clientX - r.left) / r.width) * total();
+                appState.sessionStartMins = Math.max(ns, Math.min(ne - appState.sessionDurationMins, Math.round(m - appState.sessionDurationMins / 2)));
+                updateAllViews();
+            });
+        }
+
+        // ---- passes table and Starlink train box ----
+        function renderPassesTable() {
+            const tbody = document.getElementById('passesTableBody'), tbox = document.getElementById('trainBox');
+            if (!tbody) return;
+            const list = visiblePasses(), shown = new Set(list.map(p => p.id));
+            tbox.innerHTML = '';
+            appState.trains.forEach(t => {
+                const mem = t.members.filter(id => shown.has(id));
+                if (!mem.length) return;
+                const sel = appState.selectedIds.length === t.members.length && t.members.every(id => appState.selectedIds.includes(id));
+                const b = document.createElement('button');
+                b.className = 'w-full text-left px-2.5 py-1.5 rounded-lg border border-cyan-700/60 text-astroCyan transition ' + (sel ? 'bg-cyan-900/50' : 'bg-cyan-950/60');
+                b.innerHTML = `★ Starlink train: ${t.count} satellites, ${fmtClock(t.fromMs, false)} to ${fmtClock(t.toMs, false)} (${t.crossing} crossing). Tap to highlight.`;
+                b.onclick = () => toggleTrainSelection(t);
+                tbox.appendChild(b);
+            });
+            tbody.innerHTML = '';
+            if (!list.length) {
+                tbody.innerHTML = `<tr><td colspan="3" class="p-3 text-center text-gray-500 italic">No predicted transits in this window.</td></tr>`;
+                return;
+            }
+            list.forEach(pass => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-800/60 cursor-pointer transition' + (appState.selectedIds.includes(pass.id) ? ' bg-cyan-900/50' : '');
+                let badge = 'text-astroPurple bg-purple-950/40 border-purple-800/50';
+                if (pass.category === 'red') badge = 'text-astroRed bg-red-950/40 border-red-800/50';
+                if (pass.category === 'orange') badge = 'text-astroOrange bg-orange-950/40 border-orange-800/50';
+                const train = pass.trainId !== null ? ` <span class="px-1.5 py-0.5 rounded border text-[9px] font-bold text-astroGreen bg-emerald-950/40 border-emerald-800/50">TRAIN</span>` : '';
+                const name = pass.special ? `<span class="text-astroGreen">★ ${pass.name}</span>` : pass.name;
+                tr.innerHTML = `
+                    <td class="p-2 font-semibold text-white">${name}<div class="mt-1"><span class="px-1.5 py-0.5 rounded border text-[9px] font-bold ${badge}">${CAT_LABEL[pass.category]}</span>${train}</div></td>
+                    <td class="p-2 text-gray-300">${pass.crosses ? fmtClock(pass.startMs, true) : '≈ ' + fmtClock(pass.closestMs, true)}</td>
+                    <td class="p-2 text-gray-300">${pass.crosses ? fmtClock(pass.endMs, true) : '—'}</td>`;
+                tr.onclick = () => togglePassSelection(pass);
+                tbody.appendChild(tr);
+            });
+        }
+
+        // ---- info panel ----
+        function fillPanel(title, sub, boxes, text) {
+            document.getElementById('modalSatName').innerText = title;
+            document.getElementById('modalSatNorad').innerText = sub;
+            boxes.forEach((b, i) => { document.getElementById('pb' + (i + 1) + 'l').innerText = b[0]; document.getElementById('pb' + (i + 1) + 'v').innerText = b[1]; });
+            document.getElementById('modalSatTrack').innerText = text;
+            document.getElementById('telemetryModal').classList.remove('hidden');
+        }
+        function openPassPanel(p) {
+            const rad = appState.radiusDeg, also = p.also.length ? ` Also in this spot: ${p.also.join(', ')}.` : '';
+            const orbit = `Orbit: ${Math.round(p.altKm)} km high, ${p.speedKmS.toFixed(2)} km/s, inclination ${p.inclDeg.toFixed(1)}°.`;
+            const motion = `Moving ${p.angSpeed.toFixed(2)}°/s across the sky, ${Math.round(p.elDeg)}° above your horizon.`;
+            if (p.crosses) {
+                fillPanel(passLabel(p), `NORAD ${p.norad} | ${CAT_LABEL[p.category]}${p.trainId !== null ? ' | Starlink train' : ''}`,
+                    [['Transit start', fmtClock(p.startMs, true)], ['Transit end', fmtClock(p.endMs, true)], ['Duration', p.durationS.toFixed(2) + ' s'], ['Distance', Math.round(p.rangeKm) + ' km']],
+                    `Closest approach to the center of the ${KIND_NAME[appState.kind]}: ${p.minD.toFixed(2)}° (disc radius ${rad.toFixed(2)}°). ${motion} ${orbit}${also}`);
+            } else {
+                fillPanel(passLabel(p), `NORAD ${p.norad} | Near miss`,
+                    [['Closest approach', fmtClock(p.closestMs, true)], ['Miss distance', (p.minD - rad).toFixed(2) + '° off edge'], ['Speed', p.angSpeed.toFixed(2) + ' °/s'], ['Distance', Math.round(p.rangeKm) + ' km']],
+                    `Passes just outside the ${KIND_NAME[appState.kind]}'s edge (disc radius ${rad.toFixed(2)}°). With normal orbit uncertainty it could still cross, so watch for it. ${motion} ${orbit}${also}`);
+            }
+        }
+        function openTrainPanel(t) {
+            const first = appState.satellitePasses[t.members[0]];
+            fillPanel(`Starlink train: ${t.count} satellites`, `Launch group ${t.launch.slice(0, 2)}-${t.launch.slice(2)} | ${t.crossing} crossing the disc`,
+                [['First', fmtClock(t.fromMs, true)], ['Last', fmtClock(t.toMs, true)], ['Span', ((t.toMs - t.fromMs) / 1000).toFixed(1) + ' s'], ['Altitude', Math.round(t.altKm) + ' km']],
+                `Satellites from one launch crossing within seconds of each other. Starts with ${first.name}. All of them are highlighted with dotted lines on the display. Tap the train again to clear.`);
+        }
+
+        // ---- next-transit countdown ----
+        function nextText(p, now) {
+            const secs = Math.round((p.startMs - now) / 1000);
+            const inTxt = secs < 3600 ? `${Math.floor(secs / 60)}m ${pad2(secs % 60)}s` : `${Math.floor(secs / 3600)}h ${pad2(Math.floor((secs % 3600) / 60))}m`;
+            const who = p.trainId !== null ? `Starlink train (${appState.trains[p.trainId].count} satellites)` : passLabel(p);
+            return { secs, text: `${who}, ${CAT_LABEL[p.category].toLowerCase()}, ${fmtClock(p.startMs, true)} (in ${inTxt})` };
+        }
+        function updateNextBanner() {
+            const el = document.getElementById('nextBanner');
+            if (!el) return;
+            const now = Date.now();
+            if (!appState.satellitePasses.length && !appState.tracksResult) { el.innerText = 'Waiting for the calculation…'; el.style.color = ''; return; }
+            const ahead = appState.satellitePasses.filter(p => p.crosses && p.startMs > now).sort((a, b) => a.startMs - b.startMs);
+            if (!ahead.length) { el.innerText = `No more ${KIND_NAME[appState.kind]} transits found after now on this date.`; el.style.color = ''; return; }
+            const first = nextText(ahead[0], now);
+            const star = ahead.find(p => p.special || p.trainId !== null);
+            let html = `Next: ${first.text}`;
+            if (star && star !== ahead[0]) html += `<div class="text-xs text-astroGreen mt-1">Next highlight: ${nextText(star, now).text}</div>`;
+            if (el.dataset.html !== html) { el.dataset.html = html; el.innerHTML = html; }
+            el.style.color = first.secs <= 120 ? '#00E676' : '';
+        }
+
+        // ===== START-UP AND CONTROLS =====
+        function initApp() {
+            document.getElementById('dateInput').value = appState.dateStr;
+            document.getElementById('latInput').value = appState.lat;
+            document.getElementById('lngInput').value = appState.lng;
+
+            // Location
+            document.getElementById('gpsBtn').onclick = () => {
+                if (!navigator.geolocation) { setSatStatus('This browser cannot provide your location. Type your latitude and longitude instead.', null); return; }
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        appState.lat = parseFloat(pos.coords.latitude.toFixed(5));
+                        appState.lng = parseFloat(pos.coords.longitude.toFixed(5));
+                        document.getElementById('latInput').value = appState.lat;
+                        document.getElementById('lngInput').value = appState.lng;
+                        generateSatellitePasses(true); updateAllViews();
+                    },
+                    (err) => { setSatStatus('Could not get your location (' + (err && err.code === 1 ? 'location access is blocked for this page' : 'no position available') + '). Your coordinates were not changed. Type them in, or allow location access and try again.', null); },
+                    { timeout: 20000 });
+            };
+            document.getElementById('latInput').onchange = (e) => {
+                const v = parseFloat(e.target.value);
+                if (!isFinite(v) || v < -90 || v > 90) { e.target.value = appState.lat; setSatStatus('Latitude must be a number from -90 to 90, so it was left at ' + appState.lat + '.', null); return; }
+                appState.lat = v; generateSatellitePasses(true); updateAllViews();
+            };
+            document.getElementById('lngInput').onchange = (e) => {
+                const v = parseFloat(e.target.value);
+                if (!isFinite(v) || v < -180 || v > 180) { e.target.value = appState.lng; setSatStatus('Longitude must be a number from -180 to 180 (negative = west), so it was left at ' + appState.lng + '.', null); return; }
+                appState.lng = v; generateSatellitePasses(true); updateAllViews();
+            };
+
+            // Date, target, and (when the Moon is up twice) which period to use
+            document.getElementById('dateInput').onchange = (e) => {
+                if (!e.target.value) return;
+                appState.dateStr = e.target.value; generateSatellitePasses(true); updateAllViews();
+            };
+            document.getElementById('targetSelect').onchange = (e) => {
+                appState.kind = e.target.value;
+                document.getElementById('sunWarn').classList.toggle('hidden', appState.kind !== 'sun');
+                generateSatellitePasses(true); updateAllViews();
+            };
+            document.getElementById('upPeriodSelect').onchange = (e) => {
+                appState.upIndex = parseInt(e.target.value, 10); generateSatellitePasses(false); updateAllViews();
+            };
+
+            // Telescope frame (drawn around the disc; changing it only redraws)
+            const setFov = () => {
+                document.getElementById('fovSpecLabel').innerText = appState.fovW > 0 ? `Frame: ${appState.fovW.toFixed(2)}° x ${appState.fovH.toFixed(2)}°` : 'Disc close-up';
+            };
+            document.getElementById('telescopeSelect').onchange = (e) => {
+                const val = e.target.value, custom = document.getElementById('customFovContainer');
+                appState.telescopeKey = val;
+                if (val === 'custom') {
+                    custom.classList.remove('hidden');
+                    appState.fovW = parseFloat(document.getElementById('fovWInput').value) || 2.0;
+                    appState.fovH = parseFloat(document.getElementById('fovHInput').value) || 1.5;
+                } else {
+                    custom.classList.add('hidden');
+                    const pr = TELESCOPE_PRESETS[val];
+                    if (pr) { appState.fovW = pr.widthDeg; appState.fovH = pr.heightDeg; }
+                }
+                setFov(); updateAllViews();
+            };
+            document.getElementById('fovWInput').onchange = (e) => { appState.fovW = parseFloat(e.target.value) || 2.0; setFov(); updateAllViews(); };
+            document.getElementById('fovHInput').onchange = (e) => { appState.fovH = parseFloat(e.target.value) || 1.5; setFov(); updateAllViews(); };
+
+            // Category filters (they hide trails and table rows)
+            [['toggleRed', 'filterRed'], ['toggleOrange', 'filterOrange'], ['togglePurple', 'filterPurple']].forEach(([id, key]) => {
+                const b = document.getElementById(id);
+                b.onclick = () => { appState[key] = !appState[key]; b.classList.toggle('opacity-40', !appState[key]); updateAllViews(); };
+            });
+
+            // Satellite data
+            document.getElementById('updateSatBtn').onclick = async () => { await loadSatData(true); generateSatellitePasses(false); updateAllViews(); };
+            document.getElementById('loadSatFileBtn').onclick = () => document.getElementById('satFileInput').click();
+            document.getElementById('satFileInput').onchange = async (e) => {
+                const f = e.target.files[0];
+                e.target.value = '';
+                if (!f) return;
+                const text = await f.text();
+                if (parseTLEText(text).length < 20) { setSatStatus('That file does not look like a satellite list (it needs TLE entries: lines starting with "1 " and "2 ").', 0); return; }
+                const saved = await idbSet('tle', { ts: f.lastModified || Date.now(), text });
+                appState.sats = null; appState.tracksResult = null; appState.tracksKey = '';
+                await loadSatData(false);
+                if (!saved) appState.dataNote = ' (could not save a copy on this device)';
+                generateSatellitePasses(false); updateAllViews();
+            };
+
+            // Panels and guide
+            document.getElementById('closeTelemetryModal').onclick = clearSelection;
+            document.getElementById('closeTelemetryBtn2').onclick = clearSelection;
+            const guide = document.getElementById('guideModal');
+            document.getElementById('guideBtn').onclick = () => guide.classList.remove('hidden');
+            document.getElementById('closeGuideModal').onclick = () => guide.classList.add('hidden');
+            document.getElementById('closeGuideBtn2').onclick = () => guide.classList.add('hidden');
+            document.getElementById('guideJump').onchange = (e) => {
+                const el = e.target.value ? document.getElementById(e.target.value) : null;
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                e.target.value = '';
+            };
+            document.getElementById('resetSessionBtn').onclick = () => { defaultSession(); updateAllViews(); };
+            window.addEventListener('resize', () => renderFOVCanvas());
+
+            initTimelineDrag();
+            setInterval(updateNextBanner, 1000);
+            setFov();
+            generateSatellitePasses(true);
+            updateAllViews();
+        }
+        window.onload = initApp;
+
+        // Save the app on the device so it opens without a connection (uses the same sw.js as the deep-sky app)
+        if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
+            navigator.serviceWorker.register('sw.js').catch(() => { /* offline saving is optional */ });
+        }
+
+    </script>
+</body>
+</html>
