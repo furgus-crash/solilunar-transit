@@ -181,6 +181,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 .space-y-3>:not([hidden])~:not([hidden]){margin-top:.75rem}
 .sticky{position:sticky}
 .text-2xl{font-size:1.5rem;line-height:2rem}
+.text-3xl{font-size:1.875rem;line-height:2.25rem}
 .text-\[10px\]{font-size:10px}
 .text-\[11px\]{font-size:11px}
 .text-\[9px\]{font-size:9px}
@@ -291,7 +292,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             <div>
                 <h1 class="text-lg font-bold tracking-wide text-white flex items-center gap-2">
                     Sun &amp; Moon Transits
-                    <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-cyan-950 text-astroCyan border border-cyan-800/60">v1.1</span>
+                    <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-cyan-950 text-astroCyan border border-cyan-800/60">v1.2</span>
                 </h1>
                 <p class="text-xs text-gray-400">Satellites crossing the Sun and Moon during your viewing window</p>
             </div>
@@ -362,9 +363,17 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
         <div class="lg:col-span-7 flex flex-col gap-4">
             <div class="bg-astroCard border border-astroBorder rounded-2xl p-4 flex flex-col gap-2 shadow-2xl">
                 <div class="flex items-center gap-2 text-xs text-gray-400"><svg class="ico text-astroGreen" viewBox="0 0 448 512" aria-hidden="true"><path d="M224 0c-17.7 0-32 14.3-32 32l0 19.2C119 66 64 130.6 64 208l0 18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416l384 0c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8l0-18.8c0-77.4-55-142-128-156.8L256 32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg> Next transit</div>
+                <select id="nextKindSelect" class="w-full bg-astroBg border border-astroBorder rounded px-2 py-1 text-white text-xs focus:border-astroCyan outline-none">
+                    <option value="any" selected>Next satellite transit</option>
+                    <option value="iss">Next ISS transit</option>
+                    <option value="css">Next CSS transit</option>
+                    <option value="hst">Next Hubble transit</option>
+                </select>
                 <div id="nextBanner" class="text-sm font-bold text-white font-mono">Waiting for the calculation…</div>
-                <div class="flex items-center gap-2">
+                <div id="countBig" class="hidden text-3xl font-bold text-astroGreen font-mono"></div>
+                <div class="flex items-center gap-2 flex-wrap">
                     <button id="previewBtn" class="px-3 py-1.5 bg-cyan-950 hover:bg-cyan-900 text-astroCyan border border-cyan-700/60 rounded-lg text-xs font-semibold transition">Preview next crossing</button>
+                    <button id="soundBtn" class="px-3 py-1.5 bg-astroBorder hover:bg-slate-700 text-gray-200 rounded-lg text-xs font-semibold transition">Beeps: off</button>
                 </div>
                 <div id="previewInfo" class="hidden text-xs text-gray-300 leading-relaxed"></div>
             </div>
@@ -479,7 +488,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <option value="guide-5">5. Timeline and viewing window</option>
 <option value="guide-6">6. Predicted transits list</option>
 <option value="guide-7">7. ISS, China's station, Hubble and Starlink trains</option>
-<option value="guide-8">8. Next transit countdown</option>
+<option value="guide-8">8. Next transit, preview and beeps</option>
 <option value="guide-9">9. Safety</option>
 <option value="guide-10">10. How accurate is it?</option>
 <option value="guide-11">11. Using it at a session</option>
@@ -495,7 +504,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <li>Choose <strong>Sun</strong> or <strong>Moon</strong> as the target. The timeline shows only the hours it is above the horizon.</li>
 <li>Wait for the status line under the display to say how many transits were found. The first time, the app downloads satellite data.</li>
 <li>Drag the cyan <strong>Viewing Window</strong> on the timeline to match your session. The list shows every crossing in that window with start and end times.</li>
-<li>Check the <strong>Next transit</strong> countdown at the top right during your session, and tap <strong>Preview next crossing</strong> to see where the next satellite will cross the disc and which way it will be heading.</li>
+<li>Check the <strong>Next transit</strong> countdown at the top right during your session, choose which kind of transit to wait for (any satellite, the ISS, the CSS or Hubble), and tap <strong>Preview next crossing</strong> to see exactly where it will cross the disc and which way it will be heading. Turn on <strong>Beeps</strong> for a 3-2-1 audio countdown.</li>
 <li>Tap a row, or a Starlink train, to highlight it on the display.</li>
 </ul></div>
 </div>
@@ -551,10 +560,11 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <p><strong>Starlink trains:</strong> when three or more Starlink satellites from the same launch cross within 30 seconds of each other, they are grouped as a <strong>train</strong>. A cyan banner above the list gives the number of satellites, the time span and how many actually cross the disc. <strong>Tap it</strong> to highlight every member on the display and open a summary. Members also carry a green TRAIN tag in the list. New launches appear as tight trains in the first days after launch, so refresh the data on the day.</p></div>
 </div>
 <div id="guide-8" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">8. Next transit countdown</h4>
+<h4 class="font-bold text-astroCyan text-sm mb-1">8. Next transit, preview and beeps</h4>
 <div class="space-y-3">
-<p>At the top right, a live countdown shows the next crossing after the current time (not just the ones in your window): what it is, how central it is, the exact time and how long to wait. It turns green in the last 2 minutes so you can point it out to the public. Below it, a green <strong>Next highlight</strong> line shows the next ISS, Chinese station, Hubble or Starlink train, which are the transits most worth announcing. If you pick another date, it counts down to the first crossing after the current time on that date.</p>
-<p><strong>Preview next crossing.</strong> Tap this button under the countdown to show only that crossing on the display: a thick line with a white dot where it enters the disc and an arrowhead showing where it is heading, plus a description in plain words (for example "enters at the 8 o'clock edge and leaves near 2 o'clock, moving up and to the right"). It moves on to the following crossing automatically after each one. For a Starlink train, all its satellites are shown. Tap <strong>Back to window view</strong> to return, or tap a row in the list, which also ends the preview.</p></div>
+<p>The <strong>Next transit</strong> card, at the top of the page, looks ahead from the current time (not just your window). Use the menu to choose what to wait for: <strong>Next satellite transit</strong> (any), <strong>Next ISS transit</strong>, <strong>Next CSS transit</strong> or <strong>Next Hubble transit</strong>. It shows the satellite, how central the crossing is, the exact start and end times to a tenth of a second, and a live countdown. It turns green in the last 2 minutes. For any satellite, a green <strong>Next highlight</strong> line also shows the next ISS, CSS, Hubble or Starlink train. In the last 10 seconds a big countdown appears, and it says TRANSIT NOW while the crossing is happening.</p>
+<p><strong>Preview next crossing.</strong> Shows only the transit you chose, drawn in <strong>green</strong> on the disc: a thick line, a white dot where it enters, a white ring where it leaves, an arrowhead for the direction, and the exact START and END times in the corners. Under the button you also get a plain-words description (for example "enters at the 3 o'clock edge and leaves near 9 o'clock, moving left"). It moves on to the following crossing by itself after each one. For a Starlink train all its satellites are shown. Tap <strong>Back to window view</strong> to return, or tap a row in the list, which also ends the preview.</p>
+<p><strong>Beeps.</strong> Tap <strong>Beeps: off</strong> to turn sound on (you will hear a short test beep). For the transit you chose, the app beeps at 3, 2 and 1 second before the start, then plays a steady higher tone for exactly as long as the transit lasts, so you can keep your eye on the telescope and listen. Tips: raise the volume and switch off the iPhone's silent mode; keep the page open (the app asks the phone to keep the screen on while beeps are on); set the phone's date and time to automatic so its clock is accurate. Predictions can be off by a second or two, so be watching a couple of seconds before the first beep.</p></div>
 </div>
 <div id="guide-9" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
 <h4 class="font-bold text-astroCyan text-sm mb-1">9. Safety</h4>
@@ -574,6 +584,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <ul class="list-disc list-inside space-y-0.5">
 <li>Open the page once with a connection before the event so the app and the data are saved. Then it opens and calculates without signal. (Phone GPS usually works without signal too.)</li>
 <li>On the day, tap <strong>Update data</strong>, confirm the location, then set the window for your session.</li>
+<li>When a crossing you want is coming up, choose its type in the Next transit card, turn on <strong>Beeps</strong>, and use the preview to tell the audience where to look.</li>
 <li>Add it to your Home Screen: in Safari tap Share, then Add to Home Screen.</li>
 <li>After the app is updated on GitHub, open it twice to see the new version.</li>
 </ul></div>
@@ -586,6 +597,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <li><strong>"Could not download satellite data":</strong> no connection and no saved copy yet. Connect once.</li>
 <li><strong>"The Sun/Moon is not above the horizon on this date":</strong> pick another date.</li>
 <li><strong>No transits:</strong> normal! Most windows have none. Look at the timeline for busier times, or widen the window.</li>
+<li><strong>No beeps:</strong> tap Beeps so it says "on", raise the volume, turn off silent mode, and keep the screen on. Beeps only play when a transit of the chosen type is about to start.</li>
 <li><strong>"(could not refresh, using saved copy)":</strong> the refresh failed, so older saved data is being used.</li>
 <li><strong>Predictions differ from another site:</strong> check the data date, your exact location, and the time zone.</li>
 </ul></div>
@@ -1041,7 +1053,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
         let appState = {
             lat: 44.9914, lng: -93.1881,               // Bell Museum, Falcon Heights / St. Paul
             dateStr: (() => { const n = new Date(); return n.getFullYear() + '-' + String(n.getMonth() + 1).padStart(2, '0') + '-' + String(n.getDate()).padStart(2, '0'); })(),
-            kind: 'sun', previewOn: false, previewId: -1,
+            kind: 'sun', previewOn: false, previewKey: null, previewSet: [], nextKind: 'any', soundOn: false, audioCtx: null, beepKey: '', beepNodes: [], wakeLock: null,
             upIntervals: [], upIndex: 0, upStartMins: 0, upEndMins: 0,
             sessionStartMins: 0, sessionDurationMins: 60,
             filterRed: true, filterOrange: true,
@@ -1346,12 +1358,8 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
         function passTimeMs(p) { return p.crosses ? p.startMs : p.closestMs; }
         function passLabel(p) { return (p.special ? '★ ' : '') + p.name; }
 
-        // Passes shown in "preview next crossing" mode (a Starlink train shows all its members)
-        function previewPasses() {
-            const p = appState.satellitePasses[appState.previewId];
-            if (!p) return [];
-            return p.trainId !== null ? appState.trains[p.trainId].members.map(i => appState.satellitePasses[i]) : [p];
-        }
+        // Passes shown in "preview next crossing" mode (the chosen kind of transit; a Starlink train shows all its members)
+        function previewPasses() { return appState.previewSet || []; }
 
         function renderFOVCanvas() {
             const canvas = document.getElementById('fovCanvas');
@@ -1362,7 +1370,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             const width = rect.width, height = rect.height;
             ctx.fillStyle = '#0B0E14'; ctx.fillRect(0, 0, width, height);
             const cx = width / 2, cy = height / 2, rad = appState.radiusDeg, sun = appState.kind === 'sun', preview = appState.previewOn;
-            document.getElementById('fovModeLabel').innerText = preview ? 'Next crossing preview' : 'Viewing window';
+            document.getElementById('fovModeLabel').innerText = preview ? `Next ${NEXT_KIND_NAME[appState.nextKind]} transit` : 'Viewing window';
 
             // The disc fills almost the whole picture
             const scale = (Math.min(width, height) / 2 / (rad * 1.12)) * 0.98;
@@ -1381,7 +1389,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
                 const x1 = cx + pass.x1 * scale, y1 = cy - pass.y1 * scale, x2 = cx + pass.x2 * scale, y2 = cy - pass.y2 * scale;
                 const c = clipLineLiangBarsky(x1, y1, x2, y2, 8, 8, width - 8, height - 8);
                 if (!c) return;
-                const color = CAT_COLOR[pass.category], selected = appState.selectedIds.includes(pass.id);
+                const color = preview ? '#00E676' : CAT_COLOR[pass.category], selected = appState.selectedIds.includes(pass.id);
                 ctx.strokeStyle = color; ctx.lineWidth = ((pass.category === 'red' ? 2.5 : 1.8) * (pass.special ? 1.5 : 1)) * (preview ? 1.6 : 1);
                 if (selected) ctx.setLineDash([5, 5]);
                 ctx.beginPath(); ctx.moveTo(c.cx1, c.cy1); ctx.lineTo(c.cx2, c.cy2); ctx.stroke(); ctx.setLineDash([]);
@@ -1392,8 +1400,19 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
                 if (preview) {                                                  // dot where it enters the disc
                     ctx.beginPath(); ctx.arc(cx + pass.entryX * scale, cy - pass.entryY * scale, 5, 0, Math.PI * 2);
                     ctx.fillStyle = '#FFFFFF'; ctx.fill();
+                    ctx.beginPath(); ctx.arc(cx + pass.exitX * scale, cy - pass.exitY * scale, 5, 0, Math.PI * 2);   // ring where it leaves
+                    ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = 2; ctx.stroke();
                 }
             });
+            if (preview) {                                                      // exact start and end times, in the corners
+                ctx.font = 'bold 11px monospace'; ctx.fillStyle = '#00E676';
+                if (!list.length) { ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(`No upcoming ${NEXT_KIND_NAME[appState.nextKind]} transit found`, cx, 18); }
+                else {
+                    const se = setStartEnd(list);
+                    ctx.textAlign = 'left'; ctx.textBaseline = 'top'; ctx.fillText('START ' + fmtClock(se.startMs, true), 8, 8);
+                    ctx.textAlign = 'right'; ctx.textBaseline = 'bottom'; ctx.fillText('END ' + fmtClock(se.endMs, true), width - 8, height - 8);
+                }
+            }
 
             const cnt = { red: 0, orange: 0 };
             passesInWindow().forEach(p => { cnt[p.category]++; });
@@ -1549,39 +1568,108 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
                 `Satellites from one launch crossing within seconds of each other. Starts with ${first.name}. All of them are highlighted with dotted lines on the display. Tap the train again to clear.`);
         }
 
-        // ---- next-transit countdown and preview ----
+        // ---- next transit: choose a kind, preview it, and get a beeping countdown ----
+        const NEXT_KIND_NAME = { any: 'satellite', iss: 'ISS', css: 'CSS', hst: 'Hubble' };
+        function kindOk(p) {
+            const k = appState.nextKind;
+            return k === 'any' || (k === 'iss' && p.special === 'ISS') || (k === 'css' && p.special === 'CSS') || (k === 'hst' && p.special === 'HST');
+        }
+        function pickNext(now) {
+            return appState.satellitePasses.filter(p => p.startMs > now && kindOk(p)).sort((a, b) => a.startMs - b.startMs)[0] || null;
+        }
+        // The passes drawn for a chosen transit: just that one, or the rest of its Starlink train
+        function passSet(p) {
+            if (appState.nextKind === 'any' && p.trainId !== null) return appState.trains[p.trainId].members.map(i => appState.satellitePasses[i]).filter(q => q.startMs >= p.startMs);
+            return [p];
+        }
+        function setStartEnd(set) { return { startMs: Math.min(...set.map(q => q.startMs)), endMs: Math.max(...set.map(q => q.endMs)) }; }
+
         function clockPos(x, y) { const a = (Math.atan2(x, y) * 180 / Math.PI + 360) % 360, h = Math.round(a / 30) % 12; return (h === 0 ? 12 : h) + " o'clock"; }
         function dirWord(dx, dy) {
             const a = (Math.atan2(dx, dy) * 180 / Math.PI + 360) % 360;
             return ['up', 'up and to the right', 'right', 'down and to the right', 'down', 'down and to the left', 'left', 'up and to the left'][Math.round(a / 45) % 8];
         }
-        function describePass(p) {
-            const who = p.trainId !== null ? `Starlink train (${appState.trains[p.trainId].count} satellites)` : passLabel(p);
-            return `${who}: enters at the ${clockPos(p.entryX, p.entryY)} edge of the disc and leaves near ${clockPos(p.exitX, p.exitY)}, moving ${dirWord(p.exitX - p.entryX, p.exitY - p.entryY)}. Crossing takes about ${p.durationS.toFixed(1)} s. (Up means toward the sky overhead.)`;
+        function describePass(p, set) {
+            const se = setStartEnd(set), who = set.length > 1 ? `Starlink train (${set.length} satellites)` : passLabel(p);
+            return `${who}: starts ${fmtClock(se.startMs, true)}, ends ${fmtClock(se.endMs, true)}. Enters at the ${clockPos(p.entryX, p.entryY)} edge of the disc and leaves near ${clockPos(p.exitX, p.exitY)}, moving ${dirWord(p.exitX - p.entryX, p.exitY - p.entryY)}. Crossing takes about ${p.durationS.toFixed(1)} s. (Up means toward the sky overhead.)`;
         }
-        function nextText(p, now) {
-            const secs = Math.round((p.startMs - now) / 1000);
-            const inTxt = secs < 3600 ? `${Math.floor(secs / 60)}m ${pad2(secs % 60)}s` : `${Math.floor(secs / 3600)}h ${pad2(Math.floor((secs % 3600) / 60))}m`;
-            const who = p.trainId !== null ? `Starlink train (${appState.trains[p.trainId].count} satellites)` : passLabel(p);
-            return { secs, text: `${who}, ${CAT_LABEL[p.category].toLowerCase()}, ${fmtClock(p.startMs, true)} (in ${inTxt})` };
+        function inText(ms) {
+            const secs = ms / 1000;
+            if (secs < 10) return `${Math.max(0, secs).toFixed(1)} s`;
+            const s = Math.round(secs);
+            return s < 3600 ? `${Math.floor(s / 60)}m ${pad2(s % 60)}s` : `${Math.floor(s / 3600)}h ${pad2(Math.floor((s % 3600) / 60))}m`;
         }
+
+        // ---- beeps ----
+        function clearBeeps() {
+            appState.beepNodes.forEach(o => { try { o.stop(0); } catch (e) { /* already stopped */ } });
+            appState.beepNodes = []; appState.beepKey = '';
+        }
+        // Schedules the 3-2-1 beeps and a steady tone for the length of the transit, once the start is within 3.6 s
+        function scheduleBeeps(startMs, endMs, key) {
+            const st = appState;
+            if (!st.soundOn || !st.audioCtx || startMs === null) return;
+            const lead = (startMs - Date.now()) / 1000, id = key + '|' + startMs;
+            if (st.beepKey === id || lead > 3.6 || lead < 0) return;
+            const ctx = st.audioCtx, t0 = ctx.currentTime;
+            const tone = (freq, atS, durS, vol) => {
+                const o = ctx.createOscillator(), g = ctx.createGain();
+                o.type = 'sine'; o.frequency.value = freq; g.gain.value = vol;
+                o.connect(g); g.connect(ctx.destination);
+                const at = t0 + Math.max(0, atS); o.start(at); o.stop(at + durS);
+                st.beepNodes.push(o);
+            };
+            [3, 2, 1].forEach(n => { if (lead - n >= -0.02) tone(880, lead - n, 0.15, 0.6); });
+            tone(1320, lead, Math.max(0.25, (endMs - startMs) / 1000), 0.7);
+            st.beepKey = id;
+        }
+        async function setSound(on) {
+            const btn = document.getElementById('soundBtn');
+            if (!on) {
+                appState.soundOn = false; clearBeeps(); btn.innerText = 'Beeps: off';
+                try { if (appState.wakeLock) { await appState.wakeLock.release(); appState.wakeLock = null; } } catch (e) { /* ignore */ }
+                return;
+            }
+            const AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) { setSatStatus('This browser cannot play sound.', null); return; }
+            try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) { /* optional */ }
+            if (!appState.audioCtx) appState.audioCtx = new AC();
+            try { await appState.audioCtx.resume(); } catch (e) { /* ignore */ }
+            appState.soundOn = true; btn.innerText = 'Beeps: on';
+            const ctx = appState.audioCtx, o = ctx.createOscillator(), g = ctx.createGain();     // short test beep
+            o.frequency.value = 660; g.gain.value = 0.5; o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + 0.15);
+            try { if (navigator.wakeLock) appState.wakeLock = await navigator.wakeLock.request('screen'); } catch (e) { /* optional */ }
+        }
+
         function updateNextBanner() {
-            const el = document.getElementById('nextBanner'), info = document.getElementById('previewInfo');
+            const el = document.getElementById('nextBanner'), info = document.getElementById('previewInfo'), big = document.getElementById('countBig');
             if (!el) return;
             const now = Date.now();
             if (!appState.satellitePasses.length && !appState.tracksResult) { el.innerText = 'Waiting for the calculation…'; el.style.color = ''; return; }
-            const ahead = appState.satellitePasses.filter(p => p.startMs > now).sort((a, b) => a.startMs - b.startMs);
-            const nxt = ahead[0], newId = nxt ? nxt.id : -1;
-            if (appState.previewId !== newId) { appState.previewId = newId; if (appState.previewOn) renderFOVCanvas(); }
+            const nxt = pickNext(now), set = nxt ? passSet(nxt) : [], key = set.map(p => p.id).join(',');
+            if (appState.previewKey !== key) { appState.previewKey = key; appState.previewSet = set; if (appState.previewOn) renderFOVCanvas(); }
             info.classList.toggle('hidden', !appState.previewOn);
-            if (appState.previewOn) info.innerText = nxt ? describePass(nxt) : 'No upcoming crossing to preview.';
-            if (!nxt) { el.innerText = `No more ${KIND_NAME[appState.kind]} transits found after now on this date.`; el.style.color = ''; return; }
-            const first = nextText(nxt, now);
-            const star = ahead.find(p => p.special || p.trainId !== null);
-            let html = `Next: ${first.text}`;
-            if (star && star !== nxt) html += `<div class="text-xs text-astroGreen mt-1">Next highlight: ${nextText(star, now).text}</div>`;
+            if (appState.previewOn) info.innerText = nxt ? describePass(nxt, set) : `No upcoming ${NEXT_KIND_NAME[appState.nextKind]} transit to preview.`;
+            // "NOW" while a transit of the chosen kind is happening
+            const active = appState.satellitePasses.find(p => kindOk(p) && p.startMs <= now && now <= p.endMs + 400);
+            if (!nxt) {
+                el.innerText = `No ${NEXT_KIND_NAME[appState.nextKind]} transit found after now on this date.`; el.style.color = '';
+                big.classList.toggle('hidden', !active); if (active) big.innerText = 'TRANSIT NOW';
+                return;
+            }
+            const se = setStartEnd(set), ms = se.startMs - now;
+            let html = `Next ${appState.nextKind === 'any' ? 'transit' : NEXT_KIND_NAME[appState.nextKind] + ' transit'}: ${set.length > 1 ? `Starlink train (${set.length} satellites)` : passLabel(nxt)}, ${CAT_LABEL[nxt.category].toLowerCase()}, ${fmtClock(se.startMs, true)} to ${fmtClock(se.endMs, true)} (in ${inText(ms)})`;
+            if (appState.nextKind === 'any') {
+                const star = appState.satellitePasses.filter(p => p.startMs > now && (p.special || p.trainId !== null)).sort((a, b) => a.startMs - b.startMs)[0];
+                if (star && star !== nxt) html += `<div class="text-xs text-astroGreen mt-1">Next highlight: ${star.trainId !== null ? 'Starlink train' : passLabel(star)}, ${fmtClock(star.startMs, true)} (in ${inText(star.startMs - now)})</div>`;
+            }
             if (el.dataset.html !== html) { el.dataset.html = html; el.innerHTML = html; }
-            el.style.color = first.secs <= 120 ? '#00E676' : '';
+            el.style.color = ms <= 120000 ? '#00E676' : '';
+            // large visual countdown for the last 10 seconds
+            if (active) { big.classList.remove('hidden'); big.innerText = 'TRANSIT NOW'; }
+            else if (ms <= 10000) { big.classList.remove('hidden'); big.innerText = ms <= 3000 ? String(Math.max(1, Math.ceil(ms / 1000))) : (ms / 1000).toFixed(1) + ' s'; }
+            else big.classList.add('hidden');
+            scheduleBeeps(se.startMs, se.endMs, key);
         }
 
         // ===== START-UP AND CONTROLS =====
@@ -1635,11 +1723,18 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
                 bt.onclick = () => { appState[key] = !appState[key]; bt.classList.toggle('opacity-40', !appState[key]); updateAllViews(); };
             });
 
+            // Which kind of transit to watch for, and the beeps
+            document.getElementById('nextKindSelect').onchange = (e) => {
+                appState.nextKind = e.target.value; clearBeeps(); appState.previewKey = null;
+                updateNextBanner(); renderFOVCanvas();
+            };
+            document.getElementById('soundBtn').onclick = () => setSound(!appState.soundOn);
+
             // Preview of the next crossing
             document.getElementById('previewBtn').onclick = () => {
                 appState.previewOn = !appState.previewOn;
                 document.getElementById('previewBtn').innerText = appState.previewOn ? 'Back to window view' : 'Preview next crossing';
-                appState.previewId = -2;
+                appState.previewKey = null;
                 updateNextBanner(); renderFOVCanvas();
             };
 
@@ -1675,7 +1770,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             window.addEventListener('resize', () => renderFOVCanvas());
 
             initTimelineDrag();
-            setInterval(updateNextBanner, 1000);
+            setInterval(updateNextBanner, 100);
             generateSatellitePasses(true);
             updateAllViews();
         }
