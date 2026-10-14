@@ -43,6 +43,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 .bg-astroBorder{background-color:#1E2638}
 .bg-astroCard{background-color:#0B0E14}
 .bg-astroCard\/80{background-color:rgb(11 14 20 / 0.8)}
+.bg-astroCard\/90{background-color:rgb(11 14 20 / 0.9)}
 .bg-astroCyan{background-color:#00E5FF}
 .bg-astroCyan\/80{background-color:rgb(0 229 255 / 0.8)}
 .bg-astroOrange{background-color:#FF6D00}
@@ -50,6 +51,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 .bg-astroPurple{background-color:#BF5AF2}
 .bg-astroRed{background-color:#FF1744}
 .bg-astroRed\/20{background-color:rgb(255 23 68 / 0.2)}
+.bg-black\/60{background-color:rgb(0 0 0 / 0.6)}
 .bg-black\/80{background-color:rgb(0 0 0 / 0.8)}
 .bg-cyan-500\/25{background-color:rgb(6 182 212 / 0.25)}
 .bg-cyan-900\/50{background-color:rgb(22 78 99 / 0.5)}
@@ -112,8 +114,10 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 .h-12{height:3rem}
 .h-2\.5{height:.625rem}
 .h-4{height:1rem}
+.h-\[55vh\]{height:55vh}
 .h-full{height:100%}
 .inset-0{top:0;right:0;bottom:0;left:0}
+.inset-x-4{left:1rem;right:1rem}
 .italic{font-style:italic}
 .items-center{align-items:center}
 .items-end{align-items:flex-end}
@@ -126,6 +130,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 .max-h-\[320px\]{max-height:320px}
 .max-h-\[80vh\]{max-height:80vh}
 .max-h-\[90vh\]{max-height:90vh}
+.max-h-\[95vh\]{max-height:95vh}
 .max-w-7xl{max-width:80rem}
 .max-w-md{max-width:28rem}
 .max-w-xl{max-width:36rem}
@@ -165,6 +170,8 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 .py-3{padding-top:.75rem;padding-bottom:.75rem}
 .relative{position:relative}
 .right-0{right:0}
+.right-1{right:.25rem}
+.right-2{right:.5rem}
 .right-4{right:1rem}
 .rounded{border-radius:.25rem}
 .rounded-2xl{border-radius:1rem}
@@ -205,6 +212,8 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 .text-xs{font-size:.75rem;line-height:1rem}
 .top-0{top:0}
 .top-1{top:.25rem}
+.top-1\/2{top:50%}
+.top-2{top:.5rem}
 .top-4{top:1rem}
 .tracking-wide{letter-spacing:.025em}
 .transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:150ms}
@@ -292,7 +301,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             <div>
                 <h1 class="text-lg font-bold tracking-wide text-white flex items-center gap-2">
                     Sun &amp; Moon Transits
-                    <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-cyan-950 text-astroCyan border border-cyan-800/60">v1.2</span>
+                    <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-cyan-950 text-astroCyan border border-cyan-800/60">v1.3</span>
                 </h1>
                 <p class="text-xs text-gray-400">Satellites crossing the Sun and Moon during your viewing window</p>
             </div>
@@ -307,9 +316,12 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
         <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 text-xs">
 
             <div class="lg:col-span-2 bg-astroBg/70 p-2.5 rounded-xl border border-astroBorder flex flex-col gap-1.5">
-                <div class="flex items-center justify-between">
-                    <span class="text-gray-400 font-medium flex items-center gap-1"><svg class="ico text-astroCyan" viewBox="0 0 384 512" aria-hidden="true"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg> Observing location</span>
-                    <button id="gpsBtn" class="px-2 py-1 bg-cyan-950 hover:bg-cyan-900 text-astroCyan border border-cyan-700/60 rounded text-[11px] font-semibold transition flex items-center gap-1"><svg class="ico" viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0c17.7 0 32 14.3 32 32l0 10.4c93.7 13.9 167.7 88 181.6 181.6l10.4 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-10.4 0c-13.9 93.7-88 167.7-181.6 181.6l0 10.4c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-10.4C130.3 455.7 56.3 381.7 42.4 288L32 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l10.4 0C56.3 130.3 130.3 56.3 224 42.4L224 32c0-17.7 14.3-32 32-32zM107.4 288c12.5 58.3 58.4 104.1 116.6 116.6l0-20.6c0-17.7 14.3-32 32-32s32 14.3 32 32l0 20.6c58.3-12.5 104.1-58.4 116.6-116.6L384 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l20.6 0C392.1 165.7 346.3 119.9 288 107.4l0 20.6c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-20.6C165.7 119.9 119.9 165.7 107.4 224l20.6 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-20.6 0zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg> Use GPS</button>
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-base font-bold text-astroCyan flex items-center gap-2"><svg class="ico text-astroCyan" viewBox="0 0 384 512" aria-hidden="true"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg> Observing location</span>
+                    <div class="flex items-center gap-2">
+                        <button id="gpsBtn" class="whitespace-nowrap px-2 py-1 bg-cyan-950 hover:bg-cyan-900 text-astroCyan border border-cyan-700/60 rounded text-[11px] font-semibold transition flex items-center gap-1"><svg class="ico" viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0c17.7 0 32 14.3 32 32l0 10.4c93.7 13.9 167.7 88 181.6 181.6l10.4 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-10.4 0c-13.9 93.7-88 167.7-181.6 181.6l0 10.4c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-10.4C130.3 455.7 56.3 381.7 42.4 288L32 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l10.4 0C56.3 130.3 130.3 56.3 224 42.4L224 32c0-17.7 14.3-32 32-32zM107.4 288c12.5 58.3 58.4 104.1 116.6 116.6l0-20.6c0-17.7 14.3-32 32-32s32 14.3 32 32l0 20.6c58.3-12.5 104.1-58.4 116.6-116.6L384 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l20.6 0C392.1 165.7 346.3 119.9 288 107.4l0 20.6c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-20.6C165.7 119.9 119.9 165.7 107.4 224l20.6 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-20.6 0zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg> Use GPS</button>
+                        <button id="mapBtn" class="whitespace-nowrap px-2 py-1 bg-cyan-950 hover:bg-cyan-900 text-astroCyan border border-cyan-700/60 rounded text-[11px] font-semibold transition flex items-center gap-1"><svg class="ico" viewBox="0 0 384 512" aria-hidden="true"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg> Map</button>
+                    </div>
                 </div>
                 <div class="grid grid-cols-2 gap-2">
                     <div>
@@ -324,7 +336,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             </div>
 
             <div class="lg:col-span-2 bg-astroBg/70 p-2.5 rounded-xl border border-astroBorder flex flex-col gap-1.5">
-                <span class="text-gray-400 font-medium flex items-center gap-1"><svg class="ico text-astroCyan" viewBox="0 0 448 512" aria-hidden="true"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L64 64C28.7 64 0 92.7 0 128l0 16 0 48L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-48 0-16c0-35.3-28.7-64-64-64l-40 0 0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L152 64l0-40zM48 192l80 0 0 56-80 0 0-56zm0 104l80 0 0 64-80 0 0-64zm128 0l96 0 0 64-96 0 0-64zm144 0l80 0 0 64-80 0 0-64zm80-48l-80 0 0-56 80 0 0 56zm0 160l0 40c0 8.8-7.2 16-16 16l-64 0 0-56 80 0zm-128 0l0 56-96 0 0-56 96 0zm-144 0l0 56-64 0c-8.8 0-16-7.2-16-16l0-40 80 0zM272 248l-96 0 0-56 96 0 0 56z"/></svg> Viewing date</span>
+                <span class="text-base font-bold text-astroCyan flex items-center gap-2"><svg class="ico text-astroCyan" viewBox="0 0 448 512" aria-hidden="true"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L64 64C28.7 64 0 92.7 0 128l0 16 0 48L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-48 0-16c0-35.3-28.7-64-64-64l-40 0 0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L152 64l0-40zM48 192l80 0 0 56-80 0 0-56zm0 104l80 0 0 64-80 0 0-64zm128 0l96 0 0 64-96 0 0-64zm144 0l80 0 0 64-80 0 0-64zm80-48l-80 0 0-56 80 0 0 56zm0 160l0 40c0 8.8-7.2 16-16 16l-64 0 0-56 80 0zm-128 0l0 56-96 0 0-56 96 0zm-144 0l0 56-64 0c-8.8 0-16-7.2-16-16l0-40 80 0zM272 248l-96 0 0-56 96 0 0 56z"/></svg> Viewing date</span>
                 <div class="grid grid-cols-1 gap-1.5">
                     <input type="date" id="dateInput" class="w-full bg-astroCard border border-astroBorder rounded px-2 py-1 text-white focus:border-astroCyan outline-none">
                     <div class="flex items-center justify-between text-[10px] text-gray-400">
@@ -339,7 +351,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 
             <div class="lg:col-span-2 bg-astroBg/70 p-2.5 rounded-xl border border-astroBorder flex flex-col gap-1.5">
                 <div class="flex items-center justify-between">
-                    <span class="text-gray-400 font-medium flex items-center gap-1"><svg class="ico text-astroCyan" viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0c17.7 0 32 14.3 32 32l0 10.4c93.7 13.9 167.7 88 181.6 181.6l10.4 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-10.4 0c-13.9 93.7-88 167.7-181.6 181.6l0 10.4c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-10.4C130.3 455.7 56.3 381.7 42.4 288L32 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l10.4 0C56.3 130.3 130.3 56.3 224 42.4L224 32c0-17.7 14.3-32 32-32zM107.4 288c12.5 58.3 58.4 104.1 116.6 116.6l0-20.6c0-17.7 14.3-32 32-32s32 14.3 32 32l0 20.6c58.3-12.5 104.1-58.4 116.6-116.6L384 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l20.6 0C392.1 165.7 346.3 119.9 288 107.4l0 20.6c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-20.6C165.7 119.9 119.9 165.7 107.4 224l20.6 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-20.6 0zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg> Target</span>
+                    <span class="text-base font-bold text-astroCyan flex items-center gap-2"><svg class="ico text-astroCyan" viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0c17.7 0 32 14.3 32 32l0 10.4c93.7 13.9 167.7 88 181.6 181.6l10.4 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-10.4 0c-13.9 93.7-88 167.7-181.6 181.6l0 10.4c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-10.4C130.3 455.7 56.3 381.7 42.4 288L32 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l10.4 0C56.3 130.3 130.3 56.3 224 42.4L224 32c0-17.7 14.3-32 32-32zM107.4 288c12.5 58.3 58.4 104.1 116.6 116.6l0-20.6c0-17.7 14.3-32 32-32s32 14.3 32 32l0 20.6c58.3-12.5 104.1-58.4 116.6-116.6L384 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l20.6 0C392.1 165.7 346.3 119.9 288 107.4l0 20.6c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-20.6C165.7 119.9 119.9 165.7 107.4 224l20.6 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-20.6 0zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg> Target</span>
                     <span id="illumLabel" class="text-[10px] text-astroCyan bg-cyan-950/70 px-2 py-0.5 rounded border border-cyan-800">—</span>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -362,7 +374,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 
         <div class="lg:col-span-7 flex flex-col gap-4">
             <div class="bg-astroCard border border-astroBorder rounded-2xl p-4 flex flex-col gap-2 shadow-2xl">
-                <div class="flex items-center gap-2 text-xs text-gray-400"><svg class="ico text-astroGreen" viewBox="0 0 448 512" aria-hidden="true"><path d="M224 0c-17.7 0-32 14.3-32 32l0 19.2C119 66 64 130.6 64 208l0 18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416l384 0c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8l0-18.8c0-77.4-55-142-128-156.8L256 32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg> Next transit</div>
+                <div class="flex items-center gap-2 text-base font-bold text-astroCyan"><svg class="ico text-astroCyan" viewBox="0 0 448 512" aria-hidden="true"><path d="M224 0c-17.7 0-32 14.3-32 32l0 19.2C119 66 64 130.6 64 208l0 18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416l384 0c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8l0-18.8c0-77.4-55-142-128-156.8L256 32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg> Next transit</div>
                 <select id="nextKindSelect" class="w-full bg-astroBg border border-astroBorder rounded px-2 py-1 text-white text-xs focus:border-astroCyan outline-none">
                     <option value="any" selected>Next satellite transit</option>
                     <option value="iss">Next ISS transit</option>
@@ -380,7 +392,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 
             <div class="bg-astroCard border border-astroBorder rounded-2xl p-4 flex flex-col gap-3 shadow-2xl relative">
                 <div class="flex items-center justify-between border-b border-astroBorder/60 pb-3">
-                    <div class="flex items-center gap-2"><svg class="ico text-astroCyan" viewBox="0 0 512 512" aria-hidden="true"><path d="M149.1 64.8L138.7 96 64 96C28.7 96 0 124.7 0 160L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-256c0-35.3-28.7-64-64-64l-74.7 0L362.9 64.8C356.4 45.2 338.1 32 317.4 32L194.6 32c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg><h2 class="text-sm font-bold text-white tracking-wide">Field of View Simulator</h2></div>
+                    <div class="flex items-center gap-2"><svg class="ico text-astroCyan" viewBox="0 0 512 512" aria-hidden="true"><path d="M149.1 64.8L138.7 96 64 96C28.7 96 0 124.7 0 160L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-256c0-35.3-28.7-64-64-64l-74.7 0L362.9 64.8C356.4 45.2 338.1 32 317.4 32L194.6 32c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg><h2 class="text-base font-bold text-astroCyan tracking-wide">Field of View Simulator</h2></div>
                     <div class="text-xs text-gray-400"><strong id="fovModeLabel" class="text-white">Viewing window</strong></div>
                 </div>
 
@@ -414,7 +426,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 
             <div class="bg-astroCard border border-astroBorder rounded-2xl p-4 flex flex-col gap-3 shadow-2xl">
                 <div class="flex items-center justify-between border-b border-astroBorder/60 pb-2">
-                    <div class="flex items-center gap-2"><svg class="ico text-astroCyan" viewBox="0 0 640 512" aria-hidden="true"><path d="M128 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm32 97.3c28.3-12.3 48-40.5 48-73.3c0-44.2-35.8-80-80-80S48 51.8 48 96c0 32.8 19.7 61 48 73.3L96 224l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l256 0 0 54.7c-28.3 12.3-48 40.5-48 73.3c0 44.2 35.8 80 80 80s80-35.8 80-80c0-32.8-19.7-61-48-73.3l0-54.7 256 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-54.7c28.3-12.3 48-40.5 48-73.3c0-44.2-35.8-80-80-80s-80 35.8-80 80c0 32.8 19.7 61 48 73.3l0 54.7-320 0 0-54.7zM488 96a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zM320 392a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg><h2 class="text-sm font-bold text-white">Timeline: target in the sky</h2></div>
+                    <div class="flex items-center gap-2"><svg class="ico text-astroCyan" viewBox="0 0 640 512" aria-hidden="true"><path d="M128 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm32 97.3c28.3-12.3 48-40.5 48-73.3c0-44.2-35.8-80-80-80S48 51.8 48 96c0 32.8 19.7 61 48 73.3L96 224l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l256 0 0 54.7c-28.3 12.3-48 40.5-48 73.3c0 44.2 35.8 80 80 80s80-35.8 80-80c0-32.8-19.7-61-48-73.3l0-54.7 256 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-54.7c28.3-12.3 48-40.5 48-73.3c0-44.2-35.8-80-80-80s-80 35.8-80 80c0 32.8 19.7 61 48 73.3l0 54.7-320 0 0-54.7zM488 96a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zM320 392a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg><h2 class="text-base font-bold text-astroCyan">Timeline: target in the sky</h2></div>
                     <span id="sessionTimeRange" class="text-xs font-mono text-astroCyan font-semibold">—</span>
                 </div>
                 <div class="relative w-full pt-2">
@@ -432,7 +444,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 
             <div class="bg-astroCard border border-astroBorder rounded-2xl p-4 flex flex-col gap-3 shadow-2xl flex-1 min-h-[220px]">
                 <div class="flex items-center justify-between border-b border-astroBorder/60 pb-2">
-                    <div class="flex items-center gap-2"><svg class="ico text-astroCyan" viewBox="0 0 512 512" aria-hidden="true"><path d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32l224 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-224 0c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32l224 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-224 0c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32l288 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-288 0c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg><h2 class="text-sm font-bold text-white">Predicted Transits in Window</h2></div>
+                    <div class="flex items-center gap-2"><svg class="ico text-astroCyan" viewBox="0 0 512 512" aria-hidden="true"><path d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32l224 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-224 0c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32l224 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-224 0c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32l288 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-288 0c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg><h2 class="text-base font-bold text-astroCyan">Predicted Transits in Window</h2></div>
                     <span class="text-[10px] text-gray-400">(Tap a row for details)</span>
                 </div>
                 <div id="trainBox" class="flex flex-col gap-2 text-[11px]"></div>
@@ -468,6 +480,32 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
                 <p id="modalSatTrack" class="text-gray-300 font-mono text-[11px]">—</p>
             </div>
             <button id="closeTelemetryBtn2" class="w-full py-2 bg-astroBorder hover:bg-slate-700 text-white rounded-xl text-xs font-bold transition">Close</button>
+        </div>
+    </div>
+
+
+    <div id="mapModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-astroCard border border-astroBorder rounded-2xl max-w-xl w-full p-4 shadow-2xl flex flex-col gap-3 max-h-[95vh]">
+            <div class="flex items-center justify-between">
+                <h3 class="text-base font-bold text-astroCyan flex items-center gap-2"><svg class="ico" viewBox="0 0 384 512" aria-hidden="true"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg> Choose observing location</h3>
+                <button id="closeMapModal" class="text-gray-400 hover:text-white text-lg"><svg class="ico" viewBox="0 0 384 512" aria-hidden="true"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></button>
+            </div>
+            <div class="text-xs text-gray-300">Drag to move the map, tap to drop the pin, and use + and − (or pinch) to zoom. Zoom in close for an exact spot.</div>
+            <div id="mapView" class="relative w-full h-[55vh] overflow-hidden rounded-xl border border-astroBorder bg-slate-900" style="touch-action: none; cursor: grab;">
+                <div id="mapTiles" class="absolute inset-0"></div>
+                <div id="mapPin" class="absolute text-astroRed text-2xl pointer-none" style="transform: translate(-50%, -100%);"><svg class="ico" viewBox="0 0 384 512" aria-hidden="true"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg></div>
+                <div class="absolute top-2 right-2 flex flex-col gap-2">
+                    <button id="mapZoomIn" class="px-3 py-1 bg-astroCard/90 border border-astroBorder rounded text-white text-lg font-bold">+</button>
+                    <button id="mapZoomOut" class="px-3 py-1 bg-astroCard/90 border border-astroBorder rounded text-white text-lg font-bold">−</button>
+                </div>
+                <div id="mapMsg" class="hidden absolute inset-x-4 top-1/2 bg-black/80 text-astroOrange text-xs p-3 rounded-xl text-center pointer-none">The map tiles could not load. The map needs an internet connection. You can still type coordinates or use GPS.</div>
+                <div class="absolute bottom-1 right-1 text-[9px] text-gray-300 bg-black/60 px-1 pointer-none">© OpenStreetMap contributors</div>
+            </div>
+            <div id="mapReadout" class="text-xs font-mono text-astroCyan">—</div>
+            <div class="flex gap-2">
+                <button id="mapUse" class="flex-1 py-2 bg-astroCyan text-black font-bold rounded-xl text-xs hover:bg-cyan-400 transition">Use this location</button>
+                <button id="mapCancel" class="flex-1 py-2 bg-astroBorder hover:bg-slate-700 text-white rounded-xl text-xs font-bold transition">Cancel</button>
+            </div>
         </div>
     </div>
 
@@ -511,7 +549,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <div id="guide-2" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
 <h4 class="font-bold text-astroCyan text-sm mb-1">2. Setting up</h4>
 <div class="space-y-3">
-<p><strong>Location matters a lot.</strong> A satellite only crosses the Sun or Moon for people standing in a narrow strip of ground, typically a few kilometers to about 10 km wide. Moving a few kilometers can turn a transit into a near miss. The app starts at the Bell Museum (44.9914, −93.1881). Enter the exact spot where your telescopes will be, or tap <strong>Use GPS</strong> on site. Longitude is negative for west. If location access is blocked, a message appears and your coordinates stay as they were. Invalid numbers are rejected.</p>
+<p><strong>Location matters a lot.</strong> A satellite only crosses the Sun or Moon for people standing in a narrow strip of ground, typically a few kilometers to about 10 km wide. Moving a few kilometers can turn a transit into a near miss. The app starts at the Bell Museum (44.9914, −93.1881). Enter the exact spot where your telescopes will be, tap <strong>Use GPS</strong> on site, or tap <strong>Map</strong> to choose it on a map: drag the map, tap to drop the pin, zoom in close with + and − (or pinch), then tap <strong>Use this location</strong>. The map needs an internet connection (it shows OpenStreetMap), but coordinates and GPS work without one. Longitude is negative for west. If location access is blocked, a message appears and your coordinates stay as they were. Invalid numbers are rejected.</p>
 <p><strong>Viewing date.</strong> The date of your session. The app starts on today's date. <strong>Sunrise/Sunset</strong> (or <strong>Moonrise/Moonset</strong>) show when the target is up. All times use your phone's time zone.</p>
 <p><strong>Target.</strong> Sun or Moon. The Alt/Az box shows where it is at the start of your window. For the Moon it also shows how much of the disc is lit. If the Moon rises and sets twice within your date, a menu appears so you can choose which period to use.</p>
 </div>
@@ -544,6 +582,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <ul class="list-disc list-inside space-y-0.5">
 <li><strong>Move</strong> the cyan window by dragging its middle. <strong>Resize</strong> it with the ║ handles (minimum 10 minutes). Tap an empty spot on the bar to center the window there.</li>
 <li>The display, the list, and the counts update instantly for the window you choose.</li>
+<li><strong>Shortcuts:</strong> tap the cyan window once to jump to the current time with a 60-minute window, wherever the window is and however long it is. <strong>Double-tap</strong> it to stretch it over the whole period from rise to set (sunrise to sunset, or moonrise to moonset).</li>
 <li><strong>Reset</strong> puts the window back to one hour: starting now if you are looking at today and the target is up, otherwise in the middle of the period.</li>
 </ul></div>
 </div>
@@ -596,6 +635,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <li><strong>"CelesTrak refused the download":</strong> the 2-hour limit. Wait, use mobile data, or Load file.</li>
 <li><strong>"Could not download satellite data":</strong> no connection and no saved copy yet. Connect once.</li>
 <li><strong>"The Sun/Moon is not above the horizon on this date":</strong> pick another date.</li>
+<li><strong>The map is blank:</strong> it needs an internet connection. Type coordinates or use GPS instead.</li>
 <li><strong>No transits:</strong> normal! Most windows have none. Look at the timeline for busier times, or widen the window.</li>
 <li><strong>No beeps:</strong> tap Beeps so it says "on", raise the volume, turn off silent mode, and keep the screen on. Beeps only play when a transit of the chosen type is about to start.</li>
 <li><strong>"(could not refresh, using saved copy)":</strong> the refresh failed, so older saved data is being used.</li>
@@ -1475,15 +1515,16 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
         function initTimelineDrag() {
             const track = document.getElementById('timelineTrack'), box = document.getElementById('sessionBox');
             const lh = document.getElementById('leftHandle'), rh = document.getElementById('rightHandle');
-            let mode = null, dragX = 0, s0 = 0, d0 = 0;
+            let mode = null, dragX = 0, s0 = 0, d0 = 0, downT = 0, moved = false, lastTap = 0, tapTimer = null;
             const MINLEN = 10;
             const total = () => appState.upEndMins - appState.upStartMins;
-            const down = (m) => (e) => { mode = m; dragX = e.clientX; s0 = appState.sessionStartMins; d0 = appState.sessionDurationMins; e.currentTarget.setPointerCapture(e.pointerId); e.stopPropagation(); };
+            const down = (m) => (e) => { mode = m; dragX = e.clientX; downT = Date.now(); moved = false; s0 = appState.sessionStartMins; d0 = appState.sessionDurationMins; e.currentTarget.setPointerCapture(e.pointerId); e.stopPropagation(); };
             box.addEventListener('pointerdown', (e) => { if (e.target === lh || e.target === rh) return; down('move')(e); });
             lh.addEventListener('pointerdown', down('left'));
             rh.addEventListener('pointerdown', down('right'));
             window.addEventListener('pointermove', (e) => {
                 if (!mode || total() <= 0) return;
+                if (Math.abs(e.clientX - dragX) > 6) moved = true;
                 const ns = appState.upStartMins, ne = appState.upEndMins;
                 const delta = Math.round(((e.clientX - dragX) / track.getBoundingClientRect().width) * total());
                 if (mode === 'move') appState.sessionStartMins = Math.max(ns, Math.min(ne - appState.sessionDurationMins, s0 + delta));
@@ -1491,7 +1532,30 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
                 else appState.sessionDurationMins = Math.max(MINLEN, Math.min(ne - appState.sessionStartMins, d0 + delta));
                 updateAllViews();
             });
-            const up = () => { mode = null; };
+            // Taps on the window: one tap = start now for 60 minutes, two quick taps = the whole period from rise to set
+            const jumpToNow = () => {
+                const ns = appState.upStartMins, ne = appState.upEndMins, len = ne - ns;
+                if (len <= 0) return;
+                const d = new Date(), todayStr = d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+                const nowMins = appState.dateStr === todayStr ? (Date.now() - appState.midnightMs) / 60000 : d.getHours() * 60 + d.getMinutes();
+                const dur = Math.min(60, len);
+                appState.sessionDurationMins = dur;
+                appState.sessionStartMins = Math.max(ns, Math.min(Math.round(nowMins), ne - dur));
+                updateAllViews();
+            };
+            const fullPeriod = () => {
+                if (total() <= 0) return;
+                appState.sessionStartMins = appState.upStartMins; appState.sessionDurationMins = total();
+                updateAllViews();
+            };
+            const up = () => {
+                if (mode && !moved && Date.now() - downT < 500) {          // a tap on the window or on either handle
+                    const t = Date.now();
+                    if (t - lastTap < 350) { clearTimeout(tapTimer); lastTap = 0; fullPeriod(); }
+                    else { lastTap = t; clearTimeout(tapTimer); tapTimer = setTimeout(() => { lastTap = 0; jumpToNow(); }, 350); }
+                }
+                mode = null;
+            };
             window.addEventListener('pointerup', up); window.addEventListener('pointercancel', up);
             track.addEventListener('click', (e) => {
                 if (e.target.closest('#sessionBox') || total() <= 0) return;
@@ -1672,6 +1736,108 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             scheduleBeeps(se.startMs, se.endMs, key);
         }
 
+        // ===== LOCATION MAP (tiles from OpenStreetMap; needs an internet connection) =====
+        const MAP = { z: 15, cLat: 0, cLng: 0, pinLat: 0, pinLng: 0, tiles: {}, pts: {}, drag: null, pinch: null, ok: 0, bad: 0, lastWheel: 0 };
+        function mapWorld(z) { return 256 * Math.pow(2, z); }
+        function lngToX(lng, z) { return (lng + 180) / 360 * mapWorld(z); }
+        function latToY(lat, z) { const s = Math.sin(lat * Math.PI / 180); return (0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)) * mapWorld(z); }
+        function xToLng(x, z) { return x / mapWorld(z) * 360 - 180; }
+        function yToLat(y, z) { const n = Math.PI - 2 * Math.PI * y / mapWorld(z); return 180 / Math.PI * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n))); }
+
+        function mapRender() {
+            const view = document.getElementById('mapView'), tilesEl = document.getElementById('mapTiles');
+            const w = view.clientWidth, h = view.clientHeight, z = MAP.z, n = Math.pow(2, z), W = mapWorld(z);
+            const cx = lngToX(MAP.cLng, z), cy = latToY(MAP.cLat, z), left = cx - w / 2, top = cy - h / 2;
+            const x0 = Math.floor(left / 256), x1 = Math.floor((left + w) / 256);
+            const y0 = Math.max(0, Math.floor(top / 256)), y1 = Math.min(n - 1, Math.floor((top + h) / 256));
+            const keep = {};
+            for (let ty = y0; ty <= y1; ty++) for (let tx = x0; tx <= x1; tx++) {
+                const wx = ((tx % n) + n) % n, key = z + '/' + wx + '/' + ty + '@' + tx;
+                keep[key] = true;
+                let img = MAP.tiles[key];
+                if (!img) {
+                    img = document.createElement('img');
+                    img.alt = ''; img.draggable = false;
+                    img.style.cssText = 'position:absolute;width:256px;height:256px;max-width:none;user-select:none;';
+                    img.onload = () => { MAP.ok++; document.getElementById('mapMsg').classList.add('hidden'); };
+                    img.onerror = () => { MAP.bad++; if (MAP.ok === 0 && MAP.bad >= 3) document.getElementById('mapMsg').classList.remove('hidden'); };
+                    img.src = `https://tile.openstreetmap.org/${z}/${wx}/${ty}.png`;
+                    tilesEl.appendChild(img); MAP.tiles[key] = img;
+                }
+                img.style.left = (tx * 256 - left) + 'px'; img.style.top = (ty * 256 - top) + 'px';
+            }
+            Object.keys(MAP.tiles).forEach(k => { if (!keep[k]) { MAP.tiles[k].remove(); delete MAP.tiles[k]; } });
+            let dx = lngToX(MAP.pinLng, z) - cx; if (dx > W / 2) dx -= W; if (dx < -W / 2) dx += W;
+            const pin = document.getElementById('mapPin');
+            pin.style.left = (w / 2 + dx) + 'px'; pin.style.top = (h / 2 + latToY(MAP.pinLat, z) - cy) + 'px';
+            document.getElementById('mapReadout').innerText = `Pin: ${MAP.pinLat.toFixed(5)}, ${MAP.pinLng.toFixed(5)}   (zoom ${z})`;
+        }
+        function mapZoom(d) {
+            const z = Math.max(3, Math.min(19, MAP.z + d));
+            if (z === MAP.z) return;
+            MAP.z = z; mapRender();
+        }
+        function mapPointToLatLng(clientX, clientY) {
+            const view = document.getElementById('mapView'), r = view.getBoundingClientRect(), z = MAP.z;
+            const x = lngToX(MAP.cLng, z) - r.width / 2 + (clientX - r.left), y = latToY(MAP.cLat, z) - r.height / 2 + (clientY - r.top);
+            let lng = xToLng(x, z); lng = ((lng + 540) % 360) - 180;
+            return { lat: Math.max(-85, Math.min(85, yToLat(y, z))), lng };
+        }
+        function openMap() {
+            MAP.cLat = MAP.pinLat = appState.lat; MAP.cLng = MAP.pinLng = appState.lng; MAP.z = 15; MAP.ok = 0; MAP.bad = 0;
+            document.getElementById('mapMsg').classList.add('hidden');
+            document.getElementById('mapModal').classList.remove('hidden');
+            requestAnimationFrame(mapRender);
+        }
+        function initMap() {
+            const view = document.getElementById('mapView');
+            document.getElementById('mapBtn').onclick = openMap;
+            document.getElementById('mapCancel').onclick = () => document.getElementById('mapModal').classList.add('hidden');
+            document.getElementById('closeMapModal').onclick = () => document.getElementById('mapModal').classList.add('hidden');
+            ['mapZoomIn', 'mapZoomOut'].forEach(id => document.getElementById(id).addEventListener('pointerdown', (ev) => ev.stopPropagation()));   // buttons must not start a map drag or drop the pin
+            document.getElementById('mapZoomIn').onclick = () => mapZoom(1);
+            document.getElementById('mapZoomOut').onclick = () => mapZoom(-1);
+            document.getElementById('mapUse').onclick = () => {
+                appState.lat = parseFloat(MAP.pinLat.toFixed(5)); appState.lng = parseFloat(MAP.pinLng.toFixed(5));
+                document.getElementById('latInput').value = appState.lat; document.getElementById('lngInput').value = appState.lng;
+                document.getElementById('mapModal').classList.add('hidden');
+                generateSatellitePasses(true); updateAllViews();
+            };
+            view.addEventListener('pointerdown', (e) => {
+                view.setPointerCapture(e.pointerId);
+                MAP.pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+                const ids = Object.keys(MAP.pts);
+                if (ids.length === 1) MAP.drag = { sx: e.clientX, sy: e.clientY, cx: lngToX(MAP.cLng, MAP.z), cy: latToY(MAP.cLat, MAP.z), moved: false };
+                else if (ids.length === 2) { MAP.drag = null; const a = MAP.pts[ids[0]], b = MAP.pts[ids[1]]; MAP.pinch = Math.hypot(a.x - b.x, a.y - b.y); }
+            });
+            view.addEventListener('pointermove', (e) => {
+                if (!MAP.pts[e.pointerId]) return;
+                MAP.pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+                const ids = Object.keys(MAP.pts);
+                if (ids.length === 1 && MAP.drag) {
+                    const dx = e.clientX - MAP.drag.sx, dy = e.clientY - MAP.drag.sy;
+                    if (Math.abs(dx) + Math.abs(dy) > 5) MAP.drag.moved = true;
+                    if (MAP.drag.moved) {
+                        MAP.cLng = ((xToLng(MAP.drag.cx - dx, MAP.z) + 540) % 360) - 180;
+                        MAP.cLat = Math.max(-85, Math.min(85, yToLat(MAP.drag.cy - dy, MAP.z)));
+                        mapRender();
+                    }
+                } else if (ids.length === 2 && MAP.pinch) {
+                    const a = MAP.pts[ids[0]], b = MAP.pts[ids[1]], d = Math.hypot(a.x - b.x, a.y - b.y);
+                    if (d / MAP.pinch > 1.6) { mapZoom(1); MAP.pinch = d; } else if (d / MAP.pinch < 0.62) { mapZoom(-1); MAP.pinch = d; }
+                }
+            });
+            const end = (e) => {
+                const wasTap = MAP.drag && !MAP.drag.moved && Object.keys(MAP.pts).length === 1;
+                delete MAP.pts[e.pointerId];
+                if (wasTap) { const p = mapPointToLatLng(e.clientX, e.clientY); MAP.pinLat = p.lat; MAP.pinLng = p.lng; mapRender(); }
+                if (!Object.keys(MAP.pts).length) { MAP.drag = null; MAP.pinch = null; }
+            };
+            view.addEventListener('pointerup', end); view.addEventListener('pointercancel', (e) => { delete MAP.pts[e.pointerId]; MAP.drag = null; });
+            view.addEventListener('wheel', (e) => { e.preventDefault(); if (Date.now() - MAP.lastWheel < 250) return; MAP.lastWheel = Date.now(); mapZoom(e.deltaY < 0 ? 1 : -1); }, { passive: false });
+            window.addEventListener('resize', () => { if (!document.getElementById('mapModal').classList.contains('hidden')) mapRender(); });
+        }
+
         // ===== START-UP AND CONTROLS =====
         function initApp() {
             document.getElementById('dateInput').value = appState.dateStr;
@@ -1770,6 +1936,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             window.addEventListener('resize', () => renderFOVCanvas());
 
             initTimelineDrag();
+            initMap();
             setInterval(updateNextBanner, 100);
             generateSatellitePasses(true);
             updateAllViews();
