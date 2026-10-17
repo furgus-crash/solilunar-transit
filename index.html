@@ -128,6 +128,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 .list-disc{list-style-type:disc}
 .list-inside{list-style-position:inside}
 .max-h-\[320px\]{max-height:320px}
+.max-h-\[42vh\]{max-height:42vh}
 .max-h-\[80vh\]{max-height:80vh}
 .max-h-\[90vh\]{max-height:90vh}
 .max-h-\[95vh\]{max-height:95vh}
@@ -291,6 +292,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             min-height: 1.75rem;
             text-align: left;
         }
+            #fovCanvas { scroll-margin-top: 130px; }
     </style>
 </head>
 <body class="min-h-screen bg-astroBg text-gray-200 flex flex-col font-sans antialiased overflow-x-hidden">
@@ -301,7 +303,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             <div>
                 <h1 class="text-lg font-bold tracking-wide text-white flex items-center gap-2">
                     Sun &amp; Moon Transits
-                    <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-cyan-950 text-astroCyan border border-cyan-800/60">v1.3</span>
+                    <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-cyan-950 text-astroCyan border border-cyan-800/60">v1.4</span>
                 </h1>
                 <p class="text-xs text-gray-400">Satellites crossing the Sun and Moon during your viewing window</p>
             </div>
@@ -396,11 +398,16 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
                     <div class="text-xs text-gray-400"><strong id="fovModeLabel" class="text-white">Viewing window</strong></div>
                 </div>
 
+                <div id="spotsRow" class="flex flex-wrap items-center gap-2">
+                    <button id="spotsBtn" class="px-3 py-1.5 bg-cyan-950 hover:bg-cyan-900 text-astroCyan border border-cyan-700/60 rounded-lg text-xs font-semibold transition">Show sunspots</button>
+                    <span id="spotStatus" class="text-[11px] text-gray-400"></span>
+                </div>
+
                 <div class="relative w-full aspect-square max-h-[80vh] bg-[#0B0E14] rounded-xl border border-astroBorder overflow-hidden shadow-inner flex items-center justify-center">
                     <canvas id="fovCanvas" class="w-full h-full block cursor-crosshair"></canvas>
                 </div>
 
-                <div class="flex flex-wrap items-center justify-between gap-2 bg-astroBg/80 p-2.5 rounded-xl border border-astroBorder text-xs">
+                <div id="filterRow" class="flex flex-wrap items-center justify-between gap-2 bg-astroBg/80 p-2.5 rounded-xl border border-astroBorder text-xs">
                     <span class="text-gray-400 font-medium">Show:</span>
                     <div class="flex items-center gap-2 flex-wrap">
                         <button id="toggleRed" class="px-2.5 py-1 rounded-lg border border-astroRed/60 bg-astroRed/20 text-astroRed font-semibold flex items-center gap-1.5 transition hover:bg-astroRed/30"><span class="w-2.5 h-2.5 rounded-full bg-astroRed"></span>Central Transit (<span id="countRed">0</span>)</button>
@@ -461,7 +468,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
     </main>
 
     <div id="telemetryModal" class="fixed inset-0 z-50 hidden flex items-end justify-center p-4 pointer-events-none">
-        <div class="bg-astroCard border border-astroBorder rounded-2xl max-w-md w-full p-5 shadow-2xl flex flex-col gap-4 relative pointer-events-auto">
+        <div class="bg-astroCard border border-astroBorder rounded-2xl max-w-md w-full p-5 shadow-2xl flex flex-col gap-4 relative pointer-events-auto max-h-[42vh] overflow-y-auto">
             <button id="closeTelemetryModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg"><svg class="ico" viewBox="0 0 384 512" aria-hidden="true"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></button>
             <div class="flex items-center gap-3">
                 <div class="p-3 bg-cyan-950 text-astroCyan rounded-xl border border-cyan-800"><svg class="ico text-2xl" viewBox="0 0 512 512" aria-hidden="true"><path d="M192 32c0-17.7 14.3-32 32-32C383.1 0 512 128.9 512 288c0 17.7-14.3 32-32 32s-32-14.3-32-32C448 164.3 347.7 64 224 64c-17.7 0-32-14.3-32-32zM60.6 220.6L164.7 324.7l28.4-28.4c-.7-2.6-1.1-5.4-1.1-8.3c0-17.7 14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32c-2.9 0-5.6-.4-8.3-1.1l-28.4 28.4L291.4 451.4c14.5 14.5 11.8 38.8-7.3 46.3C260.5 506.9 234.9 512 208 512C93.1 512 0 418.9 0 304c0-26.9 5.1-52.5 14.4-76.1c7.5-19 31.8-21.8 46.3-7.3zM224 96c106 0 192 86 192 192c0 17.7-14.3 32-32 32s-32-14.3-32-32c0-70.7-57.3-128-128-128c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg></div>
@@ -523,14 +530,15 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <option value="guide-2">2. Setting up</option>
 <option value="guide-3">3. Satellite data</option>
 <option value="guide-4">4. The display</option>
-<option value="guide-5">5. Timeline and viewing window</option>
-<option value="guide-6">6. Predicted transits list</option>
-<option value="guide-7">7. ISS, China's station, Hubble and Starlink trains</option>
-<option value="guide-8">8. Next transit, preview and beeps</option>
-<option value="guide-9">9. Safety</option>
-<option value="guide-10">10. How accurate is it?</option>
-<option value="guide-11">11. Using it at a session</option>
-<option value="guide-12">12. Troubleshooting</option>
+<option value="guide-5">5. Sunspot view</option>
+<option value="guide-6">6. Timeline and viewing window</option>
+<option value="guide-7">7. Predicted transits list</option>
+<option value="guide-8">8. ISS, China's station, Hubble and Starlink trains</option>
+<option value="guide-9">9. Next transit, preview and beeps</option>
+<option value="guide-10">10. Safety</option>
+<option value="guide-11">11. How accurate is it?</option>
+<option value="guide-12">12. Using it at a session</option>
+<option value="guide-13">13. Troubleshooting</option>
                     </select>
                 </div>
 <div id="guide-1" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
@@ -576,7 +584,19 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <p>The two <strong>Show</strong> buttons hide or show each kind on both the display and the list.</p></div>
 </div>
 <div id="guide-5" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">5. Timeline and viewing window</h4>
+<h4 class="font-bold text-astroCyan text-sm mb-1">5. Sunspot view</h4>
+<div class="space-y-3">
+<p>When the Sun is the target, tap <strong>Show sunspots</strong> above the picture to turn the display into a map of the sunspot groups on the Sun right now. Tap <strong>Back to transit view</strong> to return. This button is hidden when the Moon is selected.</p>
+<ul class="list-disc list-inside space-y-0.5">
+<li><strong>What you see:</strong> the disc, drawn the same way up as the satellite view, with faint grid lines every 30° of solar latitude and longitude. A cyan <strong>N</strong> marks the direction of the Sun's north pole. Each sunspot group is circled and labeled with its NOAA region number. Groups are drawn to <strong>true size</strong>, and a tiny blue <strong>Earth at the same scale</strong> sits in the bottom-left corner. Most groups are as big as, or many times bigger than, that Earth.</li>
+<li><strong>Tap a group</strong> for details: size compared with Earth, number of spots, length in kilometers, its sunspot class and magnetic class (explained in plain words), and where it is on the disc. Tap the same group again, or tap elsewhere, to close the details.</li>
+<li><strong>Where it comes from:</strong> NOAA's Space Weather Prediction Center publishes a daily list of sunspot groups with positions as of 00:00 UTC. The app moves each group forward to the current time using the Sun's rotation (about 13° a day), so groups slide toward the western edge during the day, and ones that rotated past it disappear. The group's overall position is exact enough to find it in a telescope. Groups that appeared after the daily report, and individual spots within a group, are not drawn.</li>
+<li>A telescope image may be flipped or rotated compared with the screen, so use the <strong>N</strong> marker and the pattern of groups to match them up. Never look at the Sun without a certified solar filter.</li>
+<li>The first time it needs an internet connection. After that, the last list it downloaded is saved and used if you are offline (the status line shows how old it is).</li>
+</ul></div>
+</div>
+<div id="guide-6" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">6. Timeline and viewing window</h4>
 <div class="space-y-3">
 <p>The timeline covers only the time the Sun or Moon is above the horizon on your date. The colored lines are <strong>every transit all through that period</strong>, so you can see busy and quiet times at a glance. The ends of the bar are labeled with the rise and set times (sunrise and sunset, or moonrise and moonset) and whole hours are marked in between, so you always know where your window sits in the day.</p>
 <ul class="list-disc list-inside space-y-0.5">
@@ -586,39 +606,39 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <li><strong>Reset</strong> puts the window back to one hour: starting now if you are looking at today and the target is up, otherwise in the middle of the period.</li>
 </ul></div>
 </div>
-<div id="guide-6" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">6. Predicted transits list</h4>
+<div id="guide-7" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">7. Predicted transits list</h4>
 <div class="space-y-3">
 <p>The list shows every pass in your window, earliest first. <strong>Start</strong> and <strong>End</strong> are the moments the satellite enters and leaves the disc, in local time to a tenth of a second. Most transits last only 0.5 to 2 seconds.</p>
 <p><strong>Tap a row</strong> to select it. Its trail on the display turns <strong>dotted</strong> and an info panel opens at the bottom with: start and end times, duration, distance, how close it comes to the center of the disc, how fast it moves across the sky, its altitude above your horizon, and its orbit (height, speed, inclination, NORAD ID). Tap the row again, or Close, to clear it. The selection also clears if you move the window so it leaves.</p></div>
 </div>
-<div id="guide-7" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">7. ISS, China's station, Hubble and Starlink trains</h4>
+<div id="guide-8" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">8. ISS, China's station, Hubble and Starlink trains</h4>
 <div class="space-y-3">
 <p><strong class="text-astroGreen">★ Special satellites:</strong> the <strong>ISS</strong>, the <strong>Chinese Space Station (CSS)</strong> and the <strong>Hubble Space Telescope</strong> are marked with a green ★, drawn with a thicker line, and labeled on the display. Modules and visiting spacecraft docked to a station share its position, so they are merged into a single entry, with the other names listed in the info panel.</p>
 <p><strong>Starlink trains:</strong> when three or more Starlink satellites from the same launch cross within 30 seconds of each other, they are grouped as a <strong>train</strong>. A cyan banner above the list gives the number of satellites, the time span and how many actually cross the disc. <strong>Tap it</strong> to highlight every member on the display and open a summary. Members also carry a green TRAIN tag in the list. New launches appear as tight trains in the first days after launch, so refresh the data on the day.</p></div>
 </div>
-<div id="guide-8" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">8. Next transit, preview and beeps</h4>
+<div id="guide-9" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">9. Next transit, preview and beeps</h4>
 <div class="space-y-3">
 <p>The <strong>Next transit</strong> card, at the top of the page, looks ahead from the current time (not just your window). Use the menu to choose what to wait for: <strong>Next satellite transit</strong> (any), <strong>Next ISS transit</strong>, <strong>Next CSS transit</strong> or <strong>Next Hubble transit</strong>. It shows the satellite, how central the crossing is, the exact start and end times to a tenth of a second, and a live countdown. It turns green in the last 2 minutes. For any satellite, a green <strong>Next highlight</strong> line also shows the next ISS, CSS, Hubble or Starlink train. In the last 10 seconds a big countdown appears, and it says TRANSIT NOW while the crossing is happening.</p>
 <p><strong>Preview next crossing.</strong> Shows only the transit you chose, drawn in <strong>green</strong> on the disc: a thick line, a white dot where it enters, a white ring where it leaves, an arrowhead for the direction, and the exact START and END times in the corners. Under the button you also get a plain-words description (for example "enters at the 3 o'clock edge and leaves near 9 o'clock, moving left"). It moves on to the following crossing by itself after each one. For a Starlink train all its satellites are shown. Tap <strong>Back to window view</strong> to return, or tap a row in the list, which also ends the preview.</p>
 <p><strong>Beeps.</strong> Tap <strong>Beeps: off</strong> to turn sound on (you will hear a short test beep). For the transit you chose, the app beeps at 3, 2 and 1 second before the start, then plays a steady higher tone for exactly as long as the transit lasts, so you can keep your eye on the telescope and listen. Tips: raise the volume and switch off the iPhone's silent mode; keep the page open (the app asks the phone to keep the screen on while beeps are on); set the phone's date and time to automatic so its clock is accurate. Predictions can be off by a second or two, so be watching a couple of seconds before the first beep.</p></div>
 </div>
-<div id="guide-9" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">9. Safety</h4>
+<div id="guide-10" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">10. Safety</h4>
 <div class="space-y-3">
 <p><strong class="text-astroOrange">Never look at the Sun, directly or through a telescope, binoculars or camera, without a certified solar filter correctly fitted.</strong> A transit lasts only a second or two, so don't take a filter off or remove your eye protection to try to see it. Moon viewing needs no filter.</p></div>
 </div>
-<div id="guide-10" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">10. How accurate is it?</h4>
+<div id="guide-11" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">11. How accurate is it?</h4>
 <div class="space-y-3">
 <p><strong>Calculated from real data:</strong> satellite positions (the standard SGP4 model with CelesTrak's orbit data), the Sun's and Moon's real positions (the Moon includes the shift from where you stand, up to about 1°), and the exact moments the satellite crosses the disc. In tests, the calculation timed a crossing placed at the center of the Sun and of the Moon to within a few thousandths of a second.</p>
 <p><strong>What limits it in practice:</strong> orbit data. With fresh data (a day old or less), a satellite's position is typically good to a kilometer or two. That shifts its path by roughly a tenth of a degree (about a fifth of the Sun's or Moon's width) and its timing by a second or less. So treat Central transits as likely, Edge transits as less certain (one near the rim can miss), and expect timing within about a second or two. Older data, satellite maneuvers, and your exact position make this worse. The predictions have not been compared with live observed transits yet, so compare them with another tracker if you can.</p>
 <p><strong>Not included:</strong> satellites missing from the public list (some military or brand-new ones), aircraft, birds, and atmospheric refraction (small except near the horizon). High-orbit satellites (orbits over about 225 minutes) are skipped because they barely move across the sky.</p></div>
 </div>
-<div id="guide-11" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">11. Using it at a session</h4>
+<div id="guide-12" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">12. Using it at a session</h4>
 <div class="space-y-3">
 <ul class="list-disc list-inside space-y-0.5">
 <li>Open the page once with a connection before the event so the app and the data are saved. Then it opens and calculates without signal. (Phone GPS usually works without signal too.)</li>
@@ -628,13 +648,14 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <li>After the app is updated on GitHub, open it twice to see the new version.</li>
 </ul></div>
 </div>
-<div id="guide-12" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">12. Troubleshooting</h4>
+<div id="guide-13" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">13. Troubleshooting</h4>
 <div class="space-y-3">
 <ul class="list-disc list-inside space-y-0.5">
 <li><strong>"CelesTrak refused the download":</strong> the 2-hour limit. Wait, use mobile data, or Load file.</li>
 <li><strong>"Could not download satellite data":</strong> no connection and no saved copy yet. Connect once.</li>
 <li><strong>"The Sun/Moon is not above the horizon on this date":</strong> pick another date.</li>
+<li><strong>"Could not load sunspot data":</strong> NOAA's site could not be reached. Check the connection and tap the button again. A saved copy is used if there is one.</li>
 <li><strong>The map is blank:</strong> it needs an internet connection. Type coordinates or use GPS instead.</li>
 <li><strong>No transits:</strong> normal! Most windows have none. Look at the timeline for busier times, or widen the window.</li>
 <li><strong>No beeps:</strong> tap Beeps so it says "on", raise the volume, turn off silent mode, and keep the screen on. Beeps only play when a transit of the chosen type is about to start.</li>
@@ -1093,7 +1114,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
         let appState = {
             lat: 44.9914, lng: -93.1881,               // Bell Museum, Falcon Heights / St. Paul
             dateStr: (() => { const n = new Date(); return n.getFullYear() + '-' + String(n.getMonth() + 1).padStart(2, '0') + '-' + String(n.getDate()).padStart(2, '0'); })(),
-            kind: 'sun', previewOn: false, previewKey: null, previewSet: [], nextKind: 'any', soundOn: false, audioCtx: null, beepKey: '', beepNodes: [], wakeLock: null,
+            kind: 'sun', spotsOn: false, spots: null, spotsLoading: false, selectedSpot: null, spotHits: [], previewOn: false, previewKey: null, previewSet: [], nextKind: 'any', soundOn: false, audioCtx: null, beepKey: '', beepNodes: [], wakeLock: null,
             upIntervals: [], upIndex: 0, upStartMins: 0, upEndMins: 0,
             sessionStartMins: 0, sessionDurationMins: 60,
             filterRed: true, filterOrange: true,
@@ -1261,7 +1282,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 
         // ---- selection (one pass, or a whole Starlink train) ----
         function clearSelection() {
-            appState.selectedIds = [];
+            appState.selectedIds = []; appState.selectedSpot = null;
             document.getElementById('telemetryModal').classList.add('hidden');
             updateAllViews();
         }
@@ -1272,14 +1293,14 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             if (b) b.innerText = 'Preview next crossing';
         }
         function togglePassSelection(pass) {
-            endPreview();
+            endPreview(); leaveSunspots();
             if (appState.selectedIds.length === 1 && appState.selectedIds[0] === pass.id) { clearSelection(); return; }
             appState.selectedIds = [pass.id];
             openPassPanel(pass);
             updateAllViews();
         }
         function toggleTrainSelection(train) {
-            endPreview();
+            endPreview(); leaveSunspots();
             const same = appState.selectedIds.length === train.members.length && train.members.every(id => appState.selectedIds.includes(id));
             if (same) { clearSelection(); return; }
             appState.selectedIds = train.members.slice();
@@ -1414,6 +1435,11 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 
             // The disc fills almost the whole picture
             const scale = (Math.min(width, height) / 2 / (rad * 1.12)) * 0.98;
+            if (appState.spotsOn && sun) {                                          // sunspot view replaces the transit view
+                document.getElementById('fovModeLabel').innerText = 'Sunspots';
+                drawSunspots(ctx, width, height, cx, cy, rad * scale);
+                return;
+            }
             ctx.beginPath(); ctx.arc(cx, cy, rad * scale, 0, Math.PI * 2);
             ctx.fillStyle = sun ? 'rgba(255, 196, 40, 0.22)' : 'rgba(203, 213, 225, 0.20)'; ctx.fill();
             ctx.strokeStyle = sun ? '#FFC428' : '#CBD5E1'; ctx.lineWidth = 2; ctx.stroke();
@@ -1838,6 +1864,266 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             window.addEventListener('resize', () => { if (!document.getElementById('mapModal').classList.contains('hidden')) mapRender(); });
         }
 
+        // ===== SUNSPOTS: orientation of the Sun and NOAA's daily region list =====
+        // Position angle P of the Sun's north pole, and the heliographic latitude B0 / longitude L0 of the disc center (Meeus, ch. 29)
+        function solarOrientation(jd) {
+            const rad = Math.PI / 180, T = (jd - 2451545.0) / 36525;
+            const L = (280.46646 + 36000.76983 * T) % 360, g = (357.52911 + 35999.05029 * T) * rad;
+            const lamTrue = L + (1.914602 - 0.004817 * T) * Math.sin(g) + 0.019993 * Math.sin(2 * g) + 0.000289 * Math.sin(3 * g);
+            const om = (125.04 - 1934.136 * T) * rad;
+            const lam = (lamTrue - 0.00569 - 0.00478 * Math.sin(om)) * rad;                  // apparent longitude
+            const eps = (23.4392911 - 0.0130042 * T + 0.00256 * Math.cos(om)) * rad;           // true obliquity
+            const theta = ((jd - 2398220) * 360 / 25.38) * rad, I = 7.25 * rad, K = (73.6667 + 1.3958333 * (jd - 2396758) / 36525) * rad;
+            const x = Math.atan(-Math.cos(lam) * Math.tan(eps)), y = Math.atan(-Math.cos(lam - K) * Math.tan(I));
+            const eta = Math.atan2(-Math.sin(lam - K) * Math.cos(I), -Math.cos(lam - K));
+            return { P: (x + y) / rad, B0: Math.asin(Math.sin(lam - K) * Math.sin(I)) / rad, L0: (((eta - theta) / rad) % 360 + 360) % 360 };
+        }
+        // Where a point of the Sun's surface sits on the disc: heliographic latitude b and Carrington longitude l (degrees).
+        // Returns {x: toward solar west, y: toward solar north (both in solar radii), mu: cosine of the angle from disc center, visible}
+        function heliographicToDisc(b, l, ori) {
+            const rad = Math.PI / 180, B0 = ori.B0 * rad, dl = (l - ori.L0) * rad, bb = b * rad;
+            const x = Math.cos(bb) * Math.sin(dl);
+            const y = Math.sin(bb) * Math.cos(B0) - Math.cos(bb) * Math.cos(dl) * Math.sin(B0);
+            const mu = Math.sin(B0) * Math.sin(bb) + Math.cos(B0) * Math.cos(bb) * Math.cos(dl);
+            return { x, y, mu, visible: mu > 0 };
+        }
+        // Builds a function that converts a point on the disc (solar west / north components, in solar radii) into this app's picture
+        // (right = increasing azimuth, up = toward the zenith)
+        function solarProjector(P, lat, lng, ms) {
+            const jd = ms / 86400000 + 2440587.5, f = observerFrame(lat, lng, ms), T = sunUnit(jd);
+            const dot = (a, c) => a[0] * c[0] + a[1] * c[1] + a[2] * c[2];
+            const Z = [0, 0, 1], zt = dot(Z, T);
+            let N = [Z[0] - zt * T[0], Z[1] - zt * T[1], Z[2] - zt * T[2]]; const nl = Math.hypot(...N); N = N.map(v => v / nl);   // celestial north on the sky
+            let E = [T[1] * N[2] - T[2] * N[1], T[2] * N[0] - T[0] * N[2], T[0] * N[1] - T[1] * N[0]];                                 // celestial east
+            if (dot(E, [-T[1], T[0], 0]) < 0) E = E.map(v => -v);                                                                       // east = toward increasing right ascension
+            const ut = dot(f.up, T);
+            let Y = [f.up[0] - ut * T[0], f.up[1] - ut * T[1], f.up[2] - ut * T[2]]; const yl = Math.hypot(...Y); Y = Y.map(v => v / yl);
+            const X = [T[1] * Y[2] - T[2] * Y[1], T[2] * Y[0] - T[0] * Y[2], T[0] * Y[1] - T[1] * Y[0]];
+            const p = P * Math.PI / 180, cP = Math.cos(p), sP = Math.sin(p);
+            const nS = [N[0] * cP + E[0] * sP, N[1] * cP + E[1] * sP, N[2] * cP + E[2] * sP];       // solar north on the sky
+            const wS = [-E[0] * cP + N[0] * sP, -E[1] * cP + N[1] * sP, -E[2] * cP + N[2] * sP];    // solar west on the sky
+            return (sx, sy) => { const v = [sx * wS[0] + sy * nS[0], sx * wS[1] + sy * nS[1], sx * wS[2] + sy * nS[2]]; return { x: dot(v, X), y: dot(v, Y) }; };
+        }
+        function solarToDisplay(sx, sy, P, lat, lng, ms) { return solarProjector(P, lat, lng, ms)(sx, sy); }
+
+        // ===== SUNSPOT VIEW: NOAA's daily region list, drawn on the disc =====
+        const SPOT_URLS = ['https://services.swpc.noaa.gov/json/solar_regions.json', 'https://services.swpc.noaa.gov/text/srs.txt'];
+        const EARTH_R_SOLAR = 6371 / 695700;               // Earth's radius in solar radii
+        const KM_PER_MSH = 3.04e6, EARTH_DISC_KM2 = Math.PI * 6371 * 6371, KM_PER_DEG = Math.PI * 695700 / 180;
+        const MONTHS = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
+
+        function parseLocation(loc) {                      // "S13W82" -> {lat: -13, cmd: 82} (cmd positive = west of the central meridian)
+            const m = /^([NS])(\d{1,2})([EW])(\d{1,3})/i.exec((loc || '').trim());
+            return m ? { lat: (m[1].toUpperCase() === 'S' ? -1 : 1) * +m[2], cmd: (m[3].toUpperCase() === 'W' ? 1 : -1) * +m[4] } : null;
+        }
+        // NOAA / USAF Solar Region Summary (text). Positions are valid at 00:00 UTC on the issue date.
+        function parseSRS(text) {
+            const im = /Issued:\s*(\d{4})\s+([A-Za-z]{3})\s+(\d{1,2})/.exec(text) || /on\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})/.exec(text);
+            if (!im) return null;
+            const validMs = im.length && /^\d{4}$/.test(im[1]) ? Date.UTC(+im[1], MONTHS[im[2]], +im[3]) : Date.UTC(+im[3], MONTHS[im[2]], +im[1]);
+            const out = [], a = text.search(/I\.\s+Regions with Sunspots/i), b = text.search(/IA\.\s+H-alpha/i);
+            const sec = a >= 0 ? text.slice(a, b > a ? b : undefined) : '';
+            const ori = solarOrientation(validMs / 86400000 + 2440587.5);
+            sec.split(/\r?\n/).forEach(line => {
+                const m = /^\s*(\d{4,5})\s+([NS]\d{1,2}[EW]\d{1,3})\s+(\d{1,3})\s+(\d{1,4})\s+([A-Za-z]{3})\s+(\d{1,2})\s+(\d{1,3})\s+(\S.*?)\s*$/.exec(line);
+                if (!m) return;
+                const loc = parseLocation(m[2]);
+                if (!loc) return;
+                out.push({ num: +m[1], location: m[2].toUpperCase(), lat: loc.lat, cmd: loc.cmd, carr: +m[3], areaMSH: +m[4], spotClass: m[5], extentDeg: +m[6], spots: +m[7], magClass: m[8] });
+            });
+            return { validMs, regions: out, source: 'NOAA Solar Region Summary' };
+        }
+        // NOAA's JSON version of the same table (field names vary a little, so read them defensively)
+        function parseRegionsJson(arr) {
+            if (!Array.isArray(arr) || !arr.length) return null;
+            const get = (o, ...keys) => { for (const k of keys) if (o[k] !== undefined && o[k] !== null) return o[k]; return undefined; };
+            const dates = arr.map(o => String(get(o, 'observed_date', 'observedDate', 'date') || '')).filter(Boolean).sort();
+            const latest = dates.length ? dates[dates.length - 1] : null;
+            const rows = latest ? arr.filter(o => String(get(o, 'observed_date', 'observedDate', 'date') || '') === latest) : arr;
+            const d = latest ? latest.split('-').map(Number) : null;
+            const validMs = d ? Date.UTC(d[0], d[1] - 1, d[2] + 1) : Date.now();           // observed on day D, valid at the end of that day
+            const regions = [];
+            rows.forEach(o => {
+                const location = String(get(o, 'location', 'Location') || ''), loc = parseLocation(location);
+                if (!loc) return;
+                const area = +get(o, 'area', 'Area', 'areaMSH'), spots = +get(o, 'number_spots', 'numberSpots', 'spots', 'NN');
+                regions.push({ num: +get(o, 'region', 'Region', 'number', 'noaa'), location: location.toUpperCase(), lat: loc.lat, cmd: loc.cmd,
+                               carr: +get(o, 'carrington_longitude', 'carringtonLongitude', 'Lo'), areaMSH: isFinite(area) ? area : 0,
+                               spotClass: String(get(o, 'spot_class', 'spotClass', 'Z') || ''), extentDeg: +get(o, 'extent', 'LL') || 0,
+                               spots: isFinite(spots) ? spots : 0, magClass: String(get(o, 'mag_class', 'magClass', 'mag_type') || '') });
+            });
+            return { validMs, regions: regions.filter(r => r.num), source: 'NOAA solar_regions' };
+        }
+        async function fetchSunspots(force) {
+            const cached = await idbGet('sunspots');
+            if (cached && !force && Date.now() - cached.fetchedMs < 3 * 3600 * 1000) return cached;
+            for (const url of SPOT_URLS) {
+                try {
+                    const ctl = new AbortController(), killer = setTimeout(() => ctl.abort(), 15000);
+                    let text;
+                    try { const resp = await fetch(url, { cache: 'no-store', signal: ctl.signal }); if (!resp.ok) throw new Error('HTTP ' + resp.status); text = await resp.text(); }
+                    finally { clearTimeout(killer); }
+                    let data = null;
+                    try { data = parseRegionsJson(JSON.parse(text)); } catch (e) { data = null; }
+                    if (!data) data = parseSRS(text);
+                    if (data) {
+                        data.regions.forEach(r => { if (!isFinite(r.carr) || r.carr <= 0) r.carr = (solarOrientation(data.validMs / 86400000 + 2440587.5).L0 + r.cmd + 720) % 360; });
+                        data.fetchedMs = Date.now();
+                        await idbSet('sunspots', data);
+                        return data;
+                    }
+                } catch (e) { /* try the next source */ }
+            }
+            return cached || null;
+        }
+        async function ensureSunspots(force) {
+            setSpotStatus('Loading sunspot data…');
+            appState.spots = await fetchSunspots(force);
+            updateSpotStatus();
+            renderFOVCanvas();
+        }
+        function setSpotStatus(t) { const el = document.getElementById('spotStatus'); if (el) el.innerText = t; }
+        function updateSpotStatus() {
+            if (!appState.spotsOn) { setSpotStatus(''); return; }
+            const d = appState.spots;
+            if (!d) { setSpotStatus('Could not load sunspot data. Check your connection and try again.'); return; }
+            const hrs = Math.round((Date.now() - d.validMs) / 3600000);
+            setSpotStatus(`Sunspot data: ${d.source}, positions from ${new Date(d.validMs).toISOString().slice(0, 16).replace('T', ' ')} UTC (${hrs} h ago), moved forward to now with the Sun's rotation.`);
+        }
+
+        // What the McIntosh class letters mean, in plain words
+        function describeClass(z) {
+            if (!z || z.length < 3) return '';
+            const a = { A: 'a tiny single spot', B: 'a pair of spots (no penumbra)', C: 'a pair with a penumbra on one spot', D: 'a pair with penumbrae, under 10° long', E: 'a long pair, 10 to 15° long', F: 'a very long pair, over 15°', H: 'a single spot with a penumbra' }[z[0].toUpperCase()] || '';
+            const b = { X: '', R: 'a rudimentary penumbra', S: 'a small, round penumbra', A: 'a small, uneven penumbra', H: 'a large, round penumbra', K: 'a large, uneven penumbra' }[z[1].toUpperCase()];
+            const c = { X: '', O: 'open (spread out)', I: 'intermediate', C: 'compact (tightly packed)' }[z[2].toUpperCase()];
+            return [a, b, c].filter(Boolean).join('; ');
+        }
+        function describeMag(m) {
+            const k = (m || '').toLowerCase();
+            if (k.includes('delta')) return 'Contains a Delta region (opposite magnetic polarities packed tightly together), the most flare-prone kind.';
+            if (k.includes('gamma')) return 'Magnetically complex (mixed polarities), so flares are more likely.';
+            if (k.includes('beta')) return 'Two magnetic polarities (a normal bipolar group).';
+            if (k.includes('alpha')) return 'One magnetic polarity (simple and quiet).';
+            return '';
+        }
+
+        // Current positions of the visible sunspot groups, in pixels
+        function computeSpots(cx, cy, R) {
+            const d = appState.spots, now = Date.now();
+            if (!d) return { items: [], ori: null, proj: null };
+            const ori = solarOrientation(now / 86400000 + 2440587.5), proj = solarProjector(ori.P, appState.lat, appState.lng, now), items = [];
+            d.regions.forEach(r => {
+                const h = heliographicToDisc(r.lat, r.carr, ori);
+                if (!h.visible) return;
+                const s = proj(h.x, h.y), rTrue = Math.sqrt(2 * r.areaMSH * 1e-6) * R;
+                items.push({ r, px: cx + s.x * R, py: cy - s.y * R, mu: h.mu, rTrue, halo: Math.max(10, 2.5 * rTrue), distFromCenter: Math.hypot(h.x, h.y) });
+            });
+            return { items, ori, proj };
+        }
+
+        function drawSunspots(ctx, width, height, cx, cy, R) {
+            const { items, ori, proj } = computeSpots(cx, cy, R);
+            const g = ctx.createRadialGradient(cx, cy, R * 0.1, cx, cy, R);
+            g.addColorStop(0, 'rgba(255, 214, 90, 0.55)'); g.addColorStop(1, 'rgba(230, 150, 20, 0.45)');
+            ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
+            ctx.strokeStyle = '#FFC428'; ctx.lineWidth = 2; ctx.stroke();
+            ctx.font = '11px monospace'; ctx.textBaseline = 'middle';
+            if (!appState.spots) {
+                ctx.fillStyle = '#E2E8F0'; ctx.textAlign = 'center'; ctx.fillText(appState.spotsLoading ? 'Loading sunspot data…' : 'No sunspot data available', cx, cy);
+                appState.spotHits = []; return;
+            }
+            // faint latitude / longitude grid
+            ctx.lineWidth = 1;
+            const line = (pts, strong) => { ctx.strokeStyle = strong ? 'rgba(255,255,255,0.22)' : 'rgba(255,255,255,0.10)'; ctx.beginPath(); let on = false; pts.forEach(p => { if (!p) { on = false; return; } if (!on) { ctx.moveTo(p[0], p[1]); on = true; } else ctx.lineTo(p[0], p[1]); }); ctx.stroke(); };
+            const at = (b, l) => { const h = heliographicToDisc(b, l, ori); if (!h.visible) return null; const s = proj(h.x, h.y); return [cx + s.x * R, cy - s.y * R]; };
+            [-60, -30, 0, 30, 60].forEach(b => { const pts = []; for (let l = ori.L0 - 90; l <= ori.L0 + 90; l += 3) pts.push(at(b, l)); line(pts, b === 0); });
+            for (let k = -90; k <= 90; k += 30) { const pts = []; for (let b = -90; b <= 90; b += 3) pts.push(at(b, ori.L0 + k)); line(pts, k === 0); }
+            // solar north marker
+            const n = proj(0, 1);
+            ctx.fillStyle = '#00E5FF'; ctx.textAlign = 'center'; ctx.font = 'bold 12px monospace';
+            ctx.fillText('N', cx + n.x * R * 1.08, cy - n.y * R * 1.08);
+            ctx.font = '10px monospace';
+            // sunspot groups
+            const hits = [];
+            items.forEach(it => {
+                const sel = appState.selectedSpot === it.r.num, rr = Math.max(it.rTrue, 1.5), ang = Math.atan2(it.py - cy, it.px - cx);
+                ctx.beginPath(); ctx.arc(it.px, it.py, it.halo, 0, Math.PI * 2);
+                ctx.strokeStyle = sel ? '#00E5FF' : 'rgba(255,255,255,0.55)'; ctx.lineWidth = sel ? 2.5 : 1.2; ctx.stroke();
+                ctx.beginPath(); ctx.ellipse(it.px, it.py, rr * Math.max(it.mu, 0.25), rr, ang, 0, Math.PI * 2);
+                ctx.fillStyle = '#1b0f05'; ctx.fill();
+                ctx.fillStyle = '#FFF8E1'; ctx.textAlign = 'center';
+                ctx.fillText(String(it.r.num), Math.max(18, Math.min(width - 18, it.px)), Math.max(8, it.py - it.halo - 7));
+                hits.push({ x: it.px, y: it.py, r: it.halo + 6, num: it.r.num, item: it });
+            });
+            appState.spotHits = hits;
+            // summary and an Earth drawn to the same scale
+            const totalSpots = items.reduce((a, it) => a + (it.r.spots || 0), 0);
+            ctx.textAlign = 'left'; ctx.fillStyle = '#E2E8F0'; ctx.font = '11px monospace';
+            ctx.fillText(items.length ? `${items.length} group${items.length > 1 ? 's' : ''}, ${totalSpots} spots` : 'No sunspots today', 10, 14);
+            ctx.beginPath(); ctx.arc(16, height - 16, Math.max(0.8, EARTH_R_SOLAR * R), 0, Math.PI * 2); ctx.fillStyle = '#4FC3F7'; ctx.fill();
+            ctx.fillStyle = '#E2E8F0'; ctx.fillText('= Earth, to the same scale', 26, height - 16);
+        }
+
+        function spotFromTap(clientX, clientY) {
+            const c = document.getElementById('fovCanvas'), r = c.getBoundingClientRect(), x = clientX - r.left, y = clientY - r.top;
+            let best = null, bd = 1e9;
+            (appState.spotHits || []).forEach(h => { const d = Math.hypot(h.x - x, h.y - y); if (d <= h.r && d < bd) { bd = d; best = h; } });
+            return best;
+        }
+        function openSpotPanel(h) {
+            const r = h.item.r, it = h.item, earths = r.areaMSH * KM_PER_MSH / EARTH_DISC_KM2, lenKm = r.extentDeg * KM_PER_DEG;
+            const classTxt = describeClass(r.spotClass), magTxt = describeMag(r.magClass);
+            const edge = it.distFromCenter > 0.85 ? ' It is near the edge of the disc, so it looks squashed.' : '';
+            fillPanel(`Sunspot group AR ${r.num}`, `${r.location} | Carrington longitude ${Math.round(r.carr)}°`,
+                [['Size', `${earths < 10 ? earths.toFixed(1) : Math.round(earths)} × Earth's disc`], ['Spots', `${r.spots} spot${r.spots === 1 ? '' : 's'}`], ['Length', r.extentDeg ? `${r.extentDeg}° = ${Math.round(lenKm / 100) * 100} km` : 'n/a'], ['Magnetic class', r.magClass || 'n/a']],
+                `Area ${r.areaMSH} millionths of the Sun's visible half, about ${Math.round(r.areaMSH * KM_PER_MSH).toLocaleString()} km², which is ${earths.toFixed(1)} times the area of the Earth's disc${r.extentDeg ? `, and ${(lenKm / 12742).toFixed(1)} Earth diameters long` : ''}. ` +
+                `Sunspot class ${r.spotClass}${classTxt ? ': ' + classTxt : ''}. ${magTxt} Seen now at ${(it.distFromCenter * 100).toFixed(0)}% of the way from the center to the edge of the disc.${edge}`);
+        }
+        // scroll so the whole disc sits just under the page header, clear of the details card at the bottom
+        function showPictureAbovePopup() {
+            const cv = document.getElementById('fovCanvas'), hh = document.querySelector('header').getBoundingClientRect().height;
+            window.scrollTo({ top: Math.max(0, window.scrollY + cv.getBoundingClientRect().top - hh - 6), behavior: 'auto' });
+        }
+        function closeSpotPanel() {
+            appState.selectedSpot = null;
+            document.getElementById('telemetryModal').classList.add('hidden');
+            renderFOVCanvas();
+        }
+        function initSpots() {
+            // tapping the details card itself also closes a sunspot popup (the Close button still works too)
+            document.querySelector('#telemetryModal > div').addEventListener('click', (e) => {
+                if (appState.spotsOn && appState.selectedSpot !== null && !e.target.closest('button')) closeSpotPanel();
+            });
+            const btn = document.getElementById('spotsBtn');
+            btn.onclick = async () => {
+                appState.spotsOn = !appState.spotsOn;
+                endPreview();
+                appState.selectedIds = []; appState.selectedSpot = null;
+                document.getElementById('telemetryModal').classList.add('hidden');
+                document.getElementById('filterRow').classList.toggle('hidden', appState.spotsOn);
+                btn.innerText = appState.spotsOn ? 'Back to transit view' : 'Show sunspots';
+                if (appState.spotsOn) { appState.spotsLoading = true; renderFOVCanvas(); await ensureSunspots(false); appState.spotsLoading = false; }
+                else { updateSpotStatus(); updateAllViews(); }
+                renderFOVCanvas();
+            };
+            document.getElementById('fovCanvas').addEventListener('click', (e) => {
+                if (!appState.spotsOn) return;
+                const h = spotFromTap(e.clientX, e.clientY);
+                if (!h || appState.selectedSpot === h.num) { appState.selectedSpot = null; document.getElementById('telemetryModal').classList.add('hidden'); }
+                else { appState.selectedSpot = h.num; openSpotPanel(h); showPictureAbovePopup(); }
+                renderFOVCanvas();
+            });
+            setInterval(() => { if (appState.spotsOn) { updateSpotStatus(); renderFOVCanvas(); } }, 60000);
+        }
+        function leaveSunspots() {               // used when the Moon is chosen or the preview starts
+            if (!appState.spotsOn) return;
+            appState.spotsOn = false; appState.selectedSpot = null;
+            document.getElementById('filterRow').classList.remove('hidden');
+            document.getElementById('spotsBtn').innerText = 'Show sunspots';
+            updateSpotStatus();
+        }
+
         // ===== START-UP AND CONTROLS =====
         function initApp() {
             document.getElementById('dateInput').value = appState.dateStr;
@@ -1876,6 +2162,8 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             };
             document.getElementById('targetSelect').onchange = (e) => {
                 appState.kind = e.target.value;
+                if (appState.kind !== 'sun') leaveSunspots();
+                document.getElementById('spotsRow').classList.toggle('hidden', appState.kind !== 'sun');
                 document.getElementById('sunWarn').classList.toggle('hidden', appState.kind !== 'sun');
                 generateSatellitePasses(true); updateAllViews();
             };
@@ -1898,6 +2186,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 
             // Preview of the next crossing
             document.getElementById('previewBtn').onclick = () => {
+                leaveSunspots();
                 appState.previewOn = !appState.previewOn;
                 document.getElementById('previewBtn').innerText = appState.previewOn ? 'Back to window view' : 'Preview next crossing';
                 appState.previewKey = null;
@@ -1937,6 +2226,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 
             initTimelineDrag();
             initMap();
+            initSpots();
             setInterval(updateNextBanner, 100);
             generateSatellitePasses(true);
             updateAllViews();
