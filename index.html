@@ -588,11 +588,21 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <div class="space-y-3">
 <p>When the Sun is the target, tap <strong>Show sunspots</strong> above the picture to turn the display into a map of the sunspot groups on the Sun right now. Tap <strong>Back to transit view</strong> to return. This button is hidden when the Moon is selected.</p>
 <ul class="list-disc list-inside space-y-0.5">
-<li><strong>What you see:</strong> the disc, drawn the same way up as the satellite view, with faint grid lines every 30° of solar latitude and longitude. A cyan <strong>N</strong> marks the direction of the Sun's north pole. Each sunspot group is circled and labeled with its NOAA region number. Groups are drawn to <strong>true size</strong>, and a tiny blue <strong>Earth at the same scale</strong> sits in the bottom-left corner. Most groups are as big as, or many times bigger than, that Earth.</li>
-<li><strong>Tap a group</strong> for details: size compared with Earth, number of spots, length in kilometers, its sunspot class and magnetic class (explained in plain words), and where it is on the disc. Tap the same group again, or tap elsewhere, to close the details.</li>
-<li><strong>Where it comes from:</strong> NOAA's Space Weather Prediction Center publishes a daily list of sunspot groups with positions as of 00:00 UTC. The app moves each group forward to the current time using the Sun's rotation (about 13° a day), so groups slide toward the western edge during the day, and ones that rotated past it disappear. The group's overall position is exact enough to find it in a telescope. Groups that appeared after the daily report, and individual spots within a group, are not drawn.</li>
+<li><strong>What you see:</strong> the disc, drawn the same way up as the satellite view, with faint grid lines every 30° of solar latitude and longitude. A cyan <strong>N</strong> marks the direction of the Sun's north pole. Each group is circled and labeled with its NOAA number. Groups are drawn to <strong>true size</strong>, and a tiny blue <strong>Earth at the same scale</strong> sits in the bottom-left corner.</li>
+<li><strong>Tap a group</strong> for details, and tap it again (or tap elsewhere, or tap the details card) to close them.</li>
+<li><strong>Where it comes from:</strong> NOAA's Space Weather Prediction Center publishes a daily list of sunspot groups with positions as of 00:00 UTC. The app moves each group forward to the current time using the Sun's rotation (about 13° a day), so groups drift toward the western edge during the day, and ones that rotated past it disappear. Groups that appeared after the daily report are not shown, and the individual spots inside a group are not drawn.</li>
 <li>A telescope image may be flipped or rotated compared with the screen, so use the <strong>N</strong> marker and the pattern of groups to match them up. Never look at the Sun without a certified solar filter.</li>
-<li>The first time it needs an internet connection. After that, the last list it downloaded is saved and used if you are offline (the status line shows how old it is).</li>
+<li>The first time it needs an internet connection. After that, the last list it downloaded is saved and used offline (the status line shows how old it is).</li>
+</ul>
+<p><strong>What the details mean</strong></p>
+<ul class="list-disc list-inside space-y-0.5">
+<li><strong>Sunspot group vs. spot:</strong> a single sunspot is one dark spot. Spots form in clusters, and NOAA gives each cluster one number (an "active region", written AR followed by the number). The ring on the display is the whole group. "Individual spots" is how many dark spots are inside it.</li>
+<li><strong>Plage region (no spots):</strong> sometimes NOAA numbers an area that has no sunspots at all, only a bright magnetic patch called a plage. It shows as a dashed ring. You cannot see plages through a normal white-light solar filter, only with hydrogen-alpha or calcium filters, so don't expect to find one in your telescope.</li>
+<li><strong>Location (for example S15W32):</strong> the group's place on the Sun: 15° south of the Sun's equator and 32° west of the center line of the disc, as measured when NOAA counted it. N means north, S south, E east and W west (as seen from Earth).</li>
+<li><strong>Area, compared with Earth:</strong> how much surface the group covers compared with a flat circle the size of the Earth. "About 1 Earth" means the same area as Earth. "12 Earths" means twelve times that area. "20% of an Earth" means a fifth. "Too small to measure" means NOAA reports almost no area. NOAA measures area in "millionths of the Sun's visible half" (MSH); about 42 of those equal one Earth.</li>
+<li><strong>Length:</strong> how far the group stretches along the Sun's surface, in degrees of solar longitude. One degree is about 12,100 km (7,500 miles), so a 15° group is about 182,000 km, or roughly 14 Earths lined up end to end.</li>
+<li><strong>Sunspot class (three letters, for example Ekc):</strong> the McIntosh code. First letter: the type of group (A or B, small and simple; C to F, pairs of spots that get longer and more developed; H, a single big spot). Second letter: the fringe (penumbra) of the biggest spot (x none, r rudimentary, s small round, a small uneven, h large round, k large uneven). Third letter: how packed the spots are (x single spot, o spread out, i moderately packed, c tightly packed).</li>
+<li><strong>Magnetic type:</strong> Alpha: one magnetic pole, simple and quiet. Beta: the usual two poles. Beta-Gamma: tangled poles, flares more likely. Delta (for example Beta-Gamma-Delta): opposite poles jammed together, the most flare-prone. Sunspots are strongly magnetic, and these types describe how complicated that magnetism is.</li>
 </ul></div>
 </div>
 <div id="guide-6" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
@@ -1929,7 +1939,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
                 if (!m) return;
                 const loc = parseLocation(m[2]);
                 if (!loc) return;
-                out.push({ num: +m[1], location: m[2].toUpperCase(), lat: loc.lat, cmd: loc.cmd, carr: +m[3], areaMSH: +m[4], spotClass: m[5], extentDeg: +m[6], spots: +m[7], magClass: m[8] });
+                out.push({ plage: false, num: +m[1], location: m[2].toUpperCase(), lat: loc.lat, cmd: loc.cmd, carr: +m[3], areaMSH: +m[4], spotClass: m[5], extentDeg: +m[6], spots: +m[7], magClass: m[8] });
             });
             return { validMs, regions: out, source: 'NOAA Solar Region Summary' };
         }
@@ -1947,7 +1957,8 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
                 const location = String(get(o, 'location', 'Location') || ''), loc = parseLocation(location);
                 if (!loc) return;
                 const area = +get(o, 'area', 'Area', 'areaMSH'), spots = +get(o, 'number_spots', 'numberSpots', 'spots', 'NN');
-                regions.push({ num: +get(o, 'region', 'Region', 'number', 'noaa'), location: location.toUpperCase(), lat: loc.lat, cmd: loc.cmd,
+                const cls = String(get(o, 'spot_class', 'spotClass', 'Z') || '');
+                regions.push({ plage: !(area > 0 || spots > 0 || cls), num: +get(o, 'region', 'Region', 'number', 'noaa'), location: location.toUpperCase(), lat: loc.lat, cmd: loc.cmd,
                                carr: +get(o, 'carrington_longitude', 'carringtonLongitude', 'Lo'), areaMSH: isFinite(area) ? area : 0,
                                spotClass: String(get(o, 'spot_class', 'spotClass', 'Z') || ''), extentDeg: +get(o, 'extent', 'LL') || 0,
                                spots: isFinite(spots) ? spots : 0, magClass: String(get(o, 'mag_class', 'magClass', 'mag_type') || '') });
@@ -1991,21 +2002,43 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             setSpotStatus(`Sunspot data: ${d.source}, positions from ${new Date(d.validMs).toISOString().slice(0, 16).replace('T', ' ')} UTC (${hrs} h ago), moved forward to now with the Sun's rotation.`);
         }
 
-        // What the McIntosh class letters mean, in plain words
-        function describeClass(z) {
-            if (!z || z.length < 3) return '';
-            const a = { A: 'a tiny single spot', B: 'a pair of spots (no penumbra)', C: 'a pair with a penumbra on one spot', D: 'a pair with penumbrae, under 10° long', E: 'a long pair, 10 to 15° long', F: 'a very long pair, over 15°', H: 'a single spot with a penumbra' }[z[0].toUpperCase()] || '';
-            const b = { X: '', R: 'a rudimentary penumbra', S: 'a small, round penumbra', A: 'a small, uneven penumbra', H: 'a large, round penumbra', K: 'a large, uneven penumbra' }[z[1].toUpperCase()];
-            const c = { X: '', O: 'open (spread out)', I: 'intermediate', C: 'compact (tightly packed)' }[z[2].toUpperCase()];
-            return [a, b, c].filter(Boolean).join('; ');
+        // ---- plain-words descriptions ----
+        const EARTH_DIAM_KM = 12742;
+        function nice(x) { return x < 10 ? x.toFixed(1) : Math.round(x).toLocaleString(); }
+        function earthsWord(x) { const n = nice(x); return `${n} Earth${n === '1.0' ? '' : 's'}`; }
+        function areaPhrase(msh) {                       // area compared with a flat Earth-sized disc
+            const r = msh * KM_PER_MSH / EARTH_DISC_KM2;
+            if (r < 0.05) return 'Too small to measure';
+            if (r < 0.95) return `${Math.round(r * 100)}% of an Earth`;
+            if (r < 1.05) return 'About 1 Earth';
+            return `${nice(r)} Earths`;
+        }
+        function lengthPhrase(deg) {
+            if (!deg) return 'n/a';
+            const e = deg * KM_PER_DEG / EARTH_DIAM_KM;
+            return e < 0.95 ? `${Math.round(e * 100)}% of an Earth long` : (e < 1.05 ? 'About 1 Earth long' : `${nice(e)} Earths long`);
+        }
+        function round3(x) { const p = Math.pow(10, Math.max(0, Math.floor(Math.log10(Math.max(x, 1))) - 2)); return Math.round(x / p) * p; }
+        function expandMag(m) {                          // "BGD" -> "Beta-Gamma-Delta"
+            const s = (m || '').trim();
+            if (/^[ABGD]{1,3}$/i.test(s)) return s.toUpperCase().split('').map(c => ({ A: 'Alpha', B: 'Beta', G: 'Gamma', D: 'Delta' }[c])).join('-');
+            return s;
         }
         function describeMag(m) {
-            const k = (m || '').toLowerCase();
-            if (k.includes('delta')) return 'Contains a Delta region (opposite magnetic polarities packed tightly together), the most flare-prone kind.';
-            if (k.includes('gamma')) return 'Magnetically complex (mixed polarities), so flares are more likely.';
-            if (k.includes('beta')) return 'Two magnetic polarities (a normal bipolar group).';
-            if (k.includes('alpha')) return 'One magnetic polarity (simple and quiet).';
+            const k = expandMag(m).toLowerCase();
+            if (k.includes('delta')) return 'It has a Delta region, where north and south magnetic poles are jammed tightly together. That is the most flare-prone kind of sunspot group.';
+            if (k.includes('gamma')) return 'Its magnetic field is tangled (north and south poles mixed together), which makes solar flares more likely.';
+            if (k.includes('beta')) return 'It has the usual two magnetic poles, one north and one south, like a bar magnet.';
+            if (k.includes('alpha')) return 'It has a single magnetic pole, so it is simple and quiet.';
             return '';
+        }
+        // McIntosh class: three letters. 1) group type, 2) the largest spot's penumbra (lighter outer fringe), 3) how tightly packed.
+        function describeClass(z) {
+            if (!z || z.length < 3) return '';
+            const a = { A: 'a tiny single spot', B: 'a pair of spots with no penumbra (no lighter fringe)', C: 'a pair of spots, one with a penumbra', D: 'a pair of spots, both with penumbrae, less than 10° long', E: 'a long pair of spots, 10 to 15° long', F: 'a very long pair of spots, over 15° long', H: 'a single big spot with a penumbra' }[z[0].toUpperCase()] || '';
+            const b = { X: '', R: 'the biggest spot has only a rudimentary fringe', S: 'the biggest spot has a small, round fringe', A: 'the biggest spot has a small, uneven fringe', H: 'the biggest spot has a large, round fringe', K: 'the biggest spot has a large, uneven fringe' }[z[1].toUpperCase()];
+            const c = { X: '', O: 'the spots are spread out (open)', I: 'the spots are moderately packed', C: 'the spots are tightly packed (compact)' }[z[2].toUpperCase()];
+            return [a, b, c].filter(Boolean).join('; ');
         }
 
         // Current positions of the visible sunspot groups, in pixels
@@ -2040,27 +2073,34 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             [-60, -30, 0, 30, 60].forEach(b => { const pts = []; for (let l = ori.L0 - 90; l <= ori.L0 + 90; l += 3) pts.push(at(b, l)); line(pts, b === 0); });
             for (let k = -90; k <= 90; k += 30) { const pts = []; for (let b = -90; b <= 90; b += 3) pts.push(at(b, ori.L0 + k)); line(pts, k === 0); }
             // solar north marker
-            const n = proj(0, 1);
+            const n = proj(0, 1), nx = cx + n.x * R * 1.08, ny = cy - n.y * R * 1.08;
             ctx.fillStyle = '#00E5FF'; ctx.textAlign = 'center'; ctx.font = 'bold 12px monospace';
-            ctx.fillText('N', cx + n.x * R * 1.08, cy - n.y * R * 1.08);
+            ctx.fillText('N', nx, ny);
             ctx.font = '10px monospace';
-            // sunspot groups
-            const hits = [];
+            // groups: sunspot groups get a dark spot; plage-only regions (no spots) get a dashed ring
+            const hits = [], labels = [];
             items.forEach(it => {
-                const sel = appState.selectedSpot === it.r.num, rr = Math.max(it.rTrue, 1.5), ang = Math.atan2(it.py - cy, it.px - cx);
+                const sel = appState.selectedSpot === it.r.num, plage = it.r.plage, rr = Math.max(it.rTrue, 1.5), ang = Math.atan2(it.py - cy, it.px - cx);
                 ctx.beginPath(); ctx.arc(it.px, it.py, it.halo, 0, Math.PI * 2);
-                ctx.strokeStyle = sel ? '#00E5FF' : 'rgba(255,255,255,0.55)'; ctx.lineWidth = sel ? 2.5 : 1.2; ctx.stroke();
-                ctx.beginPath(); ctx.ellipse(it.px, it.py, rr * Math.max(it.mu, 0.25), rr, ang, 0, Math.PI * 2);
-                ctx.fillStyle = '#1b0f05'; ctx.fill();
-                ctx.fillStyle = '#FFF8E1'; ctx.textAlign = 'center';
-                ctx.fillText(String(it.r.num), Math.max(18, Math.min(width - 18, it.px)), Math.max(8, it.py - it.halo - 7));
+                if (plage) ctx.setLineDash([3, 3]);
+                ctx.strokeStyle = sel ? '#00E5FF' : (plage ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.55)'); ctx.lineWidth = sel ? 2.5 : 1.2; ctx.stroke(); ctx.setLineDash([]);
+                if (!plage) { ctx.beginPath(); ctx.ellipse(it.px, it.py, rr * Math.max(it.mu, 0.25), rr, ang, 0, Math.PI * 2); ctx.fillStyle = '#1b0f05'; ctx.fill(); }
+                // number label, moved up out of the way of other labels
+                const txt = String(it.r.num), w = txt.length * 6.2, lx = Math.max(w / 2 + 2, Math.min(width - w / 2 - 2, it.px));
+                let ly = it.py - it.halo - 7;
+                for (let k = 0; k < 6 && labels.some(l => Math.abs(l.x - lx) < (l.w + w) / 2 && Math.abs(l.y - ly) < 11); k++) ly -= 11;
+                labels.push({ x: lx, y: ly, w });
+                ctx.fillStyle = plage ? 'rgba(255,248,225,0.6)' : '#FFF8E1'; ctx.textAlign = 'center'; ctx.fillText(txt, lx, Math.max(8, ly));
                 hits.push({ x: it.px, y: it.py, r: it.halo + 6, num: it.r.num, item: it });
             });
             appState.spotHits = hits;
-            // summary and an Earth drawn to the same scale
-            const totalSpots = items.reduce((a, it) => a + (it.r.spots || 0), 0);
-            ctx.textAlign = 'left'; ctx.fillStyle = '#E2E8F0'; ctx.font = '11px monospace';
-            ctx.fillText(items.length ? `${items.length} group${items.length > 1 ? 's' : ''}, ${totalSpots} spots` : 'No sunspots today', 10, 14);
+            // summary (on the side away from the N marker) and an Earth drawn to the same scale
+            const wSpots = items.filter(it => !it.r.plage), plages = items.length - wSpots.length, totalSpots = wSpots.reduce((a, it) => a + (it.r.spots || 0), 0);
+            const summary = (wSpots.length ? `${wSpots.length} sunspot group${wSpots.length > 1 ? 's' : ''} (${totalSpots} spots)` : 'No sunspots visible today') + (plages ? ` + ${plages} plage` : '');
+            const left = nx > cx;
+            ctx.textAlign = left ? 'left' : 'right'; ctx.fillStyle = '#E2E8F0'; ctx.font = '11px monospace';
+            ctx.fillText(summary, left ? 10 : width - 10, 14);
+            ctx.textAlign = 'left';
             ctx.beginPath(); ctx.arc(16, height - 16, Math.max(0.8, EARTH_R_SOLAR * R), 0, Math.PI * 2); ctx.fillStyle = '#4FC3F7'; ctx.fill();
             ctx.fillStyle = '#E2E8F0'; ctx.fillText('= Earth, to the same scale', 26, height - 16);
         }
@@ -2072,13 +2112,24 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             return best;
         }
         function openSpotPanel(h) {
-            const r = h.item.r, it = h.item, earths = r.areaMSH * KM_PER_MSH / EARTH_DISC_KM2, lenKm = r.extentDeg * KM_PER_DEG;
-            const classTxt = describeClass(r.spotClass), magTxt = describeMag(r.magClass);
-            const edge = it.distFromCenter > 0.85 ? ' It is near the edge of the disc, so it looks squashed.' : '';
-            fillPanel(`Sunspot group AR ${r.num}`, `${r.location} | Carrington longitude ${Math.round(r.carr)}°`,
-                [['Size', `${earths < 10 ? earths.toFixed(1) : Math.round(earths)} × Earth's disc`], ['Spots', `${r.spots} spot${r.spots === 1 ? '' : 's'}`], ['Length', r.extentDeg ? `${r.extentDeg}° = ${Math.round(lenKm / 100) * 100} km` : 'n/a'], ['Magnetic class', r.magClass || 'n/a']],
-                `Area ${r.areaMSH} millionths of the Sun's visible half, about ${Math.round(r.areaMSH * KM_PER_MSH).toLocaleString()} km², which is ${earths.toFixed(1)} times the area of the Earth's disc${r.extentDeg ? `, and ${(lenKm / 12742).toFixed(1)} Earth diameters long` : ''}. ` +
-                `Sunspot class ${r.spotClass}${classTxt ? ': ' + classTxt : ''}. ${magTxt} Seen now at ${(it.distFromCenter * 100).toFixed(0)}% of the way from the center to the edge of the disc.${edge}`);
+            const r = h.item.r, it = h.item, edge = it.distFromCenter > 0.85 ? ' It is near the edge of the disc, so it looks squashed.' : '';
+            const north = r.lat >= 0 ? `${r.lat}° north` : `${-r.lat}° south`, west = r.cmd >= 0 ? `${r.cmd}° west` : `${-r.cmd}° east`;
+            const where = `Where: ${r.location} means ${north} of the Sun's equator and ${west} of the center line of the disc (when NOAA measured it).`;
+            const now = `On the disc now: ${(it.distFromCenter * 100).toFixed(0)}% of the way from the center to the edge.${edge}`;
+            if (r.plage) {
+                fillPanel(`Plage region AR ${r.num}`, `${r.location} | no sunspots`,
+                    [['Sunspots', 'None'], ['Visible in your telescope?', 'No'], ['Area', 'n/a'], ['What it is', 'Bright patch']],
+                    `NOAA numbers this area as an active region, but it has no sunspots (yet, or any more). It is a bright magnetic patch called a plage. You can only see it through special hydrogen-alpha or calcium filters, not through a normal white-light solar filter, so there will be nothing to see there in your telescope.\n${where}\n${now}`);
+                return;
+            }
+            const earths = r.areaMSH * KM_PER_MSH / EARTH_DISC_KM2, lenKm = r.extentDeg * KM_PER_DEG;
+            const area = `Area: ${r.areaMSH} millionths of the Sun's visible half = ${Math.round(r.areaMSH * KM_PER_MSH).toLocaleString()} km². Earth's flat disc is about 127,500,000 km², so this group has ${earths < 0.95 ? Math.round(earths * 100) + '% of' : 'about ' + nice(earths) + ' times'} the area of an Earth (like a circle ${earthsWord(Math.sqrt(earths))} wide).`;
+            const len = r.extentDeg ? `Length: ${r.extentDeg}° of the Sun's surface = about ${round3(lenKm).toLocaleString()} km (${round3(lenKm * 0.621371).toLocaleString()} miles), or ${earthsWord(lenKm / EARTH_DIAM_KM)} in a row.` : '';
+            const cls = describeClass(r.spotClass), mag = describeMag(r.magClass), magName = expandMag(r.magClass);
+            fillPanel(`Sunspot group AR ${r.num}`, `${r.location} | ${r.spots} individual spot${r.spots === 1 ? '' : 's'}`,
+                [['Area, compared with Earth', areaPhrase(r.areaMSH)], ['Individual spots in the group', String(r.spots)], ['Length', lengthPhrase(r.extentDeg)], ['Magnetic type', magName || 'n/a']],
+                `A sunspot group is a cluster of dark spots that NOAA numbers as one unit. This one (AR ${r.num}) contains ${r.spots} separate spot${r.spots === 1 ? '' : 's'}.\n${where}\n${area}\n${len}\n` +
+                `Sunspot class ${r.spotClass}${cls ? ': ' + cls + '.' : ''}\nMagnetic type${magName ? ' ' + magName : ''}: ${mag || 'not reported.'}\n${now}`);
         }
         // scroll so the whole disc sits just under the page header, clear of the details card at the bottom
         function showPictureAbovePopup() {
