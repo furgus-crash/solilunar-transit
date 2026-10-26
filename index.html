@@ -303,7 +303,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             <div>
                 <h1 class="text-lg font-bold tracking-wide text-white flex items-center gap-2">
                     Sun &amp; Moon Transits
-                    <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-cyan-950 text-astroCyan border border-cyan-800/60">v1.4</span>
+                    <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-cyan-950 text-astroCyan border border-cyan-800/60">v1.5</span>
                 </h1>
                 <p class="text-xs text-gray-400">Satellites crossing the Sun and Moon during your viewing window</p>
             </div>
@@ -534,11 +534,12 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <option value="guide-6">6. Timeline and viewing window</option>
 <option value="guide-7">7. Predicted transits list</option>
 <option value="guide-8">8. ISS, China's station, Hubble and Starlink trains</option>
-<option value="guide-9">9. Next transit, preview and beeps</option>
-<option value="guide-10">10. Safety</option>
-<option value="guide-11">11. How accurate is it?</option>
-<option value="guide-12">12. Using it at a session</option>
-<option value="guide-13">13. Troubleshooting</option>
+<option value="guide-9">9. Which satellites are easiest to see</option>
+<option value="guide-10">10. Next transit, preview and beeps</option>
+<option value="guide-11">11. Safety</option>
+<option value="guide-12">12. How accurate is it?</option>
+<option value="guide-13">13. Using it at a session</option>
+<option value="guide-14">14. Troubleshooting</option>
                     </select>
                 </div>
 <div id="guide-1" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
@@ -629,26 +630,37 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <p><strong>Starlink trains:</strong> when three or more Starlink satellites from the same launch cross within 30 seconds of each other, they are grouped as a <strong>train</strong>. A cyan banner above the list gives the number of satellites, the time span and how many actually cross the disc. <strong>Tap it</strong> to highlight every member on the display and open a summary. Members also carry a green TRAIN tag in the list. New launches appear as tight trains in the first days after launch, so refresh the data on the day.</p></div>
 </div>
 <div id="guide-9" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">9. Next transit, preview and beeps</h4>
+<h4 class="font-bold text-astroCyan text-sm mb-1">9. Which satellites are easiest to see</h4>
+<div class="space-y-3"><p>Satellites are tiny compared with the Sun and Moon, so only the biggest show any shape in a telescope. How big a satellite looks depends on its real size and how far away it is. In the list, the largest ones carry a size line such as <em>"109 m (357 ft) across, looks about 45″ wide (2.3% of the Sun)"</em>. That is the satellite's size divided by its distance from you, written in arcseconds (the Sun and Moon are each roughly 1,800 to 1,900 arcseconds wide). The Next transit card also tells you when the next one is a satellite from this list. From easiest to hardest:</p>
+<ul class="list-disc list-inside space-y-0.5">
+<li><strong class="text-astroGreen">International Space Station (ISS):</strong> about 109 m (357 ft) across including its solar arrays, and 73 m (240 ft) the other way. The easiest satellite to see in front of the Sun. It orbits low (about 420 km), so on a close pass it can look over 60 arcseconds wide, with a distinct, recognizable silhouette.</li>
+<li><strong class="text-astroGreen">Tiangong, the Chinese Space Station (CSS):</strong> about 55 m (180 ft) long. Smaller than the ISS but still far bigger than any ordinary satellite.</li>
+<li><strong class="text-astroGreen">Hubble Space Telescope (HST):</strong> about 13 m (43 ft) long and 4 m (14 ft) wide. A distinct target, but much smaller than a space station. It orbits a little higher (about 520 km), so it is smaller and quicker. Because its orbit stays within 28.5° of the equator, transits seen from northern places like Minnesota are uncommon.</li>
+<li><strong class="text-astroCyan">Newer Starlinks (V2 Mini and Direct to Cell):</strong> their big solar arrays make them about 30 m (100 ft) across, large enough that you might notice a shape. Older Starlinks are only about 11 m (36 ft) end to end and look like a tiny speck. The app tells them apart by launch year (2024 or later is the larger type, 2022 or earlier the older type, and 2023 could be either), so treat that label as a good guess.</li>
+</ul>
+<p>These sizes are the satellite's longest dimension. How wide it looks in the telescope also depends on which way it is turned. All other satellites are small, so expect only a dark dot or a short streak.</p></div>
+</div>
+<div id="guide-10" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">10. Next transit, preview and beeps</h4>
 <div class="space-y-3">
 <p>The <strong>Next transit</strong> card, at the top of the page, looks ahead from the current time (not just your window). Use the menu to choose what to wait for: <strong>Next satellite transit</strong> (any), <strong>Next ISS transit</strong>, <strong>Next CSS transit</strong> or <strong>Next Hubble transit</strong>. It shows the satellite, how central the crossing is, the exact start and end times to a tenth of a second, and a live countdown. It turns green in the last 2 minutes. For any satellite, a green <strong>Next highlight</strong> line also shows the next ISS, CSS, Hubble or Starlink train. In the last 10 seconds a big countdown appears, and it says TRANSIT NOW while the crossing is happening.</p>
 <p><strong>Preview next crossing.</strong> Shows only the transit you chose, drawn in <strong>green</strong> on the disc: a thick line, a white dot where it enters, a white ring where it leaves, an arrowhead for the direction, and the exact START and END times in the corners. Under the button you also get a plain-words description (for example "enters at the 3 o'clock edge and leaves near 9 o'clock, moving left"). It moves on to the following crossing by itself after each one. For a Starlink train all its satellites are shown. Tap <strong>Back to window view</strong> to return, or tap a row in the list, which also ends the preview.</p>
 <p><strong>Beeps.</strong> Tap <strong>Beeps: off</strong> to turn sound on (you will hear a short test beep). For the transit you chose, the app beeps at 3, 2 and 1 second before the start, then plays a steady higher tone for exactly as long as the transit lasts, so you can keep your eye on the telescope and listen. Tips: raise the volume and switch off the iPhone's silent mode; keep the page open (the app asks the phone to keep the screen on while beeps are on); set the phone's date and time to automatic so its clock is accurate. Predictions can be off by a second or two, so be watching a couple of seconds before the first beep.</p></div>
 </div>
-<div id="guide-10" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">10. Safety</h4>
+<div id="guide-11" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">11. Safety</h4>
 <div class="space-y-3">
 <p><strong class="text-astroOrange">Never look at the Sun, directly or through a telescope, binoculars or camera, without a certified solar filter correctly fitted.</strong> A transit lasts only a second or two, so don't take a filter off or remove your eye protection to try to see it. Moon viewing needs no filter.</p></div>
 </div>
-<div id="guide-11" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">11. How accurate is it?</h4>
+<div id="guide-12" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">12. How accurate is it?</h4>
 <div class="space-y-3">
 <p><strong>Calculated from real data:</strong> satellite positions (the standard SGP4 model with CelesTrak's orbit data), the Sun's and Moon's real positions (the Moon includes the shift from where you stand, up to about 1°), and the exact moments the satellite crosses the disc. In tests, the calculation timed a crossing placed at the center of the Sun and of the Moon to within a few thousandths of a second.</p>
 <p><strong>What limits it in practice:</strong> orbit data. With fresh data (a day old or less), a satellite's position is typically good to a kilometer or two. That shifts its path by roughly a tenth of a degree (about a fifth of the Sun's or Moon's width) and its timing by a second or less. So treat Central transits as likely, Edge transits as less certain (one near the rim can miss), and expect timing within about a second or two. Older data, satellite maneuvers, and your exact position make this worse. The predictions have not been compared with live observed transits yet, so compare them with another tracker if you can.</p>
 <p><strong>Not included:</strong> satellites missing from the public list (some military or brand-new ones), aircraft, birds, and atmospheric refraction (small except near the horizon). High-orbit satellites (orbits over about 225 minutes) are skipped because they barely move across the sky.</p></div>
 </div>
-<div id="guide-12" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">12. Using it at a session</h4>
+<div id="guide-13" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">13. Using it at a session</h4>
 <div class="space-y-3">
 <ul class="list-disc list-inside space-y-0.5">
 <li>Open the page once with a connection before the event so the app and the data are saved. Then it opens and calculates without signal. (Phone GPS usually works without signal too.)</li>
@@ -658,8 +670,8 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
 <li>After the app is updated on GitHub, open it twice to see the new version.</li>
 </ul></div>
 </div>
-<div id="guide-13" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
-<h4 class="font-bold text-astroCyan text-sm mb-1">13. Troubleshooting</h4>
+<div id="guide-14" class="p-3 bg-astroBg rounded-xl border border-astroBorder">
+<h4 class="font-bold text-astroCyan text-sm mb-1">14. Troubleshooting</h4>
 <div class="space-y-3">
 <ul class="list-disc list-inside space-y-0.5">
 <li><strong>"CelesTrak refused the download":</strong> the 2-hour limit. Wait, use mobile data, or Load file.</li>
@@ -1429,6 +1441,36 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
         function passTimeMs(p) { return p.crosses ? p.startMs : p.closestMs; }
         function passLabel(p) { return (p.special ? '★ ' : '') + p.name; }
 
+        // ---- size information for the satellites that are easiest to see against the Sun or Moon ----
+        function satInfo(p) {
+            if (p.special === 'ISS') return { easy: true, tag: 'EASIEST TO SEE', sizeM: 109, sizeTxt: '109 m (357 ft) across', text: 'The International Space Station is about 109 m (357 ft) across including its solar arrays. It is the biggest and easiest satellite to recognize in front of the Sun or Moon.' };
+            if (p.special === 'CSS') return { easy: true, tag: 'EASIEST TO SEE', sizeM: 55, sizeTxt: '55 m (180 ft) long', text: "China's Tiangong space station is about 55 m (180 ft) long. It is smaller than the ISS but much bigger than any ordinary satellite, so it casts a very visible silhouette." };
+            if (p.special === 'HST') return { easy: true, tag: 'EASIEST TO SEE', sizeM: 13.2, sizeTxt: '13 m (43 ft) long', text: 'The Hubble Space Telescope is about 13 m (43 ft) long and 4 m (14 ft) wide. It is far smaller than a space station but still a large, distinct target, and its orbit makes it a quick one.' };
+            if (/^STARLINK/i.test(p.name) && p.launch) {
+                const yr = parseInt(p.launch.slice(0, 2), 10);
+                if (yr >= 24) return { easy: false, large: true, tag: 'LARGE STARLINK', sizeM: 30, sizeTxt: 'about 30 m (100 ft) across', text: 'Judging by its launch year, this is the newer Starlink type (V2 Mini or Direct to Cell). Its big solar arrays make it about 30 m (100 ft) across, a better target than older Starlinks.' };
+                if (yr <= 22) return { easy: false, large: false, tag: '', sizeM: 11, sizeTxt: 'about 11 m (36 ft) across', text: 'Judging by its launch year, this is the older Starlink type, about 11 m (36 ft) from end to end. It usually looks like a tiny speck.' };
+                return { easy: false, large: false, tag: '', sizeM: null, sizeTxt: '', text: 'Launched in 2023, so it could be the older small Starlink type (about 11 m) or the newer large one (about 30 m).' };
+            }
+            return null;
+        }
+        function apparentSize(p, info) {                 // how wide it looks: arcseconds, and as a share of the disc
+            if (!info || !info.sizeM || !p.rangeKm) return null;
+            const arcsec = info.sizeM / (p.rangeKm * 1000) * 206265, disc = 2 * appState.radiusDeg * 3600;
+            return { arcsec, pct: arcsec / disc * 100 };
+        }
+        function fmtN(x) { return x < 10 ? x.toFixed(1) : String(Math.round(x)); }
+        function sizeLine(p) {
+            const info = satInfo(p), a = apparentSize(p, info);
+            return (info && a) ? `${info.sizeTxt}, looks about ${fmtN(a.arcsec)}″ wide (${fmtN(a.pct)}% of the ${KIND_NAME[appState.kind]})` : '';
+        }
+        function easyNote(p) {                           // shown on the Next transit card
+            const info = satInfo(p);
+            if (!info || !(info.easy || info.large)) return '';
+            const a = apparentSize(p, info), sz = a ? ` It will look about ${fmtN(a.arcsec)}″ wide, ${fmtN(a.pct)}% of the ${KIND_NAME[appState.kind]}'s width.` : '';
+            return (info.easy ? '★ One of the easiest satellites to see in a telescope. ' : 'A larger Starlink. ') + info.text + sz;
+        }
+
         // Passes shown in "preview next crossing" mode (the chosen kind of transit; a Starlink train shows all its members)
         function previewPasses() { return appState.previewSet || []; }
 
@@ -1630,8 +1672,10 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
                 if (pass.category === 'red') badge = 'text-astroRed bg-red-950/40 border-red-800/50';
                 const train = pass.trainId !== null ? ` <span class="px-1.5 py-0.5 rounded border text-[9px] font-bold text-astroGreen bg-emerald-950/40 border-emerald-800/50">TRAIN</span>` : '';
                 const name = pass.special ? `<span class="text-astroGreen">★ ${pass.name}</span>` : pass.name;
+                const info = satInfo(pass), sl = sizeLine(pass);
+                const tagChip = info && info.tag ? ` <span class="px-1.5 py-0.5 rounded border text-[9px] font-bold ${info.easy ? 'text-astroGreen bg-emerald-950/40 border-emerald-800/50' : 'text-astroCyan bg-cyan-950/60 border-cyan-700/60'}">${info.tag}</span>` : '';
                 tr.innerHTML = `
-                    <td class="p-2 font-semibold text-white">${name}<div class="mt-1"><span class="px-1.5 py-0.5 rounded border text-[9px] font-bold ${badge}">${CAT_LABEL[pass.category]}</span>${train}</div></td>
+                    <td class="p-2 font-semibold text-white">${name}<div class="mt-1"><span class="px-1.5 py-0.5 rounded border text-[9px] font-bold ${badge}">${CAT_LABEL[pass.category]}</span>${train}${tagChip}</div>${sl ? `<div class="mt-1 text-[10px] text-gray-400" style="font-weight:400">${sl}</div>` : ''}</td>
                     <td class="p-2 text-gray-300">${pass.crosses ? fmtClock(pass.startMs, true) : '≈ ' + fmtClock(pass.closestMs, true)}</td>
                     <td class="p-2 text-gray-300">${pass.crosses ? fmtClock(pass.endMs, true) : '—'}</td>`;
                 tr.onclick = () => togglePassSelection(pass);
@@ -1651,10 +1695,11 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
             const rad = appState.radiusDeg, also = p.also.length ? ` Also in this spot: ${p.also.join(', ')}.` : '';
             const orbit = `Orbit: ${Math.round(p.altKm)} km high, ${p.speedKmS.toFixed(2)} km/s, inclination ${p.inclDeg.toFixed(1)}°.`;
             const motion = `Moving ${p.angSpeed.toFixed(2)}°/s across the sky, ${Math.round(p.elDeg)}° above your horizon.`;
+            const sInfo = satInfo(p), sLine = sizeLine(p), sizeNote = sInfo ? `\n${sInfo.text}${sLine ? ' Seen from here: ' + sLine + '.' : ''}` : '';
             if (p.crosses) {
                 fillPanel(passLabel(p), `NORAD ${p.norad} | ${CAT_LABEL[p.category]}${p.trainId !== null ? ' | Starlink train' : ''}`,
                     [['Transit start', fmtClock(p.startMs, true)], ['Transit end', fmtClock(p.endMs, true)], ['Duration', p.durationS.toFixed(2) + ' s'], ['Distance', Math.round(p.rangeKm) + ' km']],
-                    `Closest approach to the center of the ${KIND_NAME[appState.kind]}: ${p.minD.toFixed(2)}° (disc radius ${rad.toFixed(2)}°). ${motion} ${orbit}${also}`);
+                    `Closest approach to the center of the ${KIND_NAME[appState.kind]}: ${p.minD.toFixed(2)}° (disc radius ${rad.toFixed(2)}°). ${motion} ${orbit}${also}${sizeNote}`);
             } else {
                 fillPanel(passLabel(p), `NORAD ${p.norad} | Near miss`,
                     [['Closest approach', fmtClock(p.closestMs, true)], ['Miss distance', (p.minD - rad).toFixed(2) + '° off edge'], ['Speed', p.angSpeed.toFixed(2) + ' °/s'], ['Distance', Math.round(p.rangeKm) + ' km']],
@@ -1691,7 +1736,7 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
         }
         function describePass(p, set) {
             const se = setStartEnd(set), who = set.length > 1 ? `Starlink train (${set.length} satellites)` : passLabel(p);
-            return `${who}: starts ${fmtClock(se.startMs, true)}, ends ${fmtClock(se.endMs, true)}. Enters at the ${clockPos(p.entryX, p.entryY)} edge of the disc and leaves near ${clockPos(p.exitX, p.exitY)}, moving ${dirWord(p.exitX - p.entryX, p.exitY - p.entryY)}. Crossing takes about ${p.durationS.toFixed(1)} s. (Up means toward the sky overhead.)`;
+            return `${who}: starts ${fmtClock(se.startMs, true)}, ends ${fmtClock(se.endMs, true)}. Enters at the ${clockPos(p.entryX, p.entryY)} edge of the disc and leaves near ${clockPos(p.exitX, p.exitY)}, moving ${dirWord(p.exitX - p.entryX, p.exitY - p.entryY)}. Crossing takes about ${p.durationS.toFixed(1)} s. (Up means toward the sky overhead.)${set.length === 1 && easyNote(p) ? '\n' + easyNote(p) : ''}`;
         }
         function inText(ms) {
             const secs = ms / 1000;
@@ -1763,6 +1808,8 @@ img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:midd
                 const star = appState.satellitePasses.filter(p => p.startMs > now && (p.special || p.trainId !== null)).sort((a, b) => a.startMs - b.startMs)[0];
                 if (star && star !== nxt) html += `<div class="text-xs text-astroGreen mt-1">Next highlight: ${star.trainId !== null ? 'Starlink train' : passLabel(star)}, ${fmtClock(star.startMs, true)} (in ${inText(star.startMs - now)})</div>`;
             }
+            const note = set.length === 1 ? easyNote(nxt) : '';
+            if (note) html += `<div class="text-xs text-astroGreen mt-1" style="font-weight:400">${note}</div>`;
             if (el.dataset.html !== html) { el.dataset.html = html; el.innerHTML = html; }
             el.style.color = ms <= 120000 ? '#00E676' : '';
             // large visual countdown for the last 10 seconds
